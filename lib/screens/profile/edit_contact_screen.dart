@@ -67,7 +67,6 @@ class _EditContactScreenState extends State<EditContactScreen> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              // صورة الملف الشخصي
               Stack(
                 children: [
                   CircleAvatar(
