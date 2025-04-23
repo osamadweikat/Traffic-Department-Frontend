@@ -133,7 +133,7 @@ class CustomDrawer extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const GeneralSettingsScreen(),
+                    builder: (_) => GeneralSettingsScreen(toggleTheme: toggleTheme),
                   ),
                 );
               },

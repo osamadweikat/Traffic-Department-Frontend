@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'theme/app_theme.dart';
 import 'screens/auth/splash_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/register_screen.dart';
 import 'screens/dashboard/citizen_dashboard.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -21,37 +21,52 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool isDarkMode = false;
 
-  void toggleTheme() {
+  @override
+  void initState() {
+    super.initState();
+    _loadTheme();
+  }
+
+  Future<void> _loadTheme() async {
+    final prefs = await SharedPreferences.getInstance();
     setState(() {
-      isDarkMode = !isDarkMode;
+      isDarkMode = prefs.getBool('isDarkMode') ?? false;
     });
   }
 
+  Future<void> toggleTheme() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isDarkMode = !isDarkMode;
+    });
+    await prefs.setBool('isDarkMode', isDarkMode);
+  }
+
   @override
-Widget build(BuildContext context) {
-  return MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'دائرة السير',
-    theme: isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme,
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'دائرة السير',
+      theme: isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme,
 
-    localizationsDelegates: const [
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-    ],
-    supportedLocales: const [
-      Locale('ar'), 
-      Locale('en'), 
-    ],
-    locale: const Locale('ar'), 
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ar'),
+        Locale('en'),
+      ],
+      locale: const Locale('ar'),
 
-    initialRoute: '/',
-    routes: {
-      '/': (context) => SplashScreen(toggleTheme: toggleTheme),
-      '/login': (context) => LoginScreen(toggleTheme: toggleTheme),
-      '/register': (context) => RegisterScreen(toggleTheme: toggleTheme),
-      '/dashboard': (context) => CitizenDashboard(toggleTheme: toggleTheme),
-    },
-  );
-}
+      initialRoute: '/',
+      routes: {
+        '/': (context) => SplashScreen(toggleTheme: toggleTheme),
+        '/login': (context) => LoginScreen(toggleTheme: toggleTheme),
+        '/register': (context) => RegisterScreen(toggleTheme: toggleTheme),
+        '/dashboard': (context) => CitizenDashboard(toggleTheme: toggleTheme),
+      },
+    );
+  }
 }

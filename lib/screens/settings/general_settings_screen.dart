@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '/theme/app_theme.dart';
 
 class GeneralSettingsScreen extends StatefulWidget {
-  const GeneralSettingsScreen({super.key});
+  final VoidCallback toggleTheme;
+  const GeneralSettingsScreen({super.key, required this.toggleTheme});
 
   @override
   State<GeneralSettingsScreen> createState() => _GeneralSettingsScreenState();
@@ -11,6 +13,33 @@ class GeneralSettingsScreen extends StatefulWidget {
 class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
   bool isDarkMode = false;
   bool notificationsEnabled = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings();
+  }
+
+  Future<void> _loadSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isDarkMode = prefs.getBool('isDarkMode') ?? false;
+      notificationsEnabled = prefs.getBool('notificationsEnabled') ?? true;
+    });
+  }
+
+  Future<void> _toggleDarkMode(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() => isDarkMode = value);
+    await prefs.setBool('isDarkMode', value);
+    widget.toggleTheme();
+  }
+
+  Future<void> _toggleNotifications(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() => notificationsEnabled = value);
+    await prefs.setBool('notificationsEnabled', value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,52 +55,54 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
           padding: const EdgeInsets.all(16),
           children: [
             _buildSectionTitle("المظهر"),
-            _buildSwitchTile(
-              title: "الوضع الليلي",
+            SwitchListTile(
+              title: const Text("الوضع الليلي"),
               value: isDarkMode,
-              onChanged: (val) {
-                setState(() => isDarkMode = val);
-              },
+              onChanged: _toggleDarkMode,
+              activeColor: AppTheme.navy,
             ),
-            _buildNavigationTile(
-              icon: Icons.language,
-              title: "تغيير اللغة",
+            ListTile(
+              leading: const Icon(Icons.language, color: AppTheme.navy),
+              title: const Text("تغيير اللغة"),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 Navigator.pushNamed(context, "/language-settings");
               },
             ),
             const Divider(),
-
             _buildSectionTitle("الإشعارات"),
-            _buildSwitchTile(
-              title: "تفعيل إشعارات المعاملات",
+            SwitchListTile(
+              title: const Text("تفعيل إشعارات المعاملات"),
               value: notificationsEnabled,
-              onChanged: (val) {
-                setState(() => notificationsEnabled = val);
-              },
+              onChanged: _toggleNotifications,
+              activeColor: AppTheme.navy,
             ),
             const Divider(),
-
             _buildSectionTitle("الحساب"),
-            _buildNavigationTile(
-              icon: Icons.lock_reset,
-              title: "إعادة تعيين كلمة المرور",
+            ListTile(
+              leading: const Icon(Icons.lock_reset, color: AppTheme.navy),
+              title: const Text("إعادة تعيين كلمة المرور"),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
+                // صفحة إعادة تعيين كلمة المرور
               },
             ),
             const Divider(),
-
             _buildSectionTitle("عام"),
-            _buildNavigationTile(
-              icon: Icons.info_outline,
-              title: "عن التطبيق",
+            ListTile(
+              leading: const Icon(Icons.info_outline, color: AppTheme.navy),
+              title: const Text("عن التطبيق"),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
+                // صفحة عن التطبيق
               },
             ),
-            _buildNavigationTile(
-              icon: Icons.privacy_tip,
-              title: "سياسة الخصوصية",
+            ListTile(
+              leading: const Icon(Icons.privacy_tip, color: AppTheme.navy),
+              title: const Text("سياسة الخصوصية"),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
+                // صفحة سياسة الخصوصية
               },
             ),
           ],
@@ -87,24 +118,6 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
         title,
         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87),
       ),
-    );
-  }
-
-  Widget _buildSwitchTile({required String title, required bool value, required Function(bool) onChanged}) {
-    return SwitchListTile(
-      title: Text(title),
-      value: value,
-      onChanged: onChanged,
-      activeColor: AppTheme.navy,
-    );
-  }
-
-  Widget _buildNavigationTile({required IconData icon, required String title, required VoidCallback onTap}) {
-    return ListTile(
-      leading: Icon(icon, color: AppTheme.navy),
-      title: Text(title),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: onTap,
     );
   }
 }
