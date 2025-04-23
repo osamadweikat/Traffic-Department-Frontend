@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:traffic_department/screens/profile/change_password_screen.dart';
 import 'package:traffic_department/screens/profile/edit_contact_screen.dart';
 import '../../theme/app_theme.dart';
 
@@ -134,31 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               const SizedBox(height: 15),
 
-              OutlinedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const ChangePasswordScreen(),
-                    ),
-                  );
-                },
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: AppTheme.navy.withOpacity(0.7)),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 12,
-                  ),
-                ),
-                icon: const Icon(Icons.lock_reset),
-                label: Text(
-                  "تغيير كلمة المرور",
-                  style: TextStyle(color: AppTheme.navy),
-                ),
-              ),
+              
             ],
           ),
         ),
