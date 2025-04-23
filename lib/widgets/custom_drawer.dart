@@ -3,6 +3,8 @@ import 'package:traffic_department/screens/contact/contact_us_screen.dart';
 import 'package:traffic_department/screens/profile/profile_screen.dart';
 import 'package:traffic_department/screens/transactions/transactions_screen.dart';
 import 'package:traffic_department/screens/vehicles/vehicles_screen.dart';
+import 'package:traffic_department/screens/complaints/complaints_suggestions_screen.dart'; // تأكد من استيراد الملف بشكل صحيح
+
 import '../theme/app_theme.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -78,7 +80,20 @@ class CustomDrawer extends StatelessWidget {
               },
             ),
 
-            _buildListTile(Icons.support_agent, "الشكاوى والاقتراحات"),
+            _buildListTile(
+              Icons.support_agent,
+              "الشكاوى والاقتراحات",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (_) =>
+                            const ComplaintsSuggestionsScreen(), 
+                  ),
+                );
+              },
+            ),
             _buildListTile(Icons.g_translate, "تغيير اللغة"),
             _buildListTile(Icons.settings, "الإعدادات العامة"),
             _buildListTile(Icons.help, "الأسئلة الشائعة"),
