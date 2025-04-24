@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:traffic_department/screens/settings/language_settings_screen.dart';
+import 'package:flutter/services.dart' as ui;
 import '/theme/app_theme.dart';
 
 class GeneralSettingsScreen extends StatefulWidget {
@@ -44,54 +47,62 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: context.locale.languageCode == 'ar'
+          ? ui.TextDirection.rtl
+          : ui.TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("الإعدادات العامة"),
+          title: Text("general_settings_title".tr()),
           backgroundColor: AppTheme.navy,
         ),
         backgroundColor: AppTheme.lightGrey,
         body: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            _buildSectionTitle("المظهر"),
+            _buildSectionTitle("appearance".tr()),
             SwitchListTile(
-              title: const Text("الوضع الليلي"),
+              title: Text("dark_mode".tr()),
               value: isDarkMode,
               onChanged: _toggleDarkMode,
               activeColor: AppTheme.navy,
             ),
             ListTile(
               leading: const Icon(Icons.language, color: AppTheme.navy),
-              title: const Text("تغيير اللغة"),
+              title: Text("change_language".tr()),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
-                Navigator.pushNamed(context, "/language-settings");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const LanguageSettingsScreen(),
+                  ),
+                );
               },
             ),
+
             const Divider(),
-            _buildSectionTitle("الإشعارات"),
+            _buildSectionTitle("notifications".tr()),
             SwitchListTile(
-              title: const Text("تفعيل إشعارات المعاملات"),
+              title: Text("enable_notifications".tr()),
               value: notificationsEnabled,
               onChanged: _toggleNotifications,
               activeColor: AppTheme.navy,
             ),
             const Divider(),
-            _buildSectionTitle("الحساب"),
+            _buildSectionTitle("account".tr()),
             ListTile(
               leading: const Icon(Icons.lock_reset, color: AppTheme.navy),
-              title: const Text("إعادة تعيين كلمة المرور"),
+              title: Text("reset_password".tr()),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 // صفحة إعادة تعيين كلمة المرور
               },
             ),
             const Divider(),
-            _buildSectionTitle("عام"),
+            _buildSectionTitle("general".tr()),
             ListTile(
               leading: const Icon(Icons.info_outline, color: AppTheme.navy),
-              title: const Text("عن التطبيق"),
+              title: Text("about_app".tr()),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 // صفحة عن التطبيق
@@ -99,7 +110,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.privacy_tip, color: AppTheme.navy),
-              title: const Text("سياسة الخصوصية"),
+              title: Text("privacy_policy".tr()),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 // صفحة سياسة الخصوصية
@@ -116,7 +127,11 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Text(
         title,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87),
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Colors.black87,
+        ),
       ),
     );
   }

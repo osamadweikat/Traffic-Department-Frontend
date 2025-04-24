@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:traffic_department/widgets/transaction_progress_indicator.dart';
+import 'package:flutter/services.dart' as ui;
 import '/theme/app_theme.dart';
 
 class TransactionDetailsScreen extends StatelessWidget {
@@ -17,12 +19,12 @@ class TransactionDetailsScreen extends StatelessWidget {
     required this.status,
     required this.notes,
   });
-  
+
   List<String> get stepLabels => [
-        "تم التقديم",
-        "قيد المعالجة",
-        "قيد المراجعة",
-        "مكتملة",
+        "step_submitted".tr(),
+        "step_processing".tr(),
+        "step_reviewing".tr(),
+        "step_completed".tr(),
       ];
 
   int getStepIndex(String status) {
@@ -36,7 +38,7 @@ class TransactionDetailsScreen extends StatelessWidget {
       case "مكتملة":
         return 4;
       case "مرفوضة":
-        return 3; 
+        return 3;
       default:
         return 1;
     }
@@ -47,15 +49,15 @@ class TransactionDetailsScreen extends StatelessWidget {
     List<String> statuses = [];
     for (int i = 1; i <= 4; i++) {
       if (i < stepIndex) {
-        statuses.add("مكتملة");
+        statuses.add("status_completed".tr());
       } else if (i == stepIndex) {
         if (status == "مرفوضة") {
-          statuses.add("مرفوضة");
+          statuses.add("status_rejected".tr());
         } else {
           statuses.add(status);
         }
       } else {
-        statuses.add("قيد الانتظار");
+        statuses.add("status_pending".tr());
       }
     }
     return statuses;
@@ -66,7 +68,6 @@ class TransactionDetailsScreen extends StatelessWidget {
       case "مكتملة":
         return Colors.green;
       case "قيد المراجعة":
-        return Colors.orange;
       case "قيد المعالجة":
         return Colors.orange;
       case "مرفوضة":
@@ -98,10 +99,12 @@ class TransactionDetailsScreen extends StatelessWidget {
     final completedSteps = getStepIndex(status);
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: context.locale.languageCode == 'ar'
+          ? ui.TextDirection.rtl
+          : ui.TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("تفاصيل المعاملة"),
+          title: Text("transaction_details".tr()),
           centerTitle: true,
           backgroundColor: AppTheme.navy,
         ),
@@ -125,14 +128,11 @@ class TransactionDetailsScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            const Icon(
-                              Icons.assignment_outlined,
-                              color: AppTheme.navy,
-                            ),
+                            const Icon(Icons.assignment_outlined, color: AppTheme.navy),
                             const SizedBox(width: 8),
-                            const Text(
-                              "معلومات المعاملة",
-                              style: TextStyle(
+                            Text(
+                              "transaction_info".tr(),
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -140,16 +140,14 @@ class TransactionDetailsScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 20),
-
-                        buildRow("نوع المعاملة:", type),
-                        buildRow("رقم المعاملة:", id),
-                        buildRow("تاريخ الطلب:", date),
-
+                        buildRow("transaction_type".tr(), type),
+                        buildRow("transaction_id".tr(), id),
+                        buildRow("transaction_date".tr(), date),
                         Row(
                           children: [
-                            const Text(
-                              "حالة المعاملة:",
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                            Text(
+                              "transaction_status".tr(),
+                              style: const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(width: 8),
                             Icon(getStatusIcon(), color: getStatusColor(), size: 20),
@@ -163,16 +161,14 @@ class TransactionDetailsScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         const SizedBox(height: 15),
-
-                        const Text(
-                          "ملاحظات:",
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        Text(
+                          "notes".tr(),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          notes.isNotEmpty ? notes : "لا توجد ملاحظات.",
+                          notes.isNotEmpty ? notes : "no_notes".tr(),
                           style: const TextStyle(color: Colors.black87),
                         ),
                       ],
@@ -180,15 +176,9 @@ class TransactionDetailsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(height: 30),
-
-              const Text(
-                "تتبع حالة المعاملة",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              Text("track_status".tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 15),
-
               TransactionProgressIndicator(
                 steps: stepLabels.length,
                 completedSteps: completedSteps,
@@ -209,9 +199,7 @@ class TransactionDetailsScreen extends StatelessWidget {
         children: [
           Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(width: 8),
-          Expanded(
-            child: Text(value, style: const TextStyle(color: Colors.black87)),
-          ),
+          Expanded(child: Text(value, style: const TextStyle(color: Colors.black87))),
         ],
       ),
     );

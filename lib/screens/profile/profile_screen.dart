@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traffic_department/screens/profile/edit_contact_screen.dart';
+import 'package:flutter/services.dart' as ui;
 import '../../theme/app_theme.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -48,10 +50,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         (widget.phone == null || widget.phone!.isEmpty);
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: context.locale.languageCode == 'ar'
+          ? ui.TextDirection.rtl
+          : ui.TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("الملف الشخصي"),
+          title: const Text("الملف الشخصي").tr(),
           centerTitle: true,
           backgroundColor: AppTheme.navy,
         ),
@@ -76,14 +80,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
-                    children: const [
-                      Icon(Icons.info_outline, color: Colors.orange, size: 20),
-                      SizedBox(width: 8),
+                    children: [
+                      const Icon(Icons.info_outline, color: Colors.orange, size: 20),
+                      const SizedBox(width: 8),
                       Expanded(
-                        child: Text(
+                        child: const Text(
                           "الرجاء استكمال بيانات الاتصال (الإيميل ورقم الهاتف)",
                           style: TextStyle(color: Colors.black87),
-                        ),
+                        ).tr(),
                       ),
                     ],
                   ),
@@ -91,17 +95,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               const SizedBox(height: 20),
 
-              buildInfoRow("الاسم الرباعي", widget.fullName),
-              buildInfoRow("رقم الهوية", widget.nationalId),
-              buildInfoRow("تاريخ الميلاد", widget.birthDate),
-              buildInfoRow("البريد الإلكتروني", widget.email ?? "غير مسجل"),
-              buildInfoRow("رقم الهاتف", widget.phone ?? "غير مسجل"),
-              buildInfoRow("العنوان", widget.address ?? "غير محدد"),
+              buildInfoRow("الاسم الرباعي".tr(), widget.fullName),
+              buildInfoRow("رقم الهوية".tr(), widget.nationalId),
+              buildInfoRow("تاريخ الميلاد".tr(), widget.birthDate),
+              buildInfoRow("البريد الإلكتروني".tr(), widget.email ?? "غير مسجل".tr()),
+              buildInfoRow("رقم الهاتف".tr(), widget.phone ?? "غير مسجل".tr()),
+              buildInfoRow("العنوان".tr(), widget.address ?? "غير محدد".tr()),
 
               const SizedBox(height: 10),
 
               Text(
-                "آخر تسجيل دخول: $lastLogin",
+                "آخر تسجيل دخول: $lastLogin".tr(),
                 style: const TextStyle(color: Colors.grey, fontSize: 13),
               ),
 
@@ -128,12 +132,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 icon: const Icon(Icons.edit),
-                label: const Text("تعديل معلومات الاتصال"),
+                label: const Text("تعديل معلومات الاتصال").tr(),
               ),
-
-              const SizedBox(height: 15),
-
-              
             ],
           ),
         ),

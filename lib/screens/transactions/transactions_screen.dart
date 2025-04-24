@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '/theme/app_theme.dart';
+import 'package:flutter/services.dart' as ui;
 import 'transaction_details_screen.dart';
 
 class TransactionsScreen extends StatefulWidget {
@@ -10,17 +12,17 @@ class TransactionsScreen extends StatefulWidget {
 }
 
 class _TransactionsScreenState extends State<TransactionsScreen> {
-  String filter = 'الكل';
+  String filter = 'all';
 
   final List<Map<String, dynamic>> transactions = [
-    {"id": "#001", "type": "تجديد رخصة قيادة", "date": "2025-03-30", "status": "مكتملة"},
-    {"id": "#002", "type": "نقل ملكية مركبة", "date": "2025-03-29", "status": "قيد المعالجة"},
-    {"id": "#003", "type": "بدل فاقد رقم مركبة", "date": "2025-03-28", "status": "مرفوضة"},
-    {"id": "#004", "type": "نتيجة فحص عملي", "date": "2025-03-25", "status": "مكتملة"},
+    {"id": "#001", "type": "license_renewal".tr(), "date": "2025-03-30", "status": "completed"},
+    {"id": "#002", "type": "ownership_transfer".tr(), "date": "2025-03-29", "status": "processing"},
+    {"id": "#003", "type": "lost_plate".tr(), "date": "2025-03-28", "status": "rejected"},
+    {"id": "#004", "type": "practical_test_result".tr(), "date": "2025-03-25", "status": "completed"},
   ];
 
   List<Map<String, dynamic>> get filteredTransactions {
-    if (filter == 'الكل') return transactions;
+    if (filter == 'all') return transactions;
     return transactions.where((t) => t["status"] == filter).toList();
   }
 
@@ -28,50 +30,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     final selected = await showMenu<String>(
       context: context,
       position: const RelativeRect.fromLTRB(0, 80, 16, 0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       items: [
-        PopupMenuItem(
-          value: 'الكل',
-          child: Text(
-            'عرض الكل',
-            style: TextStyle(
-              color: filter == 'الكل' ? Colors.blue : Colors.black,
-              fontWeight: filter == 'الكل' ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
-        ),
-        PopupMenuItem(
-          value: 'قيد المعالجة',
-          child: Text(
-            'قيد المعالجة',
-            style: TextStyle(
-              color: filter == 'قيد المعالجة' ? Colors.blue : Colors.black,
-              fontWeight: filter == 'قيد المعالجة' ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
-        ),
-        PopupMenuItem(
-          value: 'مكتملة',
-          child: Text(
-            'المكتملة',
-            style: TextStyle(
-              color: filter == 'مكتملة' ? Colors.blue : Colors.black,
-              fontWeight: filter == 'مكتملة' ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
-        ),
-        PopupMenuItem(
-          value: 'مرفوضة',
-          child: Text(
-            'المرفوضة',
-            style: TextStyle(
-              color: filter == 'مرفوضة' ? Colors.blue : Colors.black,
-              fontWeight: filter == 'مرفوضة' ? FontWeight.bold : FontWeight.normal,
-            ),
-          ),
-        ),
+        _buildFilterItem('all'),
+        _buildFilterItem('processing'),
+        _buildFilterItem('completed'),
+        _buildFilterItem('rejected'),
       ],
     );
 
@@ -82,46 +46,60 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     }
   }
 
+  PopupMenuItem<String> _buildFilterItem(String value) {
+    return PopupMenuItem(
+      value: value,
+      child: Text(
+        'filter_$value'.tr(),
+        style: TextStyle(
+          color: filter == value ? Colors.blue : Colors.black,
+          fontWeight: filter == value ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
+    );
+  }
+
+  Color getStatusColor(String status) {
+    switch (status) {
+      case "completed":
+        return Colors.green;
+      case "processing":
+        return Colors.orange;
+      case "rejected":
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: context.locale.languageCode == 'ar' ? ui.TextDirection.rtl : ui.TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("معاملاتي"),
+          title: Text("my_transactions".tr()),
           centerTitle: true,
           backgroundColor: AppTheme.navy,
           actions: [
             IconButton(
               icon: const Icon(Icons.filter_list),
-              tooltip: "فلترة المعاملات",
+              tooltip: "filter_transactions".tr(),
               onPressed: showCustomMenu,
             ),
           ],
         ),
         backgroundColor: AppTheme.lightGrey,
         body: filteredTransactions.isEmpty
-            ? const Center(child: Text("لا توجد معاملات"))
+            ? Center(child: Text("no_transactions".tr()))
             : ListView.separated(
                 padding: const EdgeInsets.all(16),
                 itemCount: filteredTransactions.length,
                 separatorBuilder: (_, __) => const SizedBox(height: 12),
                 itemBuilder: (context, index) {
                   final transaction = filteredTransactions[index];
-                  Color statusColor;
-                  switch (transaction["status"]) {
-                    case "مكتملة":
-                      statusColor = Colors.green;
-                      break;
-                    case "قيد المعالجة":
-                      statusColor = Colors.orange;
-                      break;
-                    case "مرفوضة":
-                      statusColor = Colors.red;
-                      break;
-                    default:
-                      statusColor = Colors.grey;
-                  }
+                  final statusKey = 'status_${transaction["status"]}';
+
                   return Card(
                     elevation: 3,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -130,9 +108,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("رقم المعاملة: ${transaction["id"]}"),
-                          Text("تاريخ الطلب: ${transaction["date"]}"),
-                          Text("الحالة: ${transaction["status"]}", style: TextStyle(color: statusColor)),
+                          Text("${"transaction_id".tr()}: ${transaction["id"]}"),
+                          Text("${"transaction_date".tr()}: ${transaction["date"]}"),
+                          Text(
+                            "${"transaction_status".tr()}: ${statusKey.tr()}",
+                            style: TextStyle(color: getStatusColor(transaction["status"])),
+                          ),
                         ],
                       ),
                       trailing: IconButton(
@@ -145,8 +126,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                                 id: transaction["id"],
                                 type: transaction["type"],
                                 date: transaction["date"],
-                                status: transaction["status"],
-                                notes: "تفاصيل المعاملة ستُعرض هنا...",
+                                status: statusKey.tr(),
+                                notes: "transaction_notes".tr(),
                               ),
                             ),
                           );

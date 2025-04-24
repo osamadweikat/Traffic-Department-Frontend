@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:traffic_department/theme/app_theme.dart';
 
 class ContactUsScreen extends StatefulWidget {
@@ -20,25 +21,25 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     {
       "date": "2025/04/22 – 09:00",
       "messages": [
-        "bot:مرحبًا بك، كيف يمكنني مساعدتك؟ (أوقات الدوام: الأحد - الخميس | 8:00 ص - 2:00 م) - الدعم الفني: 24/7",
-        "bot:اختر نوع مشكلتك:\n1. معاملات\n2. مشكلة في التطبيق\n3. أسئلة عامة",
+        "bot:greeting",
+        "bot:problem_options",
         "user:1",
-        "bot:يرجى اختيار اسم المعاملة من القائمة التالية: \nترخيص مركبة\nنقل ملكية مركبة\nنتيجة فحص نظري\nمخالفات مرورية\nتغيير لون مركبة",
+        "bot:select_transaction",
         "user:ترخيص مركبة",
-        "bot:جرب هذه الحلول:\nتحقق من الوثائق المطلوبة\nتأكد من سريان التأمين\nتأكد من خلو المركبة من المخالفات\nالتحقق من سداد الرسوم\nتحديث بيانات المركبة",
-        "bot:هل تم حل المشكلة؟ (نعم/لا)",
+        "bot:solutions_license",
+        "bot:was_it_solved",
         "user:نعم",
-        "bot:سعدنا بخدمتك، تم إنهاء المحادثة."
+        "bot:end_conversation"
       ],
       "supportAvailable": false
     },
     {
       "date": "2025/04/23 – 14:30",
       "messages": [
-        "bot:مرحبًا بك، كيف يمكنني مساعدتك؟ (أوقات الدوام: الأحد - الخميس | 8:00 ص - 2:00 م) - الدعم الفني: 24/7",
-        "bot:اختر نوع مشكلتك:\n1. معاملات\n2. مشكلة في التطبيق\n3. أسئلة عامة",
+        "bot:greeting",
+        "bot:problem_options",
         "user:3",
-        "bot:يرجى كتابة سؤالك وسنقوم بالرد لاحقًا",
+        "bot:ask_question",
         "user:هل يوجد دوام يوم الجمعة؟"
       ],
       "supportAvailable": true
@@ -89,8 +90,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       _isConversationStarted = true;
       _isConversationEnded = false;
       _step = 1;
-      _responses.add("bot:مرحبًا بك، كيف يمكنني مساعدتك؟ (أوقات الدوام: الأحد - الخميس | 8:00 ص - 2:00 م) - الدعم الفني: 24/7");
-      _responses.add("bot:اختر نوع مشكلتك:\n1. معاملات\n2. مشكلة في التطبيق\n3. أسئلة عامة");
+      _responses.add("bot:greeting");
+      _responses.add("bot:problem_options");
     });
   }
 
@@ -104,37 +105,37 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     if (_step == 1) {
       if (["1", "١"].contains(msg)) {
         _step = 2;
-        _responses.add("bot:يرجى اختيار اسم المعاملة من القائمة التالية: \n${_transactionSuggestions.keys.join("\n")}");
+        _responses.add("bot:select_transaction");
       } else if (["2", "٢"].contains(msg)) {
         _step = 3;
-        _responses.add("bot:جرب هذه الحلول:\nقم بإعادة تشغيل التطبيق\nتأكد من اتصال الإنترنت\nجرب من جهاز مختلف\nحدّث التطبيق من المتجر\nاحذف وأعد التثبيت");
-        _responses.add("bot:هل تم حل المشكلة؟ (نعم/لا)");
+        _responses.add("bot:solutions_app");
+        _responses.add("bot:was_it_solved");
       } else if (["3", "٣"].contains(msg)) {
         _step = 4;
-        _responses.add("bot:يرجى كتابة سؤالك وسنقوم بالرد لاحقًا");
+        _responses.add("bot:ask_question");
       } else {
-        _responses.add("bot:يرجى اختيار رقم صحيح من 1 إلى 3.");
-        _responses.add("bot:اختر نوع مشكلتك: \n1. معاملات \n2. مشكلة في التطبيق \n3. أسئلة عامة");
+        _responses.add("bot:invalid_option");
+        _responses.add("bot:problem_options");
       }
     } else if (_step == 2) {
       if (_transactionSuggestions.containsKey(msg)) {
-        _responses.add("bot:جرب هذه الحلول:\n${_transactionSuggestions[msg]!.join("\n")}");
-        _responses.add("bot:هل تم حل المشكلة؟ (نعم/لا)");
+        _responses.add("bot:${_transactionSuggestions[msg]!.join("\n")}");
+        _responses.add("bot:was_it_solved");
         _step = 5;
       } else {
-        _responses.add("bot:المعاملة غير معروفة. يرجى اختيار اسم صحيح من القائمة التالية:");
+        _responses.add("bot:unknown_transaction");
         _responses.add("bot:${_transactionSuggestions.keys.join("\n")}");
       }
     } else if (_step == 4) {
-      _responses.add("bot:تم استلام سؤالك، وسيتم الرد عليك في أقرب وقت ممكن.");
-      _responses.add("bot:سعدنا بخدمتك، تم إنهاء المحادثة.");
+      _responses.add("bot:question_received");
+      _responses.add("bot:end_conversation");
       _isConversationEnded = true;
     } else if (_step >= 3) {
-      if (msg == "نعم" || msg == "نعم.") {
-        _responses.add("bot:سعدنا بخدمتك، تم إنهاء المحادثة.");
+      if (msg == "نعم" || msg.toLowerCase() == "yes") {
+        _responses.add("bot:end_conversation");
         _isConversationEnded = true;
-      } else if (msg == "لا" || msg == "لا.") {
-        _responses.add("bot:تم تحويلك إلى فريق الدعم الفني أو أحد موظفينا للمساعدة.");
+      } else if (msg == "لا" || msg.toLowerCase() == "no") {
+        _responses.add("bot:forward_to_support");
         _isConversationEnded = true;
       }
     }
@@ -146,7 +147,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     final convo = _savedConversations[index];
     if (convo['supportAvailable'] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("لا يمكن حذف المحادثة لأنها قيد الرد من الموظف أو فريق الدعم.")),
+        SnackBar(content: Text("cannot_delete_pending".tr())),
       );
     } else {
       setState(() {
@@ -167,119 +168,113 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("تواصل مع دائرة السير"),
-          centerTitle: true,
-          backgroundColor: AppTheme.navy,
-          leading: _isConversationStarted
-              ? IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: _closeConversation,
-                )
-              : null,
-        ),
-        backgroundColor: AppTheme.lightGrey,
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              if (!_isConversationStarted) ...[
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: _savedConversations.length,
-                    itemBuilder: (context, index) {
-                      final conversation = _savedConversations[index];
-                      return Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("contact_traffic").tr(),
+        centerTitle: true,
+        backgroundColor: AppTheme.navy,
+        leading: _isConversationStarted
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: _closeConversation,
+              )
+            : null,
+      ),
+      backgroundColor: AppTheme.lightGrey,
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            if (!_isConversationStarted) ...[
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _savedConversations.length,
+                  itemBuilder: (context, index) {
+                    final conversation = _savedConversations[index];
+                    return Card(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      margin: const EdgeInsets.symmetric(vertical: 6),
+                      child: ListTile(
+                        onTap: () => setState(() {
+                          _responses = List.from(conversation['messages']);
+                          _isConversationStarted = true;
+                          _isConversationEnded = true;
+                        }),
+                        title: Text("conversation_on".tr(args: [conversation["date"]])),
+                        subtitle: Text(
+                          conversation["supportAvailable"]
+                              ? "pending_reply".tr()
+                              : "ended".tr(),
+                          style: TextStyle(color: Colors.grey[700]),
                         ),
-                        margin: const EdgeInsets.symmetric(vertical: 6),
-                        child: ListTile(
-                          onTap: () => setState(() {
-                            _responses = List.from(conversation['messages']);
-                            _isConversationStarted = true;
-                            _isConversationEnded = true;
-                          }),
-                          title: Text("محادثة بتاريخ: ${conversation["date"]}"),
-                          subtitle: Text(
-                            conversation["supportAvailable"]
-                                ? "بانتظار الرد من الدعم/الموظف"
-                                : "منتهية",
-                            style: TextStyle(color: Colors.grey[700]),
-                          ),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () => _deleteConversation(index),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _startConversation,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppTheme.yellow,
-                      foregroundColor: AppTheme.navy,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    ),
-                    child: const Text("بدء محادثة جديدة", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  ),
-                ),
-              ],
-
-              if (_isConversationStarted) ...[
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: _responses.length,
-                    itemBuilder: (context, index) {
-                      final message = _responses[index];
-                      final isBot = message.startsWith("bot:");
-                      final cleanMessage = message.replaceFirst("bot:", "").replaceFirst("user:", "");
-                      return ListTile(
-                        title: isBot ? _buildBotBubble(cleanMessage) : _buildUserBubble(cleanMessage),
-                      );
-                    },
-                  ),
-                ),
-                if (!_isConversationEnded) ...[
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: _sendMessage,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme.yellow,
-                          foregroundColor: AppTheme.navy,
-                          padding: const EdgeInsets.all(14),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        child: const Icon(Icons.send),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: TextField(
-                          controller: _messageController,
-                          onChanged: (message) => setState(() => _message = message),
-                          decoration: InputDecoration(
-                            labelText: "اكتب رسالتك هنا",
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                          ),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () => _deleteConversation(index),
                         ),
                       ),
-                    ],
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _startConversation,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppTheme.yellow,
+                    foregroundColor: AppTheme.navy,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                ]
-              ]
+                  child: const Text("start_new_conversation", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)).tr(),
+                ),
+              ),
             ],
-          ),
+            if (_isConversationStarted) ...[
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _responses.length,
+                  itemBuilder: (context, index) {
+                    final message = _responses[index];
+                    final isBot = message.startsWith("bot:");
+                    final cleanMessage = message.replaceFirst("bot:", "").replaceFirst("user:", "");
+                    return ListTile(
+                      title: isBot ? _buildBotBubble(cleanMessage.tr()) : _buildUserBubble(cleanMessage),
+                    );
+                  },
+                ),
+              ),
+              if (!_isConversationEnded) ...[
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: _sendMessage,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.yellow,
+                        foregroundColor: AppTheme.navy,
+                        padding: const EdgeInsets.all(14),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      child: const Icon(Icons.send),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        controller: _messageController,
+                        onChanged: (message) => setState(() => _message = message),
+                        decoration: InputDecoration(
+                          labelText: "type_here".tr(),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ]
+            ]
+          ],
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../theme/app_theme.dart';
 import 'dart:async';
 
@@ -38,9 +39,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             children: [
               Image.asset('assets/images/traffic_logo.png', height: 120),
               const SizedBox(height: 20),
-              const Text(
-                'دائرة السير',
-                style: TextStyle(
+              Text(
+                'app_title'.tr(),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 28,
                   fontWeight: FontWeight.bold,

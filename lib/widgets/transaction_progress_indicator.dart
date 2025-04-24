@@ -42,6 +42,7 @@ class _TransactionProgressIndicatorState
 
   @override
   Widget build(BuildContext context) {
+    final direction = Directionality.of(context);
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -52,6 +53,7 @@ class _TransactionProgressIndicatorState
             stepLabels: widget.stepLabels,
             stepStatus: widget.stepStatus,
             animationValue: _controller.value,
+            textDirection: direction,
           ),
           size: const Size(350, 350),
         );
@@ -66,6 +68,7 @@ class _ProgressPainter extends CustomPainter {
   final List<String> stepLabels;
   final List<String> stepStatus;
   final double animationValue;
+  final TextDirection textDirection;
 
   _ProgressPainter({
     required this.steps,
@@ -73,6 +76,7 @@ class _ProgressPainter extends CustomPainter {
     required this.stepLabels,
     required this.stepStatus,
     required this.animationValue,
+    required this.textDirection,
   });
 
   Color _getStatusColor(String status) {
@@ -106,38 +110,29 @@ class _ProgressPainter extends CustomPainter {
     for (int i = 0; i < steps; i++) {
       final startAngle = angleStep * i - pi / 2;
       final sweepAngle = angleStep;
-
       final isCompleted = i < completedSteps;
 
       if (isCompleted) {
-  solidPaint.color = _getStatusColor(stepStatus[i]);
-  canvas.drawArc(
-    Rect.fromCircle(center: center, radius: radius),
-    startAngle,
-    sweepAngle * animationValue,
-    false,
-    solidPaint,
-  );
+        solidPaint.color = _getStatusColor(stepStatus[i]);
+        canvas.drawArc(
+          Rect.fromCircle(center: center, radius: radius),
+          startAngle,
+          sweepAngle * animationValue,
+          false,
+          solidPaint,
+        );
 
-  _drawArrowOnArc(
-    canvas,
-    center,
-    radius,
-    startAngle,
-    sweepAngle,
-    animationValue,
-    solidPaint.color,
-  );
-
-      } else {
-        _drawDashedArc(
+        _drawArrowOnArc(
           canvas,
           center,
           radius,
           startAngle,
           sweepAngle,
-          dashedPaint,
+          animationValue,
+          solidPaint.color,
         );
+      } else {
+        _drawDashedArc(canvas, center, radius, startAngle, sweepAngle, dashedPaint);
       }
     }
 
@@ -151,11 +146,7 @@ class _ProgressPainter extends CustomPainter {
         ..color = isCompleted ? _getStatusColor(stepStatus[i]) : Colors.white
         ..style = PaintingStyle.fill;
 
-      canvas.drawCircle(
-        Offset(dx, dy),
-        25,
-        Paint()..color = Colors.black.withOpacity(0.1),
-      );
+      canvas.drawCircle(Offset(dx, dy), 25, Paint()..color = Colors.black.withOpacity(0.1));
       canvas.drawCircle(Offset(dx, dy), 23, circlePaint);
       canvas.drawCircle(
         Offset(dx, dy),
@@ -176,7 +167,7 @@ class _ProgressPainter extends CustomPainter {
           ),
         ),
         textAlign: TextAlign.center,
-        textDirection: TextDirection.rtl,
+        textDirection: textDirection,
       )..layout(maxWidth: 50);
 
       textPainter.paint(
@@ -186,76 +177,37 @@ class _ProgressPainter extends CustomPainter {
     }
   }
 
-  void _drawDashedArc(
-  Canvas canvas,
-  Offset center,
-  double radius,
-  double startAngle,
-  double sweepAngle,
-  Paint paint,
-) {
-  const int dashCount = 30;
-  const double gapFactor = 0.5; 
+  void _drawDashedArc(Canvas canvas, Offset center, double radius, double startAngle, double sweepAngle, Paint paint) {
+    const int dashCount = 30;
+    const double gapFactor = 0.5;
+    final double offset = 2 * pi * animationValue;
 
-  final double offset = 2 * pi * animationValue;
-
-  for (int i = 0; i < dashCount; i++) {
-    final t1 = startAngle + sweepAngle * (i / dashCount) + offset;
-    final t2 = t1 + sweepAngle * (gapFactor / dashCount);
-
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      t1,
-      t2 - t1,
-      false,
-      paint,
-    );
+    for (int i = 0; i < dashCount; i++) {
+      final t1 = startAngle + sweepAngle * (i / dashCount) + offset;
+      final t2 = t1 + sweepAngle * (gapFactor / dashCount);
+      canvas.drawArc(Rect.fromCircle(center: center, radius: radius), t1, t2 - t1, false, paint);
+    }
   }
-}
 
-void _drawArrowOnArc(
-    Canvas canvas,
-    Offset center,
-    double radius,
-    double startAngle,
-    double sweepAngle,
-    double animationValue,
-    Color color,
-) {
-  final double arrowSize = 14; 
-  final double arrowAngle = startAngle + sweepAngle * animationValue - pi / 12; 
+  void _drawArrowOnArc(Canvas canvas, Offset center, double radius, double startAngle, double sweepAngle, double animationValue, Color color) {
+    final double arrowSize = 14;
+    final double arrowAngle = startAngle + sweepAngle * animationValue - pi / 12;
+    final arrowTip = Offset(center.dx + radius * cos(arrowAngle), center.dy + radius * sin(arrowAngle));
+    final double direction = arrowAngle + pi / 2;
 
-  final arrowTip = Offset(
-    center.dx + radius * cos(arrowAngle),
-    center.dy + radius * sin(arrowAngle),
-  );
+    final path = Path()
+      ..moveTo(arrowTip.dx, arrowTip.dy)
+      ..lineTo(arrowTip.dx - arrowSize * cos(direction - pi / 6), arrowTip.dy - arrowSize * sin(direction - pi / 6))
+      ..moveTo(arrowTip.dx, arrowTip.dy)
+      ..lineTo(arrowTip.dx - arrowSize * cos(direction + pi / 6), arrowTip.dy - arrowSize * sin(direction + pi / 6));
 
-  final double direction = arrowAngle + pi / 2;
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = 2.5
+      ..style = PaintingStyle.stroke;
 
-  final path = Path();
-  path.moveTo(arrowTip.dx, arrowTip.dy);
-
-  path.lineTo(
-    arrowTip.dx - arrowSize * cos(direction - pi / 6),
-    arrowTip.dy - arrowSize * sin(direction - pi / 6),
-  );
-
-  path.moveTo(arrowTip.dx, arrowTip.dy);
-
-  path.lineTo(
-    arrowTip.dx - arrowSize * cos(direction + pi / 6),
-    arrowTip.dy - arrowSize * sin(direction + pi / 6),
-  );
-
-  final paint = Paint()
-    ..color = color
-    ..strokeWidth = 2.5
-    ..style = PaintingStyle.stroke;
-
-  canvas.drawPath(path, paint);
-}
-
-
+    canvas.drawPath(path, paint);
+  }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;

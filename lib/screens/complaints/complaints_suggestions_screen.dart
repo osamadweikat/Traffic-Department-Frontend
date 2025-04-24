@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '/theme/app_theme.dart';
 
 class ComplaintsSuggestionsScreen extends StatefulWidget {
@@ -19,29 +20,29 @@ class _ComplaintsSuggestionsScreenState extends State<ComplaintsSuggestionsScree
   };
 
   final List<String> categories = [
-    'شكوى عن معاملة',
-    'مشكلة مع الموظف',
-    'مشكلة في الخدمات',
-    'اقتراحات لتحسين الخدمات والتطبيق',
+    'complaint_transaction',
+    'complaint_employee',
+    'complaint_services',
+    'suggestions_improvement',
   ];
 
   void _showConfirmDialog() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('تأكيد الإرسال'),
-        content: const Text('هل أنت متأكد من إرسال الشكوى؟'),
+        title: const Text('confirm_send_title').tr(),
+        content: const Text('confirm_send_message').tr(),
         actions: [
           TextButton(
-            child: const Text('إلغاء'),
+            child: const Text('cancel').tr(),
             onPressed: () => Navigator.pop(context),
           ),
           ElevatedButton(
-            child: const Text('تأكيد'),
+            child: const Text('confirm').tr(),
             onPressed: () {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("تم إرسال النموذج بنجاح")),
+                SnackBar(content: const Text("form_sent_success").tr()),
               );
               controllers.forEach((key, controller) => controller.clear());
               setState(() => _selectedCategory = null);
@@ -56,13 +57,13 @@ class _ComplaintsSuggestionsScreenState extends State<ComplaintsSuggestionsScree
     if (_selectedCategory == null) return const SizedBox.shrink();
 
     switch (_selectedCategory) {
-      case 'شكوى عن معاملة':
+      case 'complaint_transaction':
         return _buildTransactionComplaintForm();
-      case 'مشكلة مع الموظف':
+      case 'complaint_employee':
         return _buildEmployeeComplaintForm();
-      case 'مشكلة في الخدمات':
+      case 'complaint_services':
         return _buildServiceComplaintForm();
-      case 'اقتراحات لتحسين الخدمات والتطبيق':
+      case 'suggestions_improvement':
         return _buildSuggestionsForm();
       default:
         return const SizedBox.shrink();
@@ -73,9 +74,9 @@ class _ComplaintsSuggestionsScreenState extends State<ComplaintsSuggestionsScree
     return Column(
       children: [
         const SizedBox(height: 16),
-        _buildTextField('transactionId', 'رقم المعاملة'),
+        _buildTextField('transactionId', 'transaction_number'),
         const SizedBox(height: 12),
-        _buildTextField('description', 'تفاصيل الشكوى', maxLines: 4),
+        _buildTextField('description', 'complaint_details', maxLines: 4),
         const SizedBox(height: 16),
         _buildSubmitButton(),
       ],
@@ -86,9 +87,9 @@ class _ComplaintsSuggestionsScreenState extends State<ComplaintsSuggestionsScree
     return Column(
       children: [
         const SizedBox(height: 16),
-        _buildTextField('employeeName', 'اسم الموظف'),
+        _buildTextField('employeeName', 'employee_name'),
         const SizedBox(height: 12),
-        _buildTextField('description', 'تفاصيل المشكلة', maxLines: 4),
+        _buildTextField('description', 'problem_details', maxLines: 4),
         const SizedBox(height: 16),
         _buildSubmitButton(),
       ],
@@ -99,9 +100,9 @@ class _ComplaintsSuggestionsScreenState extends State<ComplaintsSuggestionsScree
     return Column(
       children: [
         const SizedBox(height: 16),
-        _buildTextField('title', 'عنوان المشكلة'),
+        _buildTextField('title', 'problem_title'),
         const SizedBox(height: 12),
-        _buildTextField('description', 'وصف المشكلة بالتفصيل', maxLines: 4),
+        _buildTextField('description', 'problem_description', maxLines: 4),
         const SizedBox(height: 16),
         _buildSubmitButton(),
       ],
@@ -112,21 +113,21 @@ class _ComplaintsSuggestionsScreenState extends State<ComplaintsSuggestionsScree
     return Column(
       children: [
         const SizedBox(height: 16),
-        _buildTextField('suggestionArea', 'المجال المستهدف (خدمة، تطبيق، تجربة مستخدم)'),
+        _buildTextField('suggestionArea', 'suggestion_area'),
         const SizedBox(height: 12),
-        _buildTextField('description', 'وصف الاقتراح', maxLines: 4),
+        _buildTextField('description', 'suggestion_description', maxLines: 4),
         const SizedBox(height: 16),
         _buildSubmitButton(),
       ],
     );
   }
 
-  Widget _buildTextField(String key, String label, {int maxLines = 1}) {
+  Widget _buildTextField(String key, String labelKey, {int maxLines = 1}) {
     return TextField(
       controller: controllers[key],
       maxLines: maxLines,
       decoration: InputDecoration(
-        labelText: label,
+        labelText: labelKey.tr(),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
@@ -135,7 +136,7 @@ class _ComplaintsSuggestionsScreenState extends State<ComplaintsSuggestionsScree
   Widget _buildSubmitButton() {
     return ElevatedButton.icon(
       icon: const Icon(Icons.send),
-      label: const Text("إرسال"),
+      label: const Text("send").tr(),
       onPressed: _showConfirmDialog,
       style: ElevatedButton.styleFrom(
         foregroundColor: AppTheme.navy,
@@ -147,10 +148,10 @@ class _ComplaintsSuggestionsScreenState extends State<ComplaintsSuggestionsScree
     );
   }
 
-  Widget _buildCategorySelector(String category) {
-    final isSelected = _selectedCategory == category;
+  Widget _buildCategorySelector(String categoryKey) {
+    final isSelected = _selectedCategory == categoryKey;
     return GestureDetector(
-      onTap: () => setState(() => _selectedCategory = category),
+      onTap: () => setState(() => _selectedCategory = categoryKey),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         margin: const EdgeInsets.symmetric(vertical: 6),
@@ -167,7 +168,7 @@ class _ComplaintsSuggestionsScreenState extends State<ComplaintsSuggestionsScree
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              category,
+              categoryKey.tr(),
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -183,29 +184,26 @@ class _ComplaintsSuggestionsScreenState extends State<ComplaintsSuggestionsScree
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("الشكاوى والاقتراحات"),
-          centerTitle: true,
-          backgroundColor: AppTheme.navy,
-        ),
-        backgroundColor: AppTheme.lightGrey,
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Text(
-                "اختر نوع الشكوى أو الاقتراح:",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              const SizedBox(height: 10),
-              ...categories.map(_buildCategorySelector),
-              _buildFormForSelectedCategory(),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("complaints_suggestions").tr(),
+        centerTitle: true,
+        backgroundColor: AppTheme.navy,
+      ),
+      backgroundColor: AppTheme.lightGrey,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text(
+              "select_complaint_type",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ).tr(),
+            const SizedBox(height: 10),
+            ...categories.map(_buildCategorySelector),
+            _buildFormForSelectedCategory(),
+          ],
         ),
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '/theme/app_theme.dart';
-import 'vehicle_details_screen.dart'; 
+import 'package:flutter/services.dart' as ui;
+import 'vehicle_details_screen.dart';
 
 class VehiclesScreen extends StatelessWidget {
   const VehiclesScreen({super.key});
@@ -54,10 +56,10 @@ class VehiclesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: context.locale.languageCode == 'ar' ? ui.TextDirection.rtl : ui.TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("مركباتي"),
+          title: const Text("my_vehicles").tr(),
           centerTitle: true,
           backgroundColor: AppTheme.navy,
         ),
@@ -72,16 +74,20 @@ class VehiclesScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               elevation: 3,
               child: ListTile(
-                leading: Icon(Icons.directions_car, size: 30, color: AppTheme.navy),
-                title: Text("رقم اللوحة: ${vehicle["plateNumber"]}", style: const TextStyle(fontWeight: FontWeight.bold)),
+                leading: const Icon(Icons.directions_car, size: 30, color: AppTheme.navy),
+                title: Text(
+                  "${"plate_number".tr()}: ${vehicle["plateNumber"]}",
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("نوع المركبة: ${vehicle["type"]}"),
-                    Text("الشركة والطراز: ${vehicle["brand"]}"),
-                    Text("سنة الصنع: ${vehicle["year"]}"),
-                    Text("اللون: ${vehicle["color"]}"),
-                    Text("الحالة: ${vehicle["status"]}", style: TextStyle(color: getStatusColor(vehicle["status"]))),
+                    Text("${"vehicle_type".tr()}: ${vehicle["type"]}"),
+                    Text("${"brand_model".tr()}: ${vehicle["brand"]}"),
+                    Text("${"manufacture_year".tr()}: ${vehicle["year"]}"),
+                    Text("${"color".tr()}: ${vehicle["color"]}"),
+                    Text("${"status".tr()}: ${vehicle["status"]}",
+                      style: TextStyle(color: getStatusColor(vehicle["status"]))),
                   ],
                 ),
                 onTap: () {

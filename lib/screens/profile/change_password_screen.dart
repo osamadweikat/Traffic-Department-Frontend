@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../theme/app_theme.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -16,19 +17,20 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   void changePassword() {
     if (_newPasswordController.text != _confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("كلمة المرور الجديدة وتأكيدها غير متطابقين")),
+        SnackBar(content: Text("passwords_not_matching".tr())),
       );
       return;
     }
+
     if (_newPasswordController.text.isEmpty || _currentPasswordController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("الرجاء تعبئة جميع الحقول")),
+        SnackBar(content: Text("fill_all_fields".tr())),
       );
       return;
     }
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("تم تغيير كلمة المرور بنجاح")),
+      SnackBar(content: Text("password_changed_successfully".tr())),
     );
 
     Navigator.pop(context);
@@ -37,10 +39,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("تغيير كلمة المرور"),
+          title: Text("change_password".tr()),
           centerTitle: true,
           backgroundColor: AppTheme.navy,
         ),
@@ -53,7 +55,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 controller: _currentPasswordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: "كلمة المرور الحالية",
+                  labelText: "current_password".tr(),
                   prefixIcon: const Icon(Icons.lock_outline),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                   filled: true,
@@ -61,12 +63,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-
               TextField(
                 controller: _newPasswordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: "كلمة المرور الجديدة",
+                  labelText: "new_password".tr(),
                   prefixIcon: const Icon(Icons.lock),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                   filled: true,
@@ -74,12 +75,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-
               TextField(
                 controller: _confirmPasswordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                  labelText: "تأكيد كلمة المرور الجديدة",
+                  labelText: "confirm_new_password".tr(),
                   prefixIcon: const Icon(Icons.lock_reset),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                   filled: true,
@@ -87,7 +87,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
@@ -99,7 +98,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                   ),
                   icon: const Icon(Icons.save),
-                  label: const Text("حفظ التغيير"),
+                  label: Text("save_changes".tr()),
                 ),
               ),
             ],

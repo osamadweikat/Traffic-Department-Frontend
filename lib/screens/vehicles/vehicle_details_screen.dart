@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/services.dart' as ui;
 import '/theme/app_theme.dart';
 
 class VehicleDetailsScreen extends StatelessWidget {
@@ -9,10 +11,10 @@ class VehicleDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: context.locale.languageCode == 'ar' ? ui.TextDirection.rtl : ui.TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("تفاصيل المركبة"),
+          title: const Text("vehicle_details").tr(),
           centerTitle: true,
           backgroundColor: AppTheme.navy,
         ),
@@ -27,60 +29,45 @@ class VehicleDetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Row(
                     children: [
                       const Icon(Icons.directions_car, color: AppTheme.navy),
                       const SizedBox(width: 8),
-                      Text("رقم اللوحة: ${vehicle["plateNumber"]}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      Text("${"plate_number".tr()}: ${vehicle["plateNumber"]}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ],
                   ),
-
                   const SizedBox(height: 20),
 
-                  buildRow("نوع المركبة:", vehicle["type"]),
-                  buildRow("الشركة والطراز:", vehicle["brand"]),
-                  buildRow("سنة الصنع:", vehicle["year"]),
-                  buildRow("اللون:", vehicle["color"]),
-                  buildRow("رقم الشاسيه:", vehicle["chassis"]),
-                  buildRow("رقم المحرك:", vehicle["engine"]),
-                  buildRow("نوع الوقود:", vehicle["fuel"]),
-                  buildRow("عدد الركاب:", vehicle["capacity"].toString()),
-                  buildRow("تاريخ انتهاء الترخيص:", vehicle["expiry"]),
-                  buildRow("حالة التأمين:", vehicle["insurance"]),
+                  buildRow("vehicle_type".tr(), vehicle["type"]),
+                  buildRow("brand_model".tr(), vehicle["brand"]),
+                  buildRow("manufacture_year".tr(), vehicle["year"]),
+                  buildRow("color".tr(), vehicle["color"]),
+                  buildRow("chassis_number".tr(), vehicle["chassis"]),
+                  buildRow("engine_number".tr(), vehicle["engine"]),
+                  buildRow("fuel_type".tr(), vehicle["fuel"]),
+                  buildRow("passenger_capacity".tr(), vehicle["capacity"].toString()),
+                  buildRow("license_expiry".tr(), vehicle["expiry"]),
+                  buildRow("insurance_status".tr(), vehicle["insurance"]),
 
                   const SizedBox(height: 15),
-                  const Text("المخالفات:", style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text("violations".tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
 
                   vehicle["violations"].isEmpty
-                      ? const Text("لا توجد مخالفات")
+                      ? Text("no_violations".tr())
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: vehicle["violations"].map<Widget>((v) => Text("• $v")).toList(),
                         ),
 
                   const SizedBox(height: 30),
-
-                  const Text("الخدمات المتاحة", style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text("available_services".tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 15),
 
-                  buildServiceButton(context, "تجديد رخصة المركبة", Icons.update, () {
-                    
-                  }),
-
-                  buildServiceButton(context, "نقل ملكية المركبة", Icons.transfer_within_a_station, () {
-                  
-                  }),
-
-                  buildServiceButton(context, "تغيير لون المركبة", Icons.color_lens, () {
-                    
-                  }),
-
-                  buildServiceButton(context, "إصدار بدل فاقد لوحة أو ملكية", Icons.report_problem, () {
-
-                  }),
-
+                  buildServiceButton(context, "service_renew_license".tr(), Icons.update, () {}),
+                  buildServiceButton(context, "service_transfer_ownership".tr(), Icons.transfer_within_a_station, () {}),
+                  buildServiceButton(context, "service_change_color".tr(), Icons.color_lens, () {}),
+                  buildServiceButton(context, "service_replace_plate".tr(), Icons.report_problem, () {}),
                 ],
               ),
             ),
