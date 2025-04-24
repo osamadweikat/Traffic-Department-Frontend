@@ -12,8 +12,13 @@ import '../theme/app_theme.dart';
 
 class CustomDrawer extends StatelessWidget {
   final VoidCallback toggleTheme;
+  final Function(bool)? onSettingsReturned;
 
-  const CustomDrawer({super.key, required this.toggleTheme});
+  const CustomDrawer({
+    super.key,
+    required this.toggleTheme,
+    this.onSettingsReturned,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +79,16 @@ class CustomDrawer extends StatelessWidget {
             const Divider(),
 
             _buildSectionHeader("drawer_settings".tr()),
-            _buildListTile(Icons.settings, "drawer_general_settings".tr(), iconColor: Colors.deepPurple, onTap: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (_) => GeneralSettingsScreen(toggleTheme: toggleTheme),
-              ));
+            _buildListTile(Icons.settings, "drawer_general_settings".tr(), iconColor: Colors.deepPurple, onTap: () async {
+              final result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => GeneralSettingsScreen(toggleTheme: toggleTheme),
+                ),
+              );
+              if (result == true && onSettingsReturned != null) {
+                onSettingsReturned!(true); 
+              }
             }),
 
             const Divider(height: 24),

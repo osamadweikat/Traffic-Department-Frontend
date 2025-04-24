@@ -230,6 +230,21 @@
   "transaction_step_reviewing": "قيد المراجعة",
   "transaction_step_completed": "مكتملة",
   "transaction_step_rejected": "مرفوضة",
-  "transaction_step_pending": "قيد الانتظار"
+  "transaction_step_pending": "قيد الانتظار",
+
+
+  "profile_name": "الاسم الرباعي",
+  "profile_id": "رقم الهوية",
+  "profile_birthdate": "تاريخ الميلاد",
+  "profile_email": "البريد الإلكتروني",
+  "profile_phone": "رقم الهاتف",
+  "profile_address": "العنوان",
+  "profile_missing_contact": "الرجاء استكمال بيانات الاتصال (الإيميل ورقم الهاتف)",
+  "profile_last_login": "آخر تسجيل دخول: {}",
+  "profile_edit_contact": "تعديل معلومات الاتصال"
+
+  
+
+  
   
 }

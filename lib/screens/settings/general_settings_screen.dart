@@ -46,77 +46,84 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: context.locale.languageCode == 'ar'
-          ? ui.TextDirection.rtl
-          : ui.TextDirection.ltr,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("general_settings_title".tr()),
-          backgroundColor: AppTheme.navy,
-        ),
-        backgroundColor: AppTheme.lightGrey,
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            _buildSectionTitle("appearance".tr()),
-            SwitchListTile(
-              title: Text("dark_mode".tr()),
-              value: isDarkMode,
-              onChanged: _toggleDarkMode,
-              activeColor: AppTheme.navy,
-            ),
-            ListTile(
-              leading: const Icon(Icons.language, color: AppTheme.navy),
-              title: Text("change_language".tr()),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const LanguageSettingsScreen(),
-                  ),
-                );
-              },
-            ),
-
-            const Divider(),
-            _buildSectionTitle("notifications".tr()),
-            SwitchListTile(
-              title: Text("enable_notifications".tr()),
-              value: notificationsEnabled,
-              onChanged: _toggleNotifications,
-              activeColor: AppTheme.navy,
-            ),
-            const Divider(),
-            _buildSectionTitle("account".tr()),
-            ListTile(
-              leading: const Icon(Icons.lock_reset, color: AppTheme.navy),
-              title: Text("reset_password".tr()),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                // صفحة إعادة تعيين كلمة المرور
-              },
-            ),
-            const Divider(),
-            _buildSectionTitle("general".tr()),
-            ListTile(
-              leading: const Icon(Icons.info_outline, color: AppTheme.navy),
-              title: Text("about_app".tr()),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                // صفحة عن التطبيق
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.privacy_tip, color: AppTheme.navy),
-              title: Text("privacy_policy".tr()),
-              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                // صفحة سياسة الخصوصية
-              },
-            ),
-          ],
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context, true); 
+        return false;
+      },
+      child: Directionality(
+        textDirection: context.locale.languageCode == 'ar'
+            ? ui.TextDirection.rtl
+            : ui.TextDirection.ltr,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("general_settings_title".tr()),
+            backgroundColor: AppTheme.navy,
+          ),
+          backgroundColor: AppTheme.lightGrey,
+          body: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              _buildSectionTitle("appearance".tr()),
+              SwitchListTile(
+                title: Text("dark_mode".tr()),
+                value: isDarkMode,
+                onChanged: _toggleDarkMode,
+                activeColor: AppTheme.navy,
+              ),
+              ListTile(
+                leading: const Icon(Icons.language, color: AppTheme.navy),
+                title: Text("change_language".tr()),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const LanguageSettingsScreen(),
+                    ),
+                  );
+                },
+              ),
+              const Divider(),
+              _buildSectionTitle("notifications".tr()),
+              SwitchListTile(
+                title: Text("enable_notifications".tr()),
+                value: notificationsEnabled,
+                onChanged: (value) async {
+                  await _toggleNotifications(value);
+                },
+                activeColor: AppTheme.navy,
+              ),
+              const Divider(),
+              _buildSectionTitle("account".tr()),
+              ListTile(
+                leading: const Icon(Icons.lock_reset, color: AppTheme.navy),
+                title: Text("reset_password".tr()),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  
+                },
+              ),
+              const Divider(),
+              _buildSectionTitle("general".tr()),
+              ListTile(
+                leading: const Icon(Icons.info_outline, color: AppTheme.navy),
+                title: Text("about_app".tr()),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.privacy_tip, color: AppTheme.navy),
+                title: Text("privacy_policy".tr()),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

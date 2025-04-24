@@ -82,10 +82,15 @@ class _ProgressPainter extends CustomPainter {
   Color _getStatusColor(String status) {
     switch (status) {
       case "مكتملة":
+      case "Completed":
         return Colors.green;
       case "قيد المعالجة":
+      case "قيد المراجعة":
+      case "Processing":
+      case "Reviewing":
         return Colors.orange;
       case "مرفوضة":
+      case "Rejected":
         return Colors.red;
       default:
         return Colors.grey;
@@ -141,9 +146,11 @@ class _ProgressPainter extends CustomPainter {
       final dx = center.dx + radius * cos(angle);
       final dy = center.dy + radius * sin(angle);
 
-      final isCompleted = i < completedSteps;
+      final bool isCompleted = i < completedSteps;
+      final Color color = _getStatusColor(stepStatus[i]);
+
       final Paint circlePaint = Paint()
-        ..color = isCompleted ? _getStatusColor(stepStatus[i]) : Colors.white
+        ..color = isCompleted ? color : Colors.white
         ..style = PaintingStyle.fill;
 
       canvas.drawCircle(Offset(dx, dy), 25, Paint()..color = Colors.black.withOpacity(0.1));

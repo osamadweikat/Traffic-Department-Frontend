@@ -15,10 +15,30 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   String filter = 'all';
 
   final List<Map<String, dynamic>> transactions = [
-    {"id": "#001", "type": "license_renewal".tr(), "date": "2025-03-30", "status": "completed"},
-    {"id": "#002", "type": "ownership_transfer".tr(), "date": "2025-03-29", "status": "processing"},
-    {"id": "#003", "type": "lost_plate".tr(), "date": "2025-03-28", "status": "rejected"},
-    {"id": "#004", "type": "practical_test_result".tr(), "date": "2025-03-25", "status": "completed"},
+    {
+      "id": "#001",
+      "type": "license_renewal".tr(),
+      "date": "2025-03-30",
+      "status": "completed"
+    },
+    {
+      "id": "#002",
+      "type": "ownership_transfer".tr(),
+      "date": "2025-03-29",
+      "status": "processing"
+    },
+    {
+      "id": "#003",
+      "type": "lost_plate".tr(),
+      "date": "2025-03-28",
+      "status": "rejected"
+    },
+    {
+      "id": "#004",
+      "type": "practical_test_result".tr(),
+      "date": "2025-03-25",
+      "status": "completed"
+    },
   ];
 
   List<Map<String, dynamic>> get filteredTransactions {
@@ -27,9 +47,13 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   }
 
   void showCustomMenu() async {
+    final isArabic = context.locale.languageCode == 'ar';
+
     final selected = await showMenu<String>(
       context: context,
-      position: const RelativeRect.fromLTRB(0, 80, 16, 0),
+      position: isArabic
+          ? const RelativeRect.fromLTRB(0, 80, 16, 0) // عربي (يمين)
+          : const RelativeRect.fromLTRB(1000, 80, 0, 0), // إنجليزي (يسار)
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       items: [
         _buildFilterItem('all'),
@@ -74,8 +98,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isArabic = context.locale.languageCode == 'ar';
+
     return Directionality(
-      textDirection: context.locale.languageCode == 'ar' ? ui.TextDirection.rtl : ui.TextDirection.ltr,
+      textDirection: isArabic ? ui.TextDirection.rtl : ui.TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
           title: Text("my_transactions".tr()),
@@ -104,7 +130,10 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     elevation: 3,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     child: ListTile(
-                      title: Text(transaction["type"], style: const TextStyle(fontWeight: FontWeight.bold)),
+                      title: Text(
+                        transaction["type"],
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

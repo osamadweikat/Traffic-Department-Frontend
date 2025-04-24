@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:traffic_department/screens/notifications/notification_details_screen.dart';
+import 'package:flutter/services.dart' as ui;
 import '../../theme/app_theme.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -13,25 +14,29 @@ class NotificationsScreen extends StatefulWidget {
 class _NotificationsScreenState extends State<NotificationsScreen> {
   List<Map<String, dynamic>> notifications = [
     {
-      "title": "تم قبول طلب تجديد رخصة القيادة",
+      "title_ar": "تم قبول طلب تجديد رخصة القيادة",
+      "title_en": "Driving license renewal request approved",
       "date": "2025-03-31",
       "isRead": false,
       "details": "تفاصيل قبول طلب تجديد الرخصة"
     },
     {
-      "title": "تم رفض طلب نقل ملكية مركبة",
+      "title_ar": "تم رفض طلب نقل ملكية مركبة",
+      "title_en": "Vehicle ownership transfer request rejected",
       "date": "2025-03-30",
       "isRead": true,
       "details": "تفاصيل رفض نقل الملكية"
     },
     {
-      "title": "تم إصدار مخالفة جديدة على المركبة",
+      "title_ar": "تم إصدار مخالفة جديدة على المركبة",
+      "title_en": "New violation issued on the vehicle",
       "date": "2025-03-29",
       "isRead": false,
       "details": "تفاصيل المخالفة الجديدة"
     },
     {
-      "title": "موعد فحص عملي قادم غداً",
+      "title_ar": "موعد فحص عملي قادم غداً",
+      "title_en": "Practical test scheduled for tomorrow",
       "date": "2025-03-28",
       "isRead": true,
       "details": "تفاصيل موعد الفحص العملي"
@@ -79,7 +84,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       context,
       MaterialPageRoute(
         builder: (_) => NotificationDetailsScreen(
-          title: notifications[index]["title"],
+          title: getLocalizedTitle(notifications[index]),
           date: notifications[index]["date"],
           details: notifications[index]["details"],
         ),
@@ -87,10 +92,20 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     );
   }
 
+  String getLocalizedTitle(Map<String, dynamic> item) {
+    return context.locale.languageCode == 'ar'
+        ? item["title_ar"]
+        : item["title_en"];
+  }
+
   void showCustomMenu() async {
+    final isArabic = context.locale.languageCode == 'ar';
+
     final selected = await showMenu<String>(
       context: context,
-      position: const RelativeRect.fromLTRB(0, 80, 16, 0),
+      position: isArabic
+          ? const RelativeRect.fromLTRB(0, 80, 16, 0) // Right (RTL)
+          : const RelativeRect.fromLTRB(1000, 80, 0, 0), // Left (LTR)
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       items: [
         _buildFilterItem('all'),
@@ -121,67 +136,74 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("notifications_title".tr()),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.delete_forever),
-            tooltip: "delete_all_tooltip".tr(),
-            onPressed: notifications.isEmpty ? null : deleteAll,
-          ),
-          IconButton(
-            icon: const Icon(Icons.filter_list),
-            onPressed: showCustomMenu,
-          ),
-        ],
-      ),
-      backgroundColor: AppTheme.lightGrey,
-      body: filteredNotifications.isEmpty
-          ? Center(child: Text("no_notifications".tr()))
-          : ListView.separated(
-              padding: const EdgeInsets.all(16),
-              separatorBuilder: (_, __) => const SizedBox(height: 12),
-              itemCount: filteredNotifications.length,
-              itemBuilder: (context, index) {
-                int realIndex = notifications.indexOf(filteredNotifications[index]);
-                bool isNew = !filteredNotifications[index]["isRead"];
-                return Dismissible(
-                  key: UniqueKey(),
-                  direction: DismissDirection.endToStart,
-                  background: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const Icon(Icons.delete, color: Colors.white),
-                  ),
-                  onDismissed: (_) => deleteNotification(realIndex),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeInOut,
-                    decoration: BoxDecoration(
-                      color: isNew ? const Color(0xFFFFF8E1) : Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: ListTile(
-                      leading: const Icon(Icons.notifications_none, color: Colors.grey, size: 30),
-                      title: Text(
-                        filteredNotifications[index]["title"],
-                        style: TextStyle(
-                          fontWeight: isNew ? FontWeight.bold : FontWeight.normal,
-                        ),
-                      ),
-                      subtitle: Text("notification_date_prefix".tr(args: [filteredNotifications[index]["date"]])),
-                      onTap: () => openNotificationDetails(realIndex),
-                    ),
-                  ),
-                );
-              },
+    final isArabic = context.locale.languageCode == 'ar';
+
+    return Directionality(
+      textDirection: isArabic ? ui.TextDirection.rtl : ui.TextDirection.ltr,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("notifications_title".tr()),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.delete_forever),
+              tooltip: "delete_all_tooltip".tr(),
+              onPressed: notifications.isEmpty ? null : deleteAll,
             ),
+            IconButton(
+              icon: const Icon(Icons.filter_list),
+              onPressed: showCustomMenu,
+            ),
+          ],
+        ),
+        backgroundColor: AppTheme.lightGrey,
+        body: filteredNotifications.isEmpty
+            ? Center(child: Text("no_notifications".tr()))
+            : ListView.separated(
+                padding: const EdgeInsets.all(16),
+                separatorBuilder: (_, __) => const SizedBox(height: 12),
+                itemCount: filteredNotifications.length,
+                itemBuilder: (context, index) {
+                  int realIndex = notifications.indexOf(filteredNotifications[index]);
+                  bool isNew = !filteredNotifications[index]["isRead"];
+                  return Dismissible(
+                    key: UniqueKey(),
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: const Icon(Icons.delete, color: Colors.white),
+                    ),
+                    onDismissed: (_) => deleteNotification(realIndex),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeInOut,
+                      decoration: BoxDecoration(
+                        color: isNew ? const Color(0xFFFFF8E1) : Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
+                        leading: const Icon(Icons.notifications_none, color: Colors.grey, size: 30),
+                        title: Text(
+                          getLocalizedTitle(filteredNotifications[index]),
+                          style: TextStyle(
+                            fontWeight: isNew ? FontWeight.bold : FontWeight.normal,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "notification_date_prefix".tr(args: [filteredNotifications[index]["date"]]),
+                        ),
+                        onTap: () => openNotificationDetails(realIndex),
+                      ),
+                    ),
+                  );
+                },
+              ),
+      ),
     );
   }
 }

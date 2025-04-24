@@ -11,7 +11,7 @@ class LanguageSettingsScreen extends StatelessWidget {
     final locale = Locale(languageCode);
     await context.setLocale(locale);
 
-    // Optional: Save language manually (although `easy_localization` does it if `saveLocale` is true)
+  
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('locale', languageCode);
   }

@@ -30,14 +30,19 @@ class TransactionDetailsScreen extends StatelessWidget {
   int getStepIndex(String status) {
     switch (status) {
       case "تم التقديم":
+      case "Submitted":
         return 1;
       case "قيد المعالجة":
+      case "Processing":
         return 2;
       case "قيد المراجعة":
+      case "Reviewing":
         return 3;
       case "مكتملة":
+      case "Completed":
         return 4;
       case "مرفوضة":
+      case "Rejected":
         return 3;
       default:
         return 1;
@@ -51,7 +56,7 @@ class TransactionDetailsScreen extends StatelessWidget {
       if (i < stepIndex) {
         statuses.add("status_completed".tr());
       } else if (i == stepIndex) {
-        if (status == "مرفوضة") {
+        if (status == "مرفوضة" || status == "Rejected") {
           statuses.add("status_rejected".tr());
         } else {
           statuses.add(status);
@@ -66,13 +71,18 @@ class TransactionDetailsScreen extends StatelessWidget {
   Color getStatusColor() {
     switch (status) {
       case "مكتملة":
+      case "Completed":
         return Colors.green;
-      case "قيد المراجعة":
       case "قيد المعالجة":
+      case "قيد المراجعة":
+      case "Processing":
+      case "Reviewing":
         return Colors.orange;
       case "مرفوضة":
+      case "Rejected":
         return Colors.red;
       case "تم التقديم":
+      case "Submitted":
         return Colors.blueGrey;
       default:
         return Colors.grey;
@@ -82,12 +92,17 @@ class TransactionDetailsScreen extends StatelessWidget {
   IconData getStatusIcon() {
     switch (status) {
       case "مكتملة":
+      case "Completed":
         return Icons.check_circle_outline;
-      case "قيد المراجعة":
       case "قيد المعالجة":
+      case "قيد المراجعة":
+      case "Processing":
+      case "Reviewing":
       case "تم التقديم":
+      case "Submitted":
         return Icons.pending_actions;
       case "مرفوضة":
+      case "Rejected":
         return Icons.cancel_outlined;
       default:
         return Icons.help_outline;
@@ -97,7 +112,6 @@ class TransactionDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final completedSteps = getStepIndex(status);
-
     return Directionality(
       textDirection: context.locale.languageCode == 'ar'
           ? ui.TextDirection.rtl
@@ -124,7 +138,6 @@ class TransactionDetailsScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Row(
                           children: [
@@ -162,10 +175,7 @@ class TransactionDetailsScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 15),
-                        Text(
-                          "notes".tr(),
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                        Text("notes".tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
                         const SizedBox(height: 4),
                         Text(
                           notes.isNotEmpty ? notes : "no_notes".tr(),
@@ -199,7 +209,9 @@ class TransactionDetailsScreen extends StatelessWidget {
         children: [
           Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(width: 8),
-          Expanded(child: Text(value, style: const TextStyle(color: Colors.black87))),
+          Expanded(
+            child: Text(value, style: const TextStyle(color: Colors.black87)),
+          ),
         ],
       ),
     );

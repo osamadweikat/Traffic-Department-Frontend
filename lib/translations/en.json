@@ -229,6 +229,16 @@
   "transaction_step_reviewing": "Under Review",
   "transaction_step_completed": "Completed",
   "transaction_step_rejected": "Rejected",
-  "transaction_step_pending": "Pending"
+  "transaction_step_pending": "Pending",
+
+  "profile_name": "Full Name",
+  "profile_id": "National ID",
+  "profile_birthdate": "Birth Date",
+  "profile_email": "Email",
+  "profile_phone": "Phone Number",
+  "profile_address": "Address",
+  "profile_missing_contact": "Please complete your contact info (email and phone)",
+  "profile_last_login": "Last login: {}",
+  "profile_edit_contact": "Edit Contact Information"
   
 }

@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/custom_drawer.dart';
 import '../notifications/notifications_screen.dart';
 
-class CitizenDashboard extends StatelessWidget {
+class CitizenDashboard extends StatefulWidget {
   final VoidCallback toggleTheme;
 
   const CitizenDashboard({super.key, required this.toggleTheme});
+
+  @override
+  State<CitizenDashboard> createState() => _CitizenDashboardState();
+}
+
+class _CitizenDashboardState extends State<CitizenDashboard> {
+  bool notificationsEnabled = true;
 
   final List<Map<String, dynamic>> services = const [
     {"title": "renew_driver_license", "icon": Icons.credit_card, "route": "/license_renewal"},
@@ -23,6 +31,19 @@ class CitizenDashboard extends StatelessWidget {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _loadNotificationSettings();
+  }
+
+  Future<void> _loadNotificationSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      notificationsEnabled = prefs.getBool('notificationsEnabled') ?? true;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -35,36 +56,58 @@ class CitizenDashboard extends StatelessWidget {
               clipBehavior: Clip.none,
               children: [
                 IconButton(
-                  icon: const Icon(Icons.notifications_none),
+                  icon: Icon(
+                    Icons.notifications_none,
+                    color: notificationsEnabled ? Colors.white : Colors.grey.withOpacity(0.5),
+                  ),
                   tooltip: 'notifications'.tr(),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const NotificationsScreen()),
-                    );
-                  },
+                  onPressed: notificationsEnabled
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+                          );
+                        }
+                      : null,
                 ),
-                Positioned(
-                  right: 8,
-                  top: 8,
-                  child: Container(
-                    padding: const EdgeInsets.all(3),
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
+                if (notificationsEnabled)
+                  Positioned(
+                    right: 8,
+                    top: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(3),
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Text(
+                        '1',
+                        style: TextStyle(color: Colors.white, fontSize: 10),
+                      ),
                     ),
-                    child: const Text(
-                      '1',
-                      style: TextStyle(color: Colors.white, fontSize: 10),
+                  )
+                else
+                  Positioned(
+                    right: 4,
+                    top: 6,
+                    child: Transform.rotate(
+                      angle: -0.5,
+                      child: Icon(Icons.block, size: 16, color: Colors.grey.withOpacity(0.7)),
                     ),
                   ),
-                ),
               ],
             ),
           ),
         ],
       ),
-      drawer: CustomDrawer(toggleTheme: toggleTheme),
+      drawer: CustomDrawer(
+        toggleTheme: widget.toggleTheme,
+        onSettingsReturned: (bool settingsChanged) {
+          if (settingsChanged) {
+            _loadNotificationSettings();
+          }
+        },
+      ),
       backgroundColor: AppTheme.lightGrey,
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -79,7 +122,7 @@ class CitizenDashboard extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                // يمكنك هنا التنقل للراوت المناسب
+              
               },
               child: Card(
                 elevation: 4,

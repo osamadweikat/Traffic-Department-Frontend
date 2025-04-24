@@ -28,7 +28,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String lastLogin = "غير متوفر";
+  String lastLogin = "not_available".tr();
 
   @override
   void initState() {
@@ -39,23 +39,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> loadLastLogin() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      lastLogin = prefs.getString('last_login') ?? "غير متوفر";
+      lastLogin = prefs.getString('last_login') ?? "not_available".tr();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    bool missingContact =
-        (widget.email == null || widget.email!.isEmpty) ||
+    bool missingContact = (widget.email == null || widget.email!.isEmpty) ||
         (widget.phone == null || widget.phone!.isEmpty);
 
     return Directionality(
-      textDirection: context.locale.languageCode == 'ar'
-          ? ui.TextDirection.rtl
-          : ui.TextDirection.ltr,
+      textDirection:
+          context.locale.languageCode == 'ar' ? ui.TextDirection.rtl : ui.TextDirection.ltr,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("الملف الشخصي").tr(),
+          title: const Text("profile_title").tr(),
           centerTitle: true,
           backgroundColor: AppTheme.navy,
         ),
@@ -71,7 +69,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: const Icon(Icons.person, size: 50, color: AppTheme.navy),
               ),
               const SizedBox(height: 16),
-
               if (missingContact)
                 Container(
                   padding: const EdgeInsets.all(10),
@@ -84,40 +81,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const Icon(Icons.info_outline, color: Colors.orange, size: 20),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: const Text(
-                          "الرجاء استكمال بيانات الاتصال (الإيميل ورقم الهاتف)",
-                          style: TextStyle(color: Colors.black87),
-                        ).tr(),
+                        child: const Text("profile_missing_contact").tr(),
                       ),
                     ],
                   ),
                 ),
-
               const SizedBox(height: 20),
-
-              buildInfoRow("الاسم الرباعي".tr(), widget.fullName),
-              buildInfoRow("رقم الهوية".tr(), widget.nationalId),
-              buildInfoRow("تاريخ الميلاد".tr(), widget.birthDate),
-              buildInfoRow("البريد الإلكتروني".tr(), widget.email ?? "غير مسجل".tr()),
-              buildInfoRow("رقم الهاتف".tr(), widget.phone ?? "غير مسجل".tr()),
-              buildInfoRow("العنوان".tr(), widget.address ?? "غير محدد".tr()),
-
+              buildInfoRow("profile_name".tr(), widget.fullName),
+              buildInfoRow("profile_id".tr(), widget.nationalId),
+              buildInfoRow("profile_birthdate".tr(), widget.birthDate),
+              buildInfoRow("profile_email".tr(), widget.email ?? "not_registered".tr()),
+              buildInfoRow("profile_phone".tr(), widget.phone ?? "not_registered".tr()),
+              buildInfoRow("profile_address".tr(), widget.address ?? "not_specified".tr()),
               const SizedBox(height: 10),
-
-              Text(
-                "آخر تسجيل دخول: $lastLogin".tr(),
-                style: const TextStyle(color: Colors.grey, fontSize: 13),
-              ),
-
+              Text("profile_last_login".tr(args: [lastLogin]),
+                  style: const TextStyle(color: Colors.grey, fontSize: 13)),
               const SizedBox(height: 30),
-
               ElevatedButton.icon(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => const EditContactScreen(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const EditContactScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -126,13 +110,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 12,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
                 icon: const Icon(Icons.edit),
-                label: const Text("تعديل معلومات الاتصال").tr(),
+                label: const Text("profile_edit_contact").tr(),
               ),
             ],
           ),
@@ -145,10 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       children: [
         ListTile(
-          title: Text(
-            label,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
+          title: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
           subtitle: Text(value),
         ),
         const Divider(),

@@ -27,7 +27,7 @@ class _RegisterScreenState extends State<RegisterScreen> with SingleTickerProvid
       initialDate: DateTime.now(),
       firstDate: DateTime(1950),
       lastDate: DateTime.now(),
-      locale: context.locale, // 🔁 لغة التاريخ حسب اللغة المختارة
+      locale: context.locale,
     );
     if (picked != null) {
       setState(() {
