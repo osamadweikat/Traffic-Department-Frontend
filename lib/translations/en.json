@@ -252,6 +252,12 @@
   "resend_code_phone": "Resend code to phone",
   "resend_code_email": "Send code to email",
   "otp_expiry_notice": "Note: the code is valid for 60 seconds only",
-  "didnt_receive_code": "Didn't receive the code?"
+  "didnt_receive_code": "Didn't receive the code?",
+
+  "change_password_title": "Change Password",
+  "change_password_button": "Change Password",
+  "password_too_short": "Password must be at least 8 characters",
+  "passwords_do_not_match": "Passwords do not match",
+  "forgot_password": "Forgot Password?"
   
 }

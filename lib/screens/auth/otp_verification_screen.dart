@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart' as ui;
+import 'package:traffic_department/screens/auth/change_password_screen.dart';
 import '../../theme/app_theme.dart';
 
 class OTPVerificationScreen extends StatefulWidget {
@@ -47,15 +48,20 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   String _getCode() => _controllers.map((c) => c.text).join();
 
   void _verifyCode() {
-    final code = _getCode();
-    if (code.length == 6) {
-      Navigator.pushNamed(context, '/change_password');
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('please_enter_valid_code'.tr())),
-      );
-    }
+  final code = _getCode();
+  if (code.length == 6) {
+    // ✅ انتقل إلى شاشة تغيير كلمة المرور
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const ChangePasswordScreen()),
+    );
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('please_enter_valid_code'.tr())),
+    );
   }
+}
+
 
   void _resendToPhone() {
     setState(() {

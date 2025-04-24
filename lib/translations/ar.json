@@ -254,7 +254,14 @@
   "resend_code_phone": "إعادة إرسال الكود إلى الهاتف",
   "resend_code_email": "إرسال الكود إلى البريد الإلكتروني",
   "otp_expiry_notice": "يرجى الملاحظة أن الكود صالح لمدة 60 ثانية فقط",
-  "didnt_receive_code": "لم يصلك الكود بعد؟"
+  "didnt_receive_code": "لم يصلك الكود بعد؟",
+
+  "change_password_title": "تغيير كلمة المرور",
+  "change_password_button": "تأكيد التغيير",
+  "password_too_short": "كلمة المرور يجب أن تتكون من 8 أحرف على الأقل",
+  "passwords_do_not_match": "كلمتا المرور غير متطابقتين",
+  "forgot_password": "هل نسيت كلمة المرور؟"
+
 
   
 

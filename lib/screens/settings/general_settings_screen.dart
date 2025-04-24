@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:traffic_department/screens/auth/otp_verification_screen.dart';
+import 'package:traffic_department/screens/auth/verify_and_change_password_screen.dart';
 import 'package:traffic_department/screens/settings/language_settings_screen.dart';
 import 'package:flutter/services.dart' as ui;
 import '/theme/app_theme.dart';
@@ -106,13 +106,7 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder:
-                          (_) => const OTPVerificationScreen(
-                            destination:
-                                '0599123456', // ← استبدل هذا برقم الجوال أو البريد الفعلي لاحقًا
-                            isEmail:
-                                false, // ← true إذا أردت الإرسال إلى الإيميل
-                          ),
+                      builder: (_) => const VerifyAndChangePasswordScreen(),
                     ),
                   );
                 },
