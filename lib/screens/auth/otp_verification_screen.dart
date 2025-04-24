@@ -50,7 +50,6 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   void _verifyCode() {
   final code = _getCode();
   if (code.length == 6) {
-    // ✅ انتقل إلى شاشة تغيير كلمة المرور
     Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => const ChangePasswordScreen()),
