@@ -258,6 +258,31 @@
   "change_password_button": "Change Password",
   "password_too_short": "Password must be at least 8 characters",
   "passwords_do_not_match": "Passwords do not match",
-  "forgot_password": "Forgot Password?"
+  "forgot_password": "Forgot Password?",
+
+  "about_app_title": "About the App",
+  "app_name": "Traffic Department App",
+  "app_version": "Version: {{version}}",
+  "about_app_description": "This app helps citizens manage license and vehicle-related services easily and digitally.",
+  "developed_by": "Developed by",
+  "developer_names": "Graduation Project Team - Palestine Technical University",
+  "contact_info": "Contact Information",
+  "app_contact_email": "support@trafficapp.ps",
+  "features_title": "Main Features",
+  "feature_1": "Renew driver and vehicle licenses",
+  "feature_2": "View theoretical and practical test results",
+  "feature_3": "Submit complaints and suggestions",
+  "feature_4": "Check violations and contact support",
+  "share_app": "Share App",
+  "check_out_app": "Check out the Traffic Department App and simplify your services!",
+  "rate_app": "Rate App",
+  "rate_app_title": "Please rate the app",
+  "write_feedback": "Leave your feedback",
+  "write_here": "Write your opinion here...",
+  "thank_you_feedback": "Thank you for your feedback!",
+  "submit": "Submit",
+  "dev_contact_email": "dev@trafficapp.ps",
+  "version_number": "Version: {{version}}",
+  "version_copied": "Version copied to clipboard!"
   
 }

@@ -260,7 +260,32 @@
   "change_password_button": "تأكيد التغيير",
   "password_too_short": "كلمة المرور يجب أن تتكون من 8 أحرف على الأقل",
   "passwords_do_not_match": "كلمتا المرور غير متطابقتين",
-  "forgot_password": "هل نسيت كلمة المرور؟"
+  "forgot_password": "هل نسيت كلمة المرور؟",
+
+  "about_app_title": "عن التطبيق",
+  "app_name": "تطبيق دائرة السير",
+  "app_version": "الإصدار: {{version}}",
+  "about_app_description": "يساعد التطبيق المواطنين في تنفيذ المعاملات المتعلقة برخص القيادة والمركبات بشكل رقمي وسهل.",
+  "developed_by": "تم تطويره بواسطة",
+  "developer_names": "قسم هندسة الحاسوب - جامعة النجاح الوطنية",
+  "contact_info": "معلومات التواصل",
+  "app_contact_email": "s12042142@stu.najah.edu",
+  "features_title": "الميزات الرئيسية",
+  "feature_1": "تجديد رخص القيادة والمركبات",
+  "feature_2": "عرض نتائج الفحوصات النظرية والعملية",
+  "feature_3": "تقديم الشكاوى والاقتراحات",
+  "feature_4": "استعراض المخالفات والتواصل مع الدعم",
+  "share_app": "مشاركة التطبيق",
+  "check_out_app": "اكتشف تطبيق دائرة السير وسهّل معاملاتك الآن!",
+  "rate_app": "تقييم التطبيق",
+  "rate_app_title": "يرجى تقييم التطبيق",
+  "write_feedback": "اترك تعليقك",
+  "write_here": "اكتب رأيك هنا...",
+  "thank_you_feedback": "شكرًا على ملاحظاتك!",
+  "submit": "إرسال",
+  "dev_contact_email": "s12027907@stu.najah.edu",
+  "version_number": "الإصدار: {{version}}",
+  "version_copied": "تم نسخ رقم الإصدار!"
 
 
   
