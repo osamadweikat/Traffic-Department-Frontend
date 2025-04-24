@@ -241,7 +241,20 @@
   "profile_address": "العنوان",
   "profile_missing_contact": "الرجاء استكمال بيانات الاتصال (الإيميل ورقم الهاتف)",
   "profile_last_login": "آخر تسجيل دخول: {}",
-  "profile_edit_contact": "تعديل معلومات الاتصال"
+  "profile_edit_contact": "تعديل معلومات الاتصال",
+
+  "verify_code_title": "التحقق من الكود",
+  "code_sent_to": "تم إرسال كود التحقق إلى رقمك",
+  "wait": "يرجى الانتظار",
+  "seconds": "ثانية",
+  "please_enter_valid_code": "يرجى إدخال كود مكون من 6 أرقام",
+  "code_sent_to_phone": "تم إرسال كود التحقق إلى رقمك",
+  "code_resent_to_phone": "تم إعادة إرسال الكود إلى رقمك",
+  "code_resent_to_email": "تم إرسال الكود إلى بريدك الإلكتروني",
+  "resend_code_phone": "إعادة إرسال الكود إلى الهاتف",
+  "resend_code_email": "إرسال الكود إلى البريد الإلكتروني",
+  "otp_expiry_notice": "يرجى الملاحظة أن الكود صالح لمدة 60 ثانية فقط",
+  "didnt_receive_code": "لم يصلك الكود بعد؟"
 
   
 

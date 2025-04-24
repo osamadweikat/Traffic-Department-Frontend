@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:traffic_department/screens/auth/otp_verification_screen.dart';
 import 'package:traffic_department/screens/settings/language_settings_screen.dart';
 import 'package:flutter/services.dart' as ui;
 import '/theme/app_theme.dart';
@@ -48,13 +49,14 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pop(context, true); 
+        Navigator.pop(context, true);
         return false;
       },
       child: Directionality(
-        textDirection: context.locale.languageCode == 'ar'
-            ? ui.TextDirection.rtl
-            : ui.TextDirection.ltr,
+        textDirection:
+            context.locale.languageCode == 'ar'
+                ? ui.TextDirection.rtl
+                : ui.TextDirection.ltr,
         child: Scaffold(
           appBar: AppBar(
             title: Text("general_settings_title".tr()),
@@ -101,7 +103,18 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                 title: Text("reset_password".tr()),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
-                  
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (_) => const OTPVerificationScreen(
+                            destination:
+                                '0599123456', // ← استبدل هذا برقم الجوال أو البريد الفعلي لاحقًا
+                            isEmail:
+                                false, // ← true إذا أردت الإرسال إلى الإيميل
+                          ),
+                    ),
+                  );
                 },
               ),
               const Divider(),
@@ -110,17 +123,13 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                 leading: const Icon(Icons.info_outline, color: AppTheme.navy),
                 title: Text("about_app".tr()),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () {
-                  
-                },
+                onTap: () {},
               ),
               ListTile(
                 leading: const Icon(Icons.privacy_tip, color: AppTheme.navy),
                 title: Text("privacy_policy".tr()),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () {
-                  
-                },
+                onTap: () {},
               ),
             ],
           ),

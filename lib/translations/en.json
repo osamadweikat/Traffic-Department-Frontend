@@ -239,6 +239,19 @@
   "profile_address": "Address",
   "profile_missing_contact": "Please complete your contact info (email and phone)",
   "profile_last_login": "Last login: {}",
-  "profile_edit_contact": "Edit Contact Information"
+  "profile_edit_contact": "Edit Contact Information",
+
+  "verify_code_title": "Verify Code",
+  "code_sent_to": "A verification code has been sent to your number",
+  "wait": "Wait",
+  "seconds": "seconds",
+  "please_enter_valid_code": "Please enter a valid 6-digit code",
+  "code_sent_to_phone": "A verification code has been sent to your number",
+  "code_resent_to_phone": "The code has been resent to your number",
+  "code_resent_to_email": "The code has been sent to your email",
+  "resend_code_phone": "Resend code to phone",
+  "resend_code_email": "Send code to email",
+  "otp_expiry_notice": "Note: the code is valid for 60 seconds only",
+  "didnt_receive_code": "Didn't receive the code?"
   
 }
