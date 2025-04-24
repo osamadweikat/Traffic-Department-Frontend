@@ -285,7 +285,25 @@
   "submit": "إرسال",
   "dev_contact_email": "s12027907@stu.najah.edu",
   "version_number": "الإصدار: {{version}}",
-  "version_copied": "تم نسخ رقم الإصدار!"
+  "version_copied": "تم نسخ رقم الإصدار!",
+
+  "privacy_intro_title": "مقدمة",
+  "privacy_intro_text": "نحن نقدر ثقتك ونلتزم بحماية خصوصيتك. تهدف هذه السياسة لتوضيح كيفية جمعنا واستخدامنا لبياناتك.",
+  "privacy_data_title": "البيانات التي نقوم بجمعها",
+  "privacy_data_text": "نقوم بجمع معلومات الحساب، الاستخدام، الجهاز، والموقع الجغرافي حسب الإعدادات.",
+  "privacy_usage_title": "استخدام المعلومات",
+  "privacy_usage_text": "نستخدم بياناتك لتحسين الخدمة، والتواصل، والتطوير والدعم الفني.",
+  "privacy_share_title": "مشاركة البيانات",
+  "privacy_share_text": "لا نشارك بياناتك إلا في حالات قانونية أو طارئة وفقًا للأنظمة.",
+  "privacy_protection_title": "حماية البيانات",
+  "privacy_protection_text": "نستخدم تقنيات تشفير وتقييد وصول وجدران حماية لحماية بياناتك.",
+  "privacy_retention_title": "مدة الاحتفاظ بالبيانات",
+  "privacy_retention_text": "نحتفظ ببياناتك طالما الحساب نشط أو حسب القانون.",
+  "privacy_rights_title": "حقوق المستخدم",
+  "privacy_rights_text": "يحق لك تعديل، حذف، أو معرفة بياناتك أو سحب الموافقة.",
+  "privacy_contact_title": "التواصل معنا",
+  "privacy_contact_text": "للاستفسارات: privacy@trafficapp.ps",
+  "privacy_last_updated": "آخر تحديث: 1 أبريل 2025"
 
 
   

@@ -283,6 +283,24 @@
   "submit": "Submit",
   "dev_contact_email": "dev@trafficapp.ps",
   "version_number": "Version: {{version}}",
-  "version_copied": "Version copied to clipboard!"
+  "version_copied": "Version copied to clipboard!",
+
+  "privacy_intro_title": "Introduction",
+  "privacy_intro_text": "We value your trust and are committed to protecting your privacy. This policy explains how we collect and use your data.",
+  "privacy_data_title": "Data We Collect",
+  "privacy_data_text": "We collect account info, usage, device data, and location (if enabled).",
+  "privacy_usage_title": "How We Use Your Data",
+  "privacy_usage_text": "We use your data to improve service, communicate, develop, and provide support.",
+  "privacy_share_title": "Data Sharing",
+  "privacy_share_text": "We only share data in legal or emergency cases under regulations.",
+  "privacy_protection_title": "Data Protection",
+  "privacy_protection_text": "We use encryption, access control, and firewalls to protect your data.",
+  "privacy_retention_title": "Data Retention",
+  "privacy_retention_text": "We retain your data while the account is active or as required by law.",
+  "privacy_rights_title": "Your Rights",
+  "privacy_rights_text": "You have the right to view, edit, delete or revoke consent regarding your data.",
+  "privacy_contact_title": "Contact Us",
+  "privacy_contact_text": "For inquiries: privacy@trafficapp.ps",
+  "privacy_last_updated": "Last updated: April 1, 2025"
   
 }

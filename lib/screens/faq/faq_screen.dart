@@ -11,56 +11,66 @@ class FAQScreen extends StatefulWidget {
 }
 
 class _FAQScreenState extends State<FAQScreen> {
-  final List<Map<String, String>> faqs = [
+  final List<Map<String, dynamic>> faqs = [
     {
       "category": "transactions",
       "question": "faq_1_q",
-      "answer": "faq_1_a"
+      "answer": "faq_1_a",
+      "isHelpful": null // null: لم يتم التقييم، true: أعجبني، false: لم يعجبني
     },
     {
       "category": "vehicles",
       "question": "faq_2_q",
-      "answer": "faq_2_a"
+      "answer": "faq_2_a",
+      "isHelpful": null
     },
     {
       "category": "vehicles",
       "question": "faq_3_q",
-      "answer": "faq_3_a"
+      "answer": "faq_3_a",
+      "isHelpful": null
     },
     {
       "category": "complaints",
       "question": "faq_4_q",
-      "answer": "faq_4_a"
+      "answer": "faq_4_a",
+      "isHelpful": null
     },
     {
       "category": "transactions",
       "question": "faq_5_q",
-      "answer": "faq_5_a"
+      "answer": "faq_5_a",
+      "isHelpful": null
     },
     {
       "category": "app",
       "question": "faq_6_q",
-      "answer": "faq_6_a"
+      "answer": "faq_6_a",
+      "isHelpful": null
     },
     {
       "category": "account",
       "question": "faq_7_q",
-      "answer": "faq_7_a"
+      "answer": "faq_7_a",
+      "isHelpful": null
     },
     {
       "category": "general",
       "question": "faq_8_q",
-      "answer": "faq_8_a"
+      "answer": "faq_8_a",
+      "isHelpful": null
     },
     {
       "category": "app",
       "question": "faq_9_q",
-      "answer": "faq_9_a"
+      "answer": "faq_9_a",
+      "isHelpful": null
     },
     {
       "category": "app",
       "question": "faq_10_q",
-      "answer": "faq_10_a"
+      "answer": "faq_10_a",
+      "isHelpful": null
     },
   ];
 
@@ -68,6 +78,17 @@ class _FAQScreenState extends State<FAQScreen> {
   String _selectedCategory = 'all';
 
   List<String> get categories => ["all", ...{...faqs.map((f) => f['category']!).toSet()}];
+
+  void _handleFeedback(int index, bool isHelpful) {
+    setState(() {
+      // إذا تم الضغط على نفس الزر مرة أخرى، قم بإلغاء التقييم
+      if (faqs[index]['isHelpful'] == isHelpful) {
+        faqs[index]['isHelpful'] = null;
+      } else {
+        faqs[index]['isHelpful'] = isHelpful;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,8 +176,23 @@ class _FAQScreenState extends State<FAQScreen> {
                                       children: [
                                         Text("was_this_helpful".tr()),
                                         const Spacer(),
-                                        IconButton(icon: const Icon(Icons.thumb_up_alt_outlined), onPressed: () {}),
-                                        IconButton(icon: const Icon(Icons.thumb_down_alt_outlined), onPressed: () {}),
+                                        GestureDetector(
+                                          onTap: () => _handleFeedback(faqs.indexOf(item), true),
+                                          child: Icon(
+                                            Icons.thumb_up_alt_outlined,
+                                            color: item['isHelpful'] == true ? Colors.green : Colors.grey,
+                                            size: 28,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        GestureDetector(
+                                          onTap: () => _handleFeedback(faqs.indexOf(item), false),
+                                          child: Icon(
+                                            Icons.thumb_down_alt_outlined,
+                                            color: item['isHelpful'] == false ? Colors.red : Colors.grey,
+                                            size: 28,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],
