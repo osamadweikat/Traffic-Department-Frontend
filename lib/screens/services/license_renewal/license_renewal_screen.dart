@@ -17,8 +17,8 @@ class _LicenseRenewalScreenState extends State<LicenseRenewalScreen>
     with SingleTickerProviderStateMixin {
   final Map<String, XFile?> uploadedFiles = {
     'original_license': null,
-    'personal_photo_1': null,
-    'personal_photo_2': null,
+    'personal_id_card': null,
+    'personal_photo': null,
     'medical_check': null,
     'fines_clearance': null,
   };
@@ -149,8 +149,8 @@ class _LicenseRenewalScreenState extends State<LicenseRenewalScreen>
               children: [
                 const SizedBox(height: 12),
                 buildUploadTile('original_license'.tr(), 'original_license'),
-                buildUploadTile('personal_photo_1'.tr(), 'personal_photo_1'),
-                buildUploadTile('personal_photo_2'.tr(), 'personal_photo_2'),
+                buildUploadTile('personal_id_card'.tr(), 'personal_id_card'),
+                buildUploadTile('personal_photo'.tr(), 'personal_photo'),
                 buildUploadTile('medical_check'.tr(), 'medical_check'),
                 buildUploadTile('fines_clearance'.tr(), 'fines_clearance'),
                 const SizedBox(height: 24),

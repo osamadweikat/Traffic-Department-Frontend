@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/services.dart' as ui;
 import 'package:month_picker_dialog/month_picker_dialog.dart';
@@ -7,7 +6,14 @@ import 'package:easy_localization/easy_localization.dart';
 
 class AddCardForm extends StatefulWidget {
   final void Function(Map<String, String>) onSubmit;
-  const AddCardForm({super.key, required this.onSubmit});
+  final bool isPaymentMode;
+  final bool showSaveCheckbox;
+  const AddCardForm({
+    super.key,
+    required this.onSubmit,
+    this.isPaymentMode = false,
+    this.showSaveCheckbox = false,
+  });
 
   @override
   State<AddCardForm> createState() => _AddCardFormState();
@@ -20,6 +26,7 @@ class _AddCardFormState extends State<AddCardForm> {
   String expiry = '';
   String cvv = '';
   String brand = 'Visa';
+  bool saveCard = false;
 
   final TextEditingController numberController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
@@ -38,16 +45,8 @@ class _AddCardFormState extends State<AddCardForm> {
 
   String convertToEnglishDigits(String input) {
     final arabicToEnglish = {
-      '٠': '0',
-      '١': '1',
-      '٢': '2',
-      '٣': '3',
-      '٤': '4',
-      '٥': '5',
-      '٦': '6',
-      '٧': '7',
-      '٨': '8',
-      '٩': '9',
+      '٠': '0', '١': '1', '٢': '2', '٣': '3', '٤': '4',
+      '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9',
     };
     return input.split('').map((e) => arabicToEnglish[e] ?? e).join();
   }
@@ -78,18 +77,9 @@ class _AddCardFormState extends State<AddCardForm> {
 
   @override
   Widget build(BuildContext context) {
-    final cardColor =
-        brand == 'Visa'
-            ? LinearGradient(
-              colors: [Colors.blueGrey.shade300, Colors.blueGrey.shade600],
-            )
-            : LinearGradient(
-              colors: [
-                Color(0xFFFFD700), 
-                Color(0xFFB8860B), 
-                Colors.black,
-              ],
-            );
+    final cardColor = brand == 'Visa'
+        ? LinearGradient(colors: [Colors.blueGrey.shade300, Colors.blueGrey.shade600])
+        : const LinearGradient(colors: [Color(0xFFFFD700), Color(0xFFB8860B), Colors.black]);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.only(bottom: 24),
@@ -104,11 +94,7 @@ class _AddCardFormState extends State<AddCardForm> {
               borderRadius: BorderRadius.circular(20),
               gradient: cardColor,
               boxShadow: const [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 12,
-                  offset: Offset(0, 6),
-                ),
+                BoxShadow(color: Colors.black26, blurRadius: 12, offset: Offset(0, 6)),
               ],
             ),
             child: Column(
@@ -123,14 +109,8 @@ class _AddCardFormState extends State<AddCardForm> {
                 ),
                 const SizedBox(height: 30),
                 Text(
-                  number.isEmpty
-                      ? '**** **** **** ****'
-                      : formatCardNumberLTR(number),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    letterSpacing: 2,
-                  ),
+                  number.isEmpty ? '**** **** **** ****' : formatCardNumberLTR(number),
+                  style: const TextStyle(color: Colors.white, fontSize: 22, letterSpacing: 2),
                   textDirection: ui.TextDirection.ltr,
                 ),
                 const SizedBox(height: 20),
@@ -140,36 +120,21 @@ class _AddCardFormState extends State<AddCardForm> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'الانتهاء:',
-                          style: TextStyle(color: Colors.white70),
-                        ),
-                        Text(
-                          expiry.isEmpty ? '--/--' : expiry,
-                          style: const TextStyle(color: Colors.white),
-                        ),
+                        Text('expiry'.tr(), style: const TextStyle(color: Colors.white70)),
+                        Text(expiry.isEmpty ? '--/--' : expiry, style: const TextStyle(color: Colors.white)),
                       ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        const Text(
-                          'CVV:',
-                          style: TextStyle(color: Colors.white70),
-                        ),
-                        Text(
-                          cvv.isEmpty ? '***' : convertToEnglishDigits(cvv),
-                          style: const TextStyle(color: Colors.white),
-                        ),
+                        Text('cvv'.tr(), style: const TextStyle(color: Colors.white70)),
+                        Text(cvv.isEmpty ? '***' : convertToEnglishDigits(cvv), style: const TextStyle(color: Colors.white)),
                       ],
                     ),
                   ],
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  holder.isEmpty ? 'اسم صاحب البطاقة' : holder,
-                  style: const TextStyle(color: Colors.white),
-                ),
+                Text(holder.isEmpty ? 'card_holder_name'.tr() : holder, style: const TextStyle(color: Colors.white)),
               ],
             ),
           ),
@@ -180,21 +145,18 @@ class _AddCardFormState extends State<AddCardForm> {
               child: Column(
                 children: [
                   TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'اسم صاحب البطاقة',
-                    ),
+                    decoration: InputDecoration(labelText: 'card_holder_name'.tr()),
                     onChanged: (val) => setState(() => holder = val),
                     validator: (val) {
-                      if (val == null || val.trim().isEmpty) return 'مطلوب';
-                      if (val.trim().split(' ').length != 2)
-                        return 'الرجاء إدخال اسمين فقط';
+                      if (val == null || val.trim().isEmpty) return 'required'.tr();
+                      if (val.trim().split(' ').length != 2) return 'name_two_parts'.tr();
                       return null;
                     },
                   ),
                   const SizedBox(height: 12),
                   TextFormField(
                     controller: numberController,
-                    decoration: const InputDecoration(labelText: 'رقم البطاقة'),
+                    decoration: InputDecoration(labelText: 'card_number'.tr()),
                     keyboardType: TextInputType.number,
                     textDirection: ui.TextDirection.ltr,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -202,21 +164,12 @@ class _AddCardFormState extends State<AddCardForm> {
                       final formatted = formatCardNumberLTR(val);
                       numberController.value = TextEditingValue(
                         text: formatted,
-                        selection: TextSelection.collapsed(
-                          offset: formatted.length,
-                        ),
+                        selection: TextSelection.collapsed(offset: formatted.length),
                       );
                       setState(() => number = formatted);
                     },
-                    validator:
-                        (val) =>
-                            val == null ||
-                                    convertToEnglishDigits(
-                                          val,
-                                        ).replaceAll(' ', '').length !=
-                                        16
-                                ? 'يجب أن يكون 16 رقم'
-                                : null,
+                    validator: (val) =>
+                      val == null || convertToEnglishDigits(val).replaceAll(' ', '').length != 16 ? 'card_number_length'.tr() : null,
                   ),
                   const SizedBox(height: 12),
                   Row(
@@ -225,32 +178,19 @@ class _AddCardFormState extends State<AddCardForm> {
                         child: TextFormField(
                           controller: dateController,
                           readOnly: true,
-                          decoration: const InputDecoration(
-                            labelText: 'تاريخ الانتهاء',
-                          ),
+                          decoration: InputDecoration(labelText: 'expiry'.tr()),
                           onTap: _selectExpiryMonthYear,
-                          validator:
-                              (val) =>
-                                  val == null || val.isEmpty ? 'مطلوب' : null,
+                          validator: (val) => val == null || val.isEmpty ? 'required'.tr() : null,
                         ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: TextFormField(
-                          decoration: const InputDecoration(labelText: 'CVV'),
+                          decoration: InputDecoration(labelText: 'cvv'.tr()),
                           keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            LengthLimitingTextInputFormatter(3),
-                          ],
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(3)],
                           onChanged: (val) => setState(() => cvv = val),
-                          validator:
-                              (val) =>
-                                  val == null ||
-                                          convertToEnglishDigits(val).length !=
-                                              3
-                                      ? 'ثلاثة أرقام'
-                                      : null,
+                          validator: (val) => val == null || convertToEnglishDigits(val).length != 3 ? 'cvv_length'.tr() : null,
                         ),
                       ),
                     ],
@@ -264,32 +204,39 @@ class _AddCardFormState extends State<AddCardForm> {
                       _buildCardTypeOption('Mastercard'),
                     ],
                   ),
+                  if (widget.showSaveCheckbox)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: CheckboxListTile(
+                        title: Text('save_card_to_my_cards'.tr()),
+                        value: saveCard,
+                        onChanged: (val) => setState(() => saveCard = val ?? false),
+                        controlAffinity: ListTileControlAffinity.leading,
+                      ),
+                    ),
                   const SizedBox(height: 24),
                   ElevatedButton.icon(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        widget.onSubmit({
+                        final cardData = {
                           'holder': holder,
                           'number': convertToEnglishDigits(number),
                           'expiry': expiry,
                           'cvv': convertToEnglishDigits(cvv),
                           'brand': brand,
-                        });
+                          'saveCard': saveCard.toString(),
+                        };
+                        widget.onSubmit(cardData);
                         Navigator.pop(context);
                       }
                     },
                     icon: const Icon(Icons.check_circle_outline),
-                    label: const Text('إضافة'),
+                    label: Text(widget.isPaymentMode ? 'confirm_payment'.tr() : 'add'.tr()),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber.shade600,
                       foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 16,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       elevation: 4,
                     ),
                   ),
@@ -311,10 +258,7 @@ class _AddCardFormState extends State<AddCardForm> {
         decoration: BoxDecoration(
           color: selected ? Colors.amber.shade600 : Colors.grey.shade200,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: selected ? Colors.amber : Colors.grey,
-            width: 1.5,
-          ),
+          border: Border.all(color: selected ? Colors.amber : Colors.grey, width: 1.5),
         ),
         child: Text(
           type,

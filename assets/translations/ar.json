@@ -272,8 +272,8 @@
   "privacy_last_updated": "آخر تحديث: 1 أبريل 2025",
   "renew_license_title": "تجديد رخصة القيادة",
   "original_license": "الرخصة الأصلية أو بدل فاقد",
-  "personal_photo_1": "بطاقة الهوية الشخصية",
-  "personal_photo_2": "الصورة الشخصية",
+  "personal_id_card": "بطاقة الهوية الشخصية",
+  "personal_photo": "الصورة الشخصية",
   "medical_check": "الفحوصات الطبية",
   "fines_clearance": "إثبات تسديد المخالفات المرورية (إن وجدت)",
   "tap_to_select_image": "اضغط لاختيار صورة",
@@ -322,8 +322,24 @@
   "card_type": "نوع البطاقة",
   "visa": "Visa",
   "mastercard": "Mastercard",
-  "invalid_card_number": "رقم غير صالح"
-  
-
-
+  "invalid_card_number": "رقم غير صالح",
+  "select_card": "اختر بطاقة:",
+  "no_saved_cards": "لا توجد بطاقات محفوظة",
+  "pay_with_new_card": "أو الدفع باستخدام بطاقة جديدة",
+  "payment_with_card": "الدفع باستخدام البطاقة",
+  "confirm_payment": "تأكيد عملية الدفع",
+  "please_select_card": "يرجى اختيار بطاقة أولاً",
+  "error": "خطأ",
+  "ok": "موافق",
+  "processing_request": "جارٍ معالجة الطلب...",
+  "success_title": "تم تقديم طلبك بنجاح!",
+  "success_subtitle": "سيتم التواصل معك قريباً لإستلام البطاقة.",
+  "back_to_dashboard": "العودة إلى الصفحة الرئيسية",
+  "expiry": "تاريخ الانتهاء",
+  "name_two_parts": "الرجاء إدخال اسمين فقط",
+  "card_number_length": "يجب أن يكون 16 رقم",
+  "cvv_length": "ثلاثة أرقام",
+  "save_card_to_my_cards": "حفظ البطاقة إلى بطاقاتي",
+  "my_cards": "بطاقاتي",
+  "cardholder_name": "اسم صاحب البطاقة:"
 }

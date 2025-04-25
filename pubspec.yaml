@@ -71,6 +71,7 @@ dependencies:
   easy_localization: ^3.0.7+1
   share_plus: ^11.0.0
   month_picker_dialog: ^6.0.3
+  lottie: ^3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -96,6 +97,7 @@ flutter:
   assets:
     - assets/images/traffic_logo.png
     - assets/translations/
+    - assets/animations/
     
   #  - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

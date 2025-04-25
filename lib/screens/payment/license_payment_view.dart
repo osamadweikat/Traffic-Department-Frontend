@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:traffic_department/screens/payment/payment_methods/visa_payment_bottom_sheet.dart';
 import 'package:traffic_department/widgets/payment_form_sheet.dart';
 import 'package:traffic_department/widgets/payment_summary_card.dart';
 import '../../../theme/app_theme.dart';
@@ -59,6 +60,21 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
           ],
         ),
       );
+    } else if (selectedPaymentMethod == 'card') {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        builder: (_) => VisaPaymentBottomSheet(
+          onSubmit: (selectedCard) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('تم استخدام البطاقة: ${selectedCard['number']}')),
+            );
+          },
+        ),
+      );
     } else {
       showModalBottomSheet(
         context: context,
@@ -84,20 +100,17 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
               children: [
                 Text('select_license_type'.tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
-
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
                   children: topLicenseTypes.map((type) => _buildLicenseOption(type)).toList(),
                 ),
                 const SizedBox(height: 10),
-
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
                   children: bottomLicenseTypes.map((type) => _buildLicenseOption(type)).toList(),
                 ),
-
                 const SizedBox(height: 20),
                 Text('select_duration'.tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
