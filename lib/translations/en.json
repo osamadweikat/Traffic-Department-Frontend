@@ -301,6 +301,18 @@
   "privacy_rights_text": "You have the right to view, edit, delete or revoke consent regarding your data.",
   "privacy_contact_title": "Contact Us",
   "privacy_contact_text": "For inquiries: privacy@trafficapp.ps",
-  "privacy_last_updated": "Last updated: April 1, 2025"
+  "privacy_last_updated": "Last updated: April 1, 2025",
+
+  "renew_license_title": "Driver’s License Renewal",
+  "original_license": "Original or Replacement License",
+  "personal_photo_1": "Personal Photo (1)",
+  "personal_photo_2": "Personal Photo (2)",
+  "medical_check": "Medical Examination",
+  "fines_clearance": "Traffic Fine Clearance (if any)",
+  "tap_to_select_image": "Tap to select an image",
+  "image_selected": "Image selected",
+  "instructions_title": "Important Instructions",
+  "instructions_content": "- Medical exams are required for those 50+ (for heavy-duty licenses) and 65+ (for light-duty licenses).\n\n- Renewal is valid for a maximum of 2 years or as recommended by the medical report.\n\n- A clearance from the court is required for any traffic fines, even if paid.\n\n- For public transport licenses, validity depends on the medical exam.\n\n- For truck licenses, renewal depends on Ministry of Health notes.",
+  "proceed_to_payment": "Proceed to Payment"
   
 }

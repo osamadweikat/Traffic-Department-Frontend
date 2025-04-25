@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:traffic_department/policy/privacy_policy_screen.dart';
+import 'package:traffic_department/screens/policy/privacy_policy_screen.dart';
 import 'package:traffic_department/screens/about/about_app_screen.dart';
 import 'package:traffic_department/screens/auth/verify_and_change_password_screen.dart';
 import 'package:traffic_department/screens/settings/language_settings_screen.dart';

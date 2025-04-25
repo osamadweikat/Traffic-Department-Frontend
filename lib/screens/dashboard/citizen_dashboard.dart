@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/custom_drawer.dart';
 import '../notifications/notifications_screen.dart';
+import '../services/license_renewal/license_renewal_screen.dart';
 
 class CitizenDashboard extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -120,34 +121,54 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
           ),
           itemCount: services.length,
           itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-              
-              },
-              child: Card(
-                elevation: 4,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                color: Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      services[index]["icon"],
-                      size: 50,
-                      color: AppTheme.navy,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      services[index]["title"].toString().tr(),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+            return StatefulBuilder(
+              builder: (context, setState) {
+                double scale = 1.0;
+                return Listener(
+                  onPointerDown: (_) => setState(() => scale = 0.95),
+                  onPointerUp: (_) => setState(() => scale = 1.0),
+                  child: AnimatedScale(
+                    scale: scale,
+                    duration: const Duration(milliseconds: 100),
+                    curve: Curves.easeOut,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(15),
+                      onTap: () {
+                        if (index == 0) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => const LicenseRenewalScreen()),
+                          );
+                        }
+                      },
+                      child: Card(
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              services[index]["icon"],
+                              size: 50,
+                              color: AppTheme.navy,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              services[index]["title"].toString().tr(),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             );
           },
         ),
