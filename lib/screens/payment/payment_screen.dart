@@ -5,7 +5,7 @@ import '../../theme/app_theme.dart';
 import 'license_payment_view.dart';
 
 class PaymentScreen extends StatelessWidget {
-  final String transactionType; // مثل: license_renewal, vehicle_renewal...
+  final String transactionType; 
 
   const PaymentScreen({super.key, required this.transactionType});
 

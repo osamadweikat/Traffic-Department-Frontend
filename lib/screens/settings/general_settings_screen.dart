@@ -8,8 +8,6 @@ import 'package:traffic_department/screens/settings/language_settings_screen.dar
 import 'package:flutter/services.dart' as ui;
 import 'package:traffic_department/screens/settings/manage_cards_screen.dart';
 import '/theme/app_theme.dart';
-// تأكد من إضافة هذا لاحقاً
-// import 'package:traffic_department/screens/payment/manage_cards_screen.dart';
 
 class GeneralSettingsScreen extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -116,8 +114,6 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                   );
                 },
               ),
-
-              /// ✅ خيار "بطاقاتي" المضاف هنا
               ListTile(
                 leading: const Icon(Icons.credit_card, color: AppTheme.navy),
                 title: Text("manage_cards".tr()),

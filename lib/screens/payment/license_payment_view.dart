@@ -74,7 +74,6 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ❌ لا يوجد AppBar هنا لمنع تكرار السهم
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
@@ -86,7 +85,6 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
                 Text('select_license_type'.tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
 
-                // صف: خصوصي وعمومي
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
@@ -94,7 +92,6 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
                 ),
                 const SizedBox(height: 10),
 
-                // صف: شحن خفيف ثم شحن ثقيل
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,

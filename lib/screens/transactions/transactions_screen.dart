@@ -52,8 +52,8 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
     final selected = await showMenu<String>(
       context: context,
       position: isArabic
-          ? const RelativeRect.fromLTRB(0, 80, 16, 0) // عربي (يمين)
-          : const RelativeRect.fromLTRB(1000, 80, 0, 0), // إنجليزي (يسار)
+          ? const RelativeRect.fromLTRB(0, 80, 16, 0) 
+          : const RelativeRect.fromLTRB(1000, 80, 0, 0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       items: [
         _buildFilterItem('all'),

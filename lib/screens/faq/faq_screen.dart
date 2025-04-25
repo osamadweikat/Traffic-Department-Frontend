@@ -81,7 +81,6 @@ class _FAQScreenState extends State<FAQScreen> {
 
   void _handleFeedback(int index, bool isHelpful) {
     setState(() {
-      // إذا تم الضغط على نفس الزر مرة أخرى، قم بإلغاء التقييم
       if (faqs[index]['isHelpful'] == isHelpful) {
         faqs[index]['isHelpful'] = null;
       } else {

@@ -318,5 +318,9 @@
   "card_holder_name": "Card Holder Name",
   "add": "Add",
   "delete_card": "Delete Card",
-  "manage_cards": "Manage Cards"
+  "manage_cards": "Manage Cards",
+  "card_type": "Card Type",
+  "visa": "Visa",
+  "mastercard": "Mastercard",
+  "invalid_card_number": "Invalid number"
 }

@@ -318,7 +318,12 @@
   "card_holder_name": "اسم صاحب البطاقة",
   "add": "إضافة",
   "delete_card": "حذف البطاقة",
-  "manage_cards": "بطاقاتي"
+  "manage_cards": "بطاقاتي",
+  "card_type": "نوع البطاقة",
+  "visa": "Visa",
+  "mastercard": "Mastercard",
+  "invalid_card_number": "رقم غير صالح"
+  
 
 
 }
