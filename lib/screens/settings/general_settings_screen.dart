@@ -6,7 +6,10 @@ import 'package:traffic_department/screens/about/about_app_screen.dart';
 import 'package:traffic_department/screens/auth/verify_and_change_password_screen.dart';
 import 'package:traffic_department/screens/settings/language_settings_screen.dart';
 import 'package:flutter/services.dart' as ui;
+import 'package:traffic_department/screens/settings/manage_cards_screen.dart';
 import '/theme/app_theme.dart';
+// تأكد من إضافة هذا لاحقاً
+// import 'package:traffic_department/screens/payment/manage_cards_screen.dart';
 
 class GeneralSettingsScreen extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -113,6 +116,22 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                   );
                 },
               ),
+
+              /// ✅ خيار "بطاقاتي" المضاف هنا
+              ListTile(
+                leading: const Icon(Icons.credit_card, color: AppTheme.navy),
+                title: Text("manage_cards".tr()),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ManageCardsScreen(),
+                    ),
+                  );
+                },
+              ),
+
               const Divider(),
               _buildSectionTitle("general".tr()),
               ListTile(
@@ -126,7 +145,6 @@ class _GeneralSettingsScreenState extends State<GeneralSettingsScreen> {
                   );
                 },
               ),
-
               ListTile(
                 leading: const Icon(Icons.privacy_tip, color: AppTheme.navy),
                 title: Text("privacy_policy".tr()),

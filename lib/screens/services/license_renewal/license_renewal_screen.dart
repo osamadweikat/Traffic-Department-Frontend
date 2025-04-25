@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart' as ui;
 import '../../../theme/app_theme.dart';
+import '../../payment/payment_screen.dart';
 
 class LicenseRenewalScreen extends StatefulWidget {
   const LicenseRenewalScreen({super.key});
@@ -170,13 +171,13 @@ class _LicenseRenewalScreenState extends State<LicenseRenewalScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'instructions_title'.tr(), 
+                        'instructions_title'.tr(),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
                       ),
-                      const SizedBox(height: 12), 
+                      const SizedBox(height: 12),
                       Text(
                         'instructions_content'.tr(),
                         style: TextStyle(
@@ -190,7 +191,12 @@ class _LicenseRenewalScreenState extends State<LicenseRenewalScreen>
                 const SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/payment');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const PaymentScreen(transactionType: 'license_renewal'),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.navy,

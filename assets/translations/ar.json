@@ -5,21 +5,18 @@
   "password": "كلمة المرور",
   "login_button": "تسجيل الدخول",
   "no_account": "ليس لديك حساب؟ سجل الآن",
-
   "register_title": "إنشاء حساب",
   "full_name": "الاسم الرباعي",
   "birth_date": "تاريخ الميلاد",
   "email": "البريد الإلكتروني",
   "confirm_password": "تأكيد كلمة المرور",
   "register_button": "إنشاء حساب",
-
   "complaints_suggestions": "الشكاوى والاقتراحات",
   "select_complaint_type": "اختر نوع الشكوى أو الاقتراح:",
   "complaint_transaction": "شكوى عن معاملة",
   "complaint_employee": "مشكلة مع الموظف",
   "complaint_services": "مشكلة في الخدمات",
   "suggestions_improvement": "اقتراحات لتحسين الخدمات والتطبيق",
-
   "transaction_number": "رقم المعاملة",
   "complaint_details": "تفاصيل الشكوى",
   "employee_name": "اسم الموظف",
@@ -29,13 +26,11 @@
   "suggestion_area": "المجال المستهدف (خدمة، تطبيق، تجربة مستخدم)",
   "suggestion_description": "وصف الاقتراح",
   "send": "إرسال",
-
   "confirm_send_title": "تأكيد الإرسال",
   "confirm_send_message": "هل أنت متأكد من إرسال الشكوى؟",
   "cancel": "إلغاء",
   "confirm": "تأكيد",
   "form_sent_success": "تم إرسال النموذج بنجاح",
-
   "contact_traffic": "تواصل مع دائرة السير",
   "start_new_conversation": "بدء محادثة جديدة",
   "conversation_on": "محادثة بتاريخ: {}",
@@ -43,7 +38,6 @@
   "ended": "منتهية",
   "type_here": "اكتب رسالتك هنا",
   "cannot_delete_pending": "لا يمكن حذف المحادثة لأنها قيد الرد من الموظف أو فريق الدعم.",
-
   "greeting": "مرحبًا بك، كيف يمكنني مساعدتك؟ (أوقات الدوام: الأحد - الخميس | 8:00 ص - 2:00 م) - الدعم الفني: 24/7",
   "problem_options": "اختر نوع مشكلتك:\n1. معاملات\n2. مشكلة في التطبيق\n3. أسئلة عامة",
   "select_transaction": "يرجى اختيار اسم المعاملة من القائمة التالية:",
@@ -55,7 +49,6 @@
   "question_received": "تم استلام سؤالك، وسيتم الرد عليك في أقرب وقت ممكن.",
   "end_conversation": "سعدنا بخدمتك، تم إنهاء المحادثة.",
   "forward_to_support": "تم تحويلك إلى فريق الدعم الفني أو أحد موظفينا للمساعدة.",
-
   "dashboard_title": "الخدمات",
   "notifications": "الإشعارات",
   "renew_driver_license": "تجديد رخصة قيادة",
@@ -68,13 +61,11 @@
   "lost_driver_license": "بدل فاقد رخصة قيادة",
   "lost_vehicle_plate": "بدل فاقد رقم مركبة",
   "traffic_violations": "مخالفات مرورية",
-
   "faq_title": "الأسئلة الشائعة",
   "search_question": "ابحث عن سؤال...",
   "no_results": "لا توجد نتائج مطابقة",
   "was_this_helpful": "هل كانت هذه الإجابة مفيدة؟",
   "still_need_help": "لم تجد ما تبحث عنه؟ تواصل معنا",
-
   "category_all": "الكل",
   "category_transactions": "المعاملات",
   "category_vehicles": "المركبات",
@@ -82,7 +73,6 @@
   "category_app": "التطبيق",
   "category_account": "الحساب",
   "category_general": "عام",
-
   "faq_1_q": "كيف يمكنني حجز موعد لتجديد رخصة القيادة؟",
   "faq_1_a": "يمكنك حجز الموعد من خلال قسم 'معاملاتي'، ثم اختيار 'حجز موعد جديد' واتباع الخطوات المعروضة.",
   "faq_2_q": "هل يمكن تجديد ترخيص المركبة من خلال التطبيق؟",
@@ -103,10 +93,8 @@
   "faq_9_a": "يمكنك استعراض بعض البيانات مثل المركبات، لكن المعاملات والشكاوى تتطلب اتصالًا بالإنترنت.",
   "faq_10_q": "ماذا أفعل إذا واجهت مشكلة في التطبيق؟",
   "faq_10_a": "انتقل إلى صفحة 'تواصل مع دائرة السير' أو قدم شكوى عبر 'الشكاوى والاقتراحات' تحت 'مشكلة في الخدمات أو التطبيق'.",
-
   "notification_details_title": "تفاصيل الإشعار",
   "notification_date_prefix": "بتاريخ: {}",
-
   "notifications_title": "الإشعارات",
   "no_notifications": "لا توجد إشعارات",
   "notification_deleted": "تم حذف الإشعار",
@@ -115,7 +103,6 @@
   "filter_all": "الكل",
   "filter_unread": "الجديدة",
   "filter_read": "المقروءة",
-
   "change_password": "تغيير كلمة المرور",
   "current_password": "كلمة المرور الحالية",
   "new_password": "كلمة المرور الجديدة",
@@ -124,12 +111,9 @@
   "passwords_not_matching": "كلمة المرور الجديدة وتأكيدها غير متطابقين",
   "fill_all_fields": "الرجاء تعبئة جميع الحقول",
   "password_changed_successfully": "تم تغيير كلمة المرور بنجاح",
-
   "edit_contact_title": "تعديل معلومات الاتصال",
-  
   "contact_info_saved": "تم حفظ البيانات بنجاح",
   "permission_denied_message": "الرجاء السماح بالوصول للصور والكاميرا لاختيار صورة الملف الشخصي",
-
   "profile_title": "الملف الشخصي",
   "complete_contact_info_warning": "الرجاء استكمال بيانات الاتصال (الإيميل ورقم الهاتف)",
   "phone": "رقم الهاتف",
@@ -139,7 +123,6 @@
   "not_specified": "غير محدد",
   "last_login_prefix": "آخر تسجيل دخول: {}",
   "edit_contact_info": "تعديل معلومات الاتصال",
-
   "general_settings_title": "الإعدادات العامة",
   "appearance": "المظهر",
   "dark_mode": "الوضع الليلي",
@@ -152,7 +135,6 @@
   "privacy_policy": "سياسة الخصوصية",
   "language_ar": "العربية",
   "language_en": "الإنجليزية",
-
   "transaction_details": "تفاصيل المعاملة",
   "transaction_info": "معلومات المعاملة",
   "transaction_type": "نوع المعاملة",
@@ -162,31 +144,24 @@
   "notes": "ملاحظات",
   "no_notes": "لا توجد ملاحظات.",
   "track_status": "تتبع حالة المعاملة",
-
   "step_submitted": "تم التقديم",
   "step_processing": "قيد المعالجة",
   "step_reviewing": "قيد المراجعة",
   "step_completed": "مكتملة",
-
   "status_pending": "قيد الانتظار",
-
   "my_transactions": "معاملاتي",
   "filter_transactions": "فلترة المعاملات",
   "no_transactions": "لا توجد معاملات",
   "transaction_notes": "تفاصيل المعاملة ستُعرض هنا...",
-
   "filter_completed": "المكتملة",
   "filter_processing": "قيد المعالجة",
   "filter_rejected": "المرفوضة",
-
   "status_completed": "مكتملة",
   "status_processing": "قيد المعالجة",
   "status_rejected": "مرفوضة",
-
   "license_renewal": "تجديد رخصة قيادة",
   "ownership_transfer": "نقل ملكية مركبة",
   "lost_plate": "بدل فاقد رقم مركبة",
-
   "vehicle_details": "تفاصيل المركبة",
   "plate_number": "رقم اللوحة",
   "vehicle_type": "نوع المركبة",
@@ -206,10 +181,8 @@
   "service_transfer_ownership": "نقل ملكية المركبة",
   "service_change_color": "تغيير لون المركبة",
   "service_replace_plate": "إصدار بدل فاقد لوحة أو ملكية",
-
   "my_vehicles": "مركباتي",
   "status": "الحالة",
-
   "drawer_welcome_user": "مرحبا، المستخدم",
   "drawer_active_last_login": "مفعل - آخر دخول: قبل دقيقة",
   "drawer_account": "الحساب",
@@ -224,15 +197,12 @@
   "drawer_settings": "الإعدادات",
   "drawer_general_settings": "الإعدادات العامة",
   "drawer_logout": "تسجيل خروج",
-
   "transaction_step_submitted": "تم التقديم",
   "transaction_step_processing": "قيد المعالجة",
   "transaction_step_reviewing": "قيد المراجعة",
   "transaction_step_completed": "مكتملة",
   "transaction_step_rejected": "مرفوضة",
   "transaction_step_pending": "قيد الانتظار",
-
-
   "profile_name": "الاسم الرباعي",
   "profile_id": "رقم الهوية",
   "profile_birthdate": "تاريخ الميلاد",
@@ -242,7 +212,6 @@
   "profile_missing_contact": "الرجاء استكمال بيانات الاتصال (الإيميل ورقم الهاتف)",
   "profile_last_login": "آخر تسجيل دخول: {}",
   "profile_edit_contact": "تعديل معلومات الاتصال",
-
   "verify_code_title": "التحقق من الكود",
   "code_sent_to": "تم إرسال كود التحقق إلى رقمك",
   "wait": "يرجى الانتظار",
@@ -255,13 +224,11 @@
   "resend_code_email": "إرسال الكود إلى البريد الإلكتروني",
   "otp_expiry_notice": "يرجى الملاحظة أن الكود صالح لمدة 60 ثانية فقط",
   "didnt_receive_code": "لم يصلك الكود بعد؟",
-
   "change_password_title": "تغيير كلمة المرور",
   "change_password_button": "تأكيد التغيير",
   "password_too_short": "كلمة المرور يجب أن تتكون من 8 أحرف على الأقل",
   "passwords_do_not_match": "كلمتا المرور غير متطابقتين",
   "forgot_password": "هل نسيت كلمة المرور؟",
-
   "about_app_title": "عن التطبيق",
   "app_name": "تطبيق دائرة السير",
   "app_version": "الإصدار: {{version}}",
@@ -286,7 +253,6 @@
   "dev_contact_email": "s12027907@stu.najah.edu",
   "version_number": "الإصدار: {{version}}",
   "version_copied": "تم نسخ رقم الإصدار!",
-
   "privacy_intro_title": "مقدمة",
   "privacy_intro_text": "نحن نقدر ثقتك ونلتزم بحماية خصوصيتك. تهدف هذه السياسة لتوضيح كيفية جمعنا واستخدامنا لبياناتك.",
   "privacy_data_title": "البيانات التي نقوم بجمعها",
@@ -304,7 +270,6 @@
   "privacy_contact_title": "التواصل معنا",
   "privacy_contact_text": "للاستفسارات: privacy@trafficapp.ps",
   "privacy_last_updated": "آخر تحديث: 1 أبريل 2025",
-
   "renew_license_title": "تجديد رخصة القيادة",
   "original_license": "الرخصة الأصلية أو بدل فاقد",
   "personal_photo_1": "بطاقة الهوية الشخصية",
@@ -315,11 +280,45 @@
   "image_selected": "تم اختيار صورة",
   "instructions_title": "إرشادات مهمة",
   "instructions_content": "- الفحوصات الطبية مطلوبة لمن بلغوا 50 عامًا لتجديد رخص الشحن الثقيل فأعلى، و65 عامًا للشحن الخفيف فما دون.\n\n- يتم التجديد لمدة لا تزيد عن سنتين أو حسب توصية الفحص الطبي.\n\n- في حال وجود مخالفات سير يجب إحضار براءة ذمة من المحكمة حتى وإن كانت مدفوعة.\n\n- في حال رخص العمومي، يتم التجديد حسب المدة المدونة في الفحص الطبي.\n\n- في حال رخصة الشحن، يتم التجديد حسب مدة وزارة الصحة المدونة.",
-  "proceed_to_payment": "الانتقال إلى الدفع"
+  "proceed_to_payment": "الانتقال إلى الدفع",
+  "payment_title": "الدفع",
+  "no_payment_view_found": "لا توجد شاشة دفع متاحة",
+  "license_type": "نوع الرخصة",
+  "renewal_duration": "مدة التجديد",
+  "base_cost": "الرسوم الأساسية",
+  "service_fee": "عمولة الخدمة",
+  "total_amount": "المجموع الكلي",
+  "years": "سنوات",
+  "select_license_type": "اختر نوع الرخصة",
+  "select_renewal_duration": "اختر مدة التجديد",
+  "private": "خاصة",
+  "public": "عمومي",
+  "truck": "شحن",
+  "pay_now": "ادفع الآن",
+  "card_payment": "الدفع باستخدام البطاقة",
+  "card_number": "رقم البطاقة",
+  "expiry_date": "تاريخ الانتهاء",
+  "cvv": "رمز CVV",
+  "card_holder": "اسم حامل البطاقة",
+  "required": "هذا الحقل مطلوب",
+  "invalid_card": "رقم البطاقة غير صالح",
+  "invalid_cvv": "رمز CVV غير صالح",
+  "payment_success": "تم الدفع بنجاح",
+  "select_duration": "اختر مدة التجديد",
+  "choose_payment_method": "اختر طريقة الدفع",
+  "cod_note_title": "تنبيه",
+  "cod_note_message": "عند اختيار الدفع عند الاستلام، سيتم تجهيز المعاملة ولكن يجب دفع المبلغ عند استلام الرخصة.",
+  "request_received_cod": "تم استلام طلبك بنجاح! سيتم التواصل معك قريباً.",
+  "please_complete_fields": "يرجى استكمال جميع الحقول المطلوبة",
+  "payment_method_card": "فيزا / ماستركارد",
+  "payment_method_palpay": "بال باي",
+  "payment_method_jawwalpay": "جوال باي",
+  "payment_method_cod": "الدفع عند الاستلام",
+  "add_new_card": "إضافة بطاقة جديدة",
+  "card_holder_name": "اسم صاحب البطاقة",
+  "add": "إضافة",
+  "delete_card": "حذف البطاقة",
+  "manage_cards": "بطاقاتي"
 
 
-  
-
-  
-  
 }

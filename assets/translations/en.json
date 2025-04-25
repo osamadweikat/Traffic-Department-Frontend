@@ -5,21 +5,18 @@
   "password": "Password",
   "login_button": "Login",
   "no_account": "Don't have an account? Register now",
-
   "register_title": "Register",
   "full_name": "Full Name",
   "birth_date": "Birth Date",
   "email": "Email",
   "confirm_password": "Confirm Password",
   "register_button": "Create Account",
-
   "complaints_suggestions": "Complaints and Suggestions",
   "select_complaint_type": "Select complaint or suggestion type:",
   "complaint_transaction": "Transaction Complaint",
   "complaint_employee": "Issue with Employee",
   "complaint_services": "Service Problem",
   "suggestions_improvement": "Suggestions to Improve Services and App",
-
   "transaction_number": "Transaction Number",
   "complaint_details": "Complaint Details",
   "employee_name": "Employee Name",
@@ -29,13 +26,11 @@
   "suggestion_area": "Target Area (Service, App, UX)",
   "suggestion_description": "Suggestion Description",
   "send": "Send",
-
   "confirm_send_title": "Confirm Send",
   "confirm_send_message": "Are you sure you want to send the complaint?",
   "cancel": "Cancel",
   "confirm": "Confirm",
   "form_sent_success": "Form submitted successfully",
-
   "contact_traffic": "Contact Traffic Department",
   "start_new_conversation": "Start New Conversation",
   "conversation_on": "Conversation on: {}",
@@ -43,7 +38,6 @@
   "ended": "Ended",
   "type_here": "Type your message here",
   "cannot_delete_pending": "Cannot delete conversation while awaiting staff response.",
-
   "greeting": "Welcome! How can I assist you? (Working hours: Sun–Thu | 8:00 AM - 2:00 PM) - Technical support: 24/7",
   "problem_options": "Please choose your issue:\n1. Transactions\n2. App Issue\n3. General Questions",
   "select_transaction": "Please select the transaction name from the list:",
@@ -55,7 +49,6 @@
   "question_received": "Your question has been received. We will respond soon.",
   "end_conversation": "Happy to help! The conversation has ended.",
   "forward_to_support": "You’ve been forwarded to our support team for further assistance.",
-
   "dashboard_title": "Services",
   "notifications": "Notifications",
   "renew_driver_license": "Renew Driver's License",
@@ -68,13 +61,11 @@
   "lost_driver_license": "Lost Driver's License",
   "lost_vehicle_plate": "Lost Vehicle Plate",
   "traffic_violations": "Traffic Violations",
-
   "faq_title": "Frequently Asked Questions",
   "search_question": "Search a question...",
   "no_results": "No matching results found",
   "was_this_helpful": "Was this answer helpful?",
   "still_need_help": "Didn't find what you're looking for? Contact us",
-
   "category_all": "All",
   "category_transactions": "Transactions",
   "category_vehicles": "Vehicles",
@@ -82,7 +73,6 @@
   "category_app": "App",
   "category_account": "Account",
   "category_general": "General",
-
   "faq_1_q": "How can I book a renewal appointment for a driver’s license?",
   "faq_1_a": "You can book through the 'My Transactions' section by selecting 'New Appointment' and following the instructions.",
   "faq_2_q": "Can I renew my vehicle license through the app?",
@@ -103,10 +93,8 @@
   "faq_9_a": "You can view basic data like vehicles, but transactions and complaints require internet access.",
   "faq_10_q": "What should I do if I face an issue in the app?",
   "faq_10_a": "Visit the 'Contact Us' screen or submit a complaint under 'Issue with Services or App'.",
-
   "notification_details_title": "Notification Details",
   "notification_date_prefix": "Date: {}",
-
   "notifications_title": "Notifications",
   "no_notifications": "No notifications available",
   "notification_deleted": "Notification deleted",
@@ -115,7 +103,6 @@
   "filter_all": "All",
   "filter_unread": "Unread",
   "filter_read": "Read",
-
   "change_password": "Change Password",
   "current_password": "Current Password",
   "new_password": "New Password",
@@ -124,11 +111,9 @@
   "passwords_not_matching": "New password and confirmation do not match",
   "fill_all_fields": "Please fill in all fields",
   "password_changed_successfully": "Password changed successfully",
-
   "edit_contact_title": "Edit Contact Info",
   "contact_info_saved": "Contact information saved successfully",
   "permission_denied_message": "Please allow access to photos and camera to select profile image",
-
   "profile_title": "Profile",
   "complete_contact_info_warning": "Please complete your contact information (email and phone)",
   "phone": "Phone Number",
@@ -138,7 +123,6 @@
   "not_specified": "Not Specified",
   "last_login_prefix": "Last Login: {}",
   "edit_contact_info": "Edit Contact Information",
-
   "general_settings_title": "General Settings",
   "appearance": "Appearance",
   "dark_mode": "Dark Mode",
@@ -149,10 +133,8 @@
   "general": "General",
   "about_app": "About the App",
   "privacy_policy": "Privacy Policy",
-
   "language_ar": "Arabic",
   "language_en": "English",
-
   "transaction_details": "Transaction Details",
   "transaction_info": "Transaction Info",
   "transaction_type": "Type",
@@ -162,31 +144,24 @@
   "notes": "Notes",
   "no_notes": "No notes available.",
   "track_status": "Track Transaction Status",
-
   "step_submitted": "Submitted",
   "step_processing": "Processing",
   "step_reviewing": "Reviewing",
   "step_completed": "Completed",
-
   "status_pending": "Pending",
-
   "my_transactions": "My Transactions",
   "filter_transactions": "Filter Transactions",
   "no_transactions": "No transactions available",
   "transaction_notes": "Transaction details will be displayed here...",
-
   "filter_completed": "Completed",
   "filter_processing": "Processing",
   "filter_rejected": "Rejected",
-
   "status_completed": "Completed",
   "status_processing": "Processing",
   "status_rejected": "Rejected",
-
   "license_renewal": "Driver's License Renewal",
   "ownership_transfer": "Vehicle Ownership Transfer",
   "lost_plate": "Lost Plate Replacement",
-
   "vehicle_details": "Vehicle Details",
   "plate_number": "Plate Number",
   "vehicle_type": "Vehicle Type",
@@ -208,7 +183,6 @@
   "service_replace_plate": "Replace Lost Plate or Ownership",
   "my_vehicles": "My Vehicles",
   "status": "Status",
-
   "drawer_welcome_user": "Welcome, User",
   "drawer_active_last_login": "Active - Last login: 1 minute ago",
   "drawer_account": "Account",
@@ -223,14 +197,12 @@
   "drawer_settings": "Settings",
   "drawer_general_settings": "General Settings",
   "drawer_logout": "Logout",
-
   "transaction_step_submitted": "Submitted",
   "transaction_step_processing": "Processing",
   "transaction_step_reviewing": "Under Review",
   "transaction_step_completed": "Completed",
   "transaction_step_rejected": "Rejected",
   "transaction_step_pending": "Pending",
-
   "profile_name": "Full Name",
   "profile_id": "National ID",
   "profile_birthdate": "Birth Date",
@@ -240,7 +212,6 @@
   "profile_missing_contact": "Please complete your contact info (email and phone)",
   "profile_last_login": "Last login: {}",
   "profile_edit_contact": "Edit Contact Information",
-
   "verify_code_title": "Verify Code",
   "code_sent_to": "A verification code has been sent to your number",
   "wait": "Wait",
@@ -253,13 +224,11 @@
   "resend_code_email": "Send code to email",
   "otp_expiry_notice": "Note: the code is valid for 60 seconds only",
   "didnt_receive_code": "Didn't receive the code?",
-
   "change_password_title": "Change Password",
   "change_password_button": "Change Password",
   "password_too_short": "Password must be at least 8 characters",
   "passwords_do_not_match": "Passwords do not match",
   "forgot_password": "Forgot Password?",
-
   "about_app_title": "About the App",
   "app_name": "Traffic Department App",
   "app_version": "Version: {{version}}",
@@ -284,7 +253,6 @@
   "dev_contact_email": "dev@trafficapp.ps",
   "version_number": "Version: {{version}}",
   "version_copied": "Version copied to clipboard!",
-
   "privacy_intro_title": "Introduction",
   "privacy_intro_text": "We value your trust and are committed to protecting your privacy. This policy explains how we collect and use your data.",
   "privacy_data_title": "Data We Collect",
@@ -302,7 +270,6 @@
   "privacy_contact_title": "Contact Us",
   "privacy_contact_text": "For inquiries: privacy@trafficapp.ps",
   "privacy_last_updated": "Last updated: April 1, 2025",
-
   "renew_license_title": "Driver’s License Renewal",
   "original_license": "Original or Replacement License",
   "personal_photo_1": "Personal Photo (1)",
@@ -313,6 +280,43 @@
   "image_selected": "Image selected",
   "instructions_title": "Important Instructions",
   "instructions_content": "- Medical exams are required for those 50+ (for heavy-duty licenses) and 65+ (for light-duty licenses).\n\n- Renewal is valid for a maximum of 2 years or as recommended by the medical report.\n\n- A clearance from the court is required for any traffic fines, even if paid.\n\n- For public transport licenses, validity depends on the medical exam.\n\n- For truck licenses, renewal depends on Ministry of Health notes.",
-  "proceed_to_payment": "Proceed to Payment"
-  
+  "proceed_to_payment": "Proceed to Payment",
+  "payment_title": "Payment",
+  "no_payment_view_found": "No payment view available",
+  "license_type": "License Type",
+  "renewal_duration": "Renewal Duration",
+  "base_cost": "Base Cost",
+  "service_fee": "Service Fee",
+  "total_amount": "Total Amount",
+  "years": "years",
+  "select_license_type": "Select license type",
+  "select_renewal_duration": "Select renewal duration",
+  "private": "Private",
+  "public": "Public",
+  "truck": "Truck",
+  "pay_now": "Pay Now",
+  "card_payment": "Card Payment",
+  "card_number": "Card Number",
+  "expiry_date": "Expiry Date",
+  "cvv": "CVV",
+  "card_holder": "Card Holder Name",
+  "required": "This field is required",
+  "invalid_card": "Invalid card number",
+  "invalid_cvv": "Invalid CVV",
+  "payment_success": "Payment completed successfully",
+  "select_duration": "Select renewal duration",
+  "choose_payment_method": "Select payment method",
+  "cod_note_title": "Notice",
+  "cod_note_message": "When choosing cash on delivery, the request will be processed but must be paid upon receiving the license.",
+  "request_received_cod": "Your request has been received! You will be contacted shortly.",
+  "please_complete_fields": "Please complete all required fields",
+  "payment_method_card": "Visa / Mastercard",
+  "payment_method_palpay": "PalPay",
+  "payment_method_jawwalpay": "Jawwal Pay",
+  "payment_method_cod": "Cash on Delivery",
+  "add_new_card": "Add New Card",
+  "card_holder_name": "Card Holder Name",
+  "add": "Add",
+  "delete_card": "Delete Card",
+  "manage_cards": "Manage Cards"
 }
