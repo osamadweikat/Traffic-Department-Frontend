@@ -99,19 +99,26 @@ class _VisaPaymentBottomSheetState extends State<VisaPaymentBottomSheet> {
   }
 
   Future<void> _confirmPayment() async {
-    showDialog(
+    
+    showGeneralDialog(
       context: context,
+      useRootNavigator: true,
       barrierDismissible: false,
-      builder: (_) => const LoadingOverlay(),
+      barrierColor: Colors.black.withOpacity(0.6),
+      transitionDuration: const Duration(milliseconds: 200),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return const LoadingOverlay();
+      },
     );
 
     await Future.delayed(const Duration(seconds: 10));
 
-    Navigator.pop(context); 
+    Navigator.of(context, rootNavigator: true).pop(); 
 
     showDialog(
       context: context,
       barrierDismissible: false,
+      useRootNavigator: true,
       builder: (_) => SuccessDialog(
         onConfirm: () {
           Navigator.of(context).pushNamedAndRemoveUntil('/dashboard', (route) => false);
@@ -122,7 +129,7 @@ class _VisaPaymentBottomSheetState extends State<VisaPaymentBottomSheet> {
 
   Future<void> _submitSelectedCard() async {
     if (selectedCard != null) {
-      await _confirmPayment();
+      await _confirmPayment(); 
       widget.onSubmit(selectedCard!);
     } else {
       _showErrorDialog('please_select_card'.tr());
@@ -132,12 +139,13 @@ class _VisaPaymentBottomSheetState extends State<VisaPaymentBottomSheet> {
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
+      useRootNavigator: true,
       builder: (_) => AlertDialog(
         title: Text('error'.tr()),
         content: Text(message),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
             child: Text('ok'.tr()),
           ),
         ],

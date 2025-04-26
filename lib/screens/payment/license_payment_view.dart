@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:traffic_department/screens/payment/payment_methods/visa_payment_bottom_sheet.dart';
+import 'package:traffic_department/screens/payment/payment_methods/paypal_payment_screen.dart';
 import 'package:traffic_department/widgets/payment_form_sheet.dart';
 import 'package:traffic_department/widgets/payment_summary_card.dart';
 import '../../../theme/app_theme.dart';
@@ -31,35 +32,12 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
 
   void _onPay() {
     if (selectedLicenseType == null || selectedDuration == null || selectedPaymentMethod == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('please_complete_fields'.tr())),
-      );
+      _showErrorDialog('please_complete_fields'.tr());
       return;
     }
 
     if (selectedPaymentMethod == 'cod') {
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: Text('cod_note_title'.tr()),
-          content: Text('cod_note_message'.tr()),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('cancel'.tr()),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('request_received_cod'.tr())),
-                );
-              },
-              child: Text('confirm'.tr()),
-            )
-          ],
-        ),
-      );
+      _showCashOnDeliveryDialog();
     } else if (selectedPaymentMethod == 'card') {
       showModalBottomSheet(
         context: context,
@@ -68,11 +46,16 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         builder: (_) => VisaPaymentBottomSheet(
-          onSubmit: (selectedCard) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('تم استخدام البطاقة: ${selectedCard['number']}')),
-            );
-          },
+          onSubmit: (selectedCard) {},
+        ),
+      );
+    } else if (selectedPaymentMethod == 'palpay') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => PaypalPaymentScreen(
+            totalAmount: total,
+          ),
         ),
       );
     } else {
@@ -85,6 +68,62 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
         builder: (_) => const PaymentFormSheet(),
       );
     }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('خطأ', style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('موافق', style: TextStyle(color: AppTheme.navy)),
+          )
+        ],
+      ),
+    );
+  }
+
+  void _showCashOnDeliveryDialog() {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('cod_note_title'.tr()),
+        content: Text('cod_note_message'.tr()),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('cancel'.tr()),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _showSuccessDialog('request_received_cod'.tr());
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.navy),
+            child: Text('confirm'.tr(), style: const TextStyle(color: Colors.white)),
+          )
+        ],
+      ),
+    );
+  }
+
+  void _showSuccessDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('نجاح', style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('موافق', style: TextStyle(color: AppTheme.navy)),
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -131,9 +170,7 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
                             color: isSelected ? AppTheme.navy : Colors.grey.shade300,
                             width: 1.5,
                           ),
-                          boxShadow: isSelected
-                              ? [BoxShadow(color: AppTheme.navy.withOpacity(0.15), blurRadius: 6)]
-                              : [],
+                          boxShadow: isSelected ? [BoxShadow(color: AppTheme.navy.withOpacity(0.15), blurRadius: 6)] : [],
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -228,9 +265,7 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
             color: isSelected ? AppTheme.navy : Colors.grey.shade300,
             width: 1.5,
           ),
-          boxShadow: isSelected
-              ? [BoxShadow(color: AppTheme.navy.withOpacity(0.15), blurRadius: 6)]
-              : [],
+          boxShadow: isSelected ? [BoxShadow(color: AppTheme.navy.withOpacity(0.15), blurRadius: 6)] : [],
         ),
         child: Text(type, style: TextStyle(color: isSelected ? AppTheme.navy : Colors.black87)),
       ),
