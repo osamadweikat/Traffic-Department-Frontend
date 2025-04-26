@@ -364,7 +364,12 @@
   "paypal_success_message": "تم استلام دفعتك بنجاح، سنقوم بمعالجة طلبك قريباً.",
   "paypal_back_to_home": "العودة إلى الصفحة الرئيسية",
   "invalid_password": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
-  "amount_to_pay": "المبلغ المطلوب دفعه",
   "login_and_pay": "تسجيل الدخول والدفع",
-  "processing_payment": "جاري معالجة الدفع..."
+  "processing_payment": "جاري معالجة الدفع...",
+  "jawwal_pay_payment": "دفع عبر جوال باي",
+  "pay_easy_with_jawwal": "ادفع بسهولة عبر جوال باي",
+  "phone_number": "رقم الجوال",
+  "amount_to_pay": "المبلغ المطلوب",
+  "phone_must_be_registered": "يجب أن يكون رقم الهاتف مسجل في حساب جوال باي.",
+  "invalid_phone_number": "رقم الجوال غير صحيح، يجب أن يبدأ بـ 059 ويتكون من 10 أرقام."
 }

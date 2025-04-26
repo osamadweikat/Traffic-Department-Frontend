@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:traffic_department/screens/payment/payment_methods/visa_payment_bottom_sheet.dart';
 import 'package:traffic_department/screens/payment/payment_methods/paypal_payment_screen.dart';
+import 'package:traffic_department/screens/payment/payment_methods/jawwal_pay_payment_screen.dart';
 import 'package:traffic_department/widgets/payment_form_sheet.dart';
 import 'package:traffic_department/widgets/payment_summary_card.dart';
 import '../../../theme/app_theme.dart';
@@ -54,6 +55,15 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
         context,
         MaterialPageRoute(
           builder: (_) => PaypalPaymentScreen(
+            totalAmount: total,
+          ),
+        ),
+      );
+    } else if (selectedPaymentMethod == 'jawwalpay') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => JawwalPayPaymentScreen(
             totalAmount: total,
           ),
         ),

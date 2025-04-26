@@ -366,5 +366,10 @@
   "invalid_password": "Password must be at least 6 characters",
   "amount_to_pay": "Amount to Pay",
   "login_and_pay": "Login and Pay",
-  "processing_payment": "Processing payment..."
+  "processing_payment": "Processing payment...",
+  "jawwal_pay_payment": "دفع عبر جوال باي",
+  "pay_easy_with_jawwal": "ادفع بسهولة عبر جوال باي",
+  "phone_number": "رقم الجوال",
+  "phone_must_be_registered": "يجب أن يكون رقم الهاتف مسجل في حساب جوال باي.",
+  "invalid_phone_number": "Invalid phone number. It must start with 059 and be 10 digits long."
 }

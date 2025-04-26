@@ -97,6 +97,7 @@ flutter:
   assets:
     - assets/images/traffic_logo.png
     - assets/images/paypal_logo.png
+    - assets/images/jawwalpay_logo.png
     - assets/translations/
     - assets/animations/
     
