@@ -5,6 +5,7 @@ import '../../theme/app_theme.dart';
 import '../../widgets/custom_drawer.dart';
 import '../notifications/notifications_screen.dart';
 import '../services/license_renewal/license_renewal_screen.dart';
+import '../services/vehicle_renewal/vehicle_renewal_form.dart'; // تم إضافة استيراد صفحة تجديد رخصة مركبة
 
 class CitizenDashboard extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -138,6 +139,11 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (_) => const LicenseRenewalScreen()),
+                          );
+                        } else if (index == 1) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => const VehicleLicenseRenewalScreen()),
                           );
                         }
                       },

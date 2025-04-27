@@ -5,8 +5,8 @@ import 'package:traffic_department/screens/payment/payment_methods/paypal_paymen
 import 'package:traffic_department/screens/payment/payment_methods/jawwal_pay_payment_screen.dart';
 import 'package:traffic_department/widgets/payment_form_sheet.dart';
 import 'package:traffic_department/widgets/payment_summary_card.dart';
-import 'package:traffic_department/widgets/cod_confirmation_dialog.dart'; // ✅ استيراد الديالوج الجديد
-import '../../../theme/app_theme.dart';
+import 'package:traffic_department/screens/payment/payment_methods/cod_confirmation_dialog.dart'; 
+import '../../../../theme/app_theme.dart';
 
 class LicensePaymentView extends StatefulWidget {
   const LicensePaymentView({super.key});

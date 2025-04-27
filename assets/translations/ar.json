@@ -386,5 +386,47 @@
   "i_accept_terms_cod": "أوافق على الشروط والأحكام.",
   "confirm_order": "تأكيد الطلب",
   "you_have_seconds": "تبقى لديك",
-  "seconds_left": "ثوانٍ"
+  "seconds_left": "ثوانٍ",
+  
+  
+    "total_fee": "الرسوم الكلية",
+    "vehicle_renewal": "تجديد رخصة مركبة",
+    "summary": "ملخص الطلب",
+    "calculate_fee": "احسب الرسوم",
+    "continue_to_payment": "متابعة إلى الدفع",
+    "based_on_vehicle_type": "ستظهر الوثائق المطلوبة بناءً على نوع المركبة.",
+    "select_vehicle_type": "اختر نوع المركبة",
+    "select_fuel_type": "اختر نوع الوقود",
+    "upload_document": "رفع مستند",
+    "view_document": "عرض المستند",
+    "delete_document": "حذف المستند",
+    "convert_to_shekel": "تحويل إلى شيكل",
+    "view_in_dinar": "عرض بالدينار",
+  "vehicle_info": "معلومات المركبة",
+  "required_documents": "المستندات المطلوبة",
+  "request_summary": "ملخص الطلب",
+  "payment_method": "طريقة الدفع",
+  "next": "التالي",
+  "back": "السابق",
+  
+    "vehicle_number": "رقم المركبة",
+    "engine_capacity": "سعة المحرك",
+    "production_year": "سنة الإنتاج",
+    "continue": "متابعة",
+    "choose_vehicle_type": "اختر نوع المركبة",
+  "choose_fuel_type": "اختر نوع الوقود",
+  "select_production_year": "اختر سنة الإنتاج",
+  "selected": "محدد",
+  "not_selected": "غير محدد",
+  "please_select_option": "يرجى اختيار خيار",
+  "click_to_upload": "اضغط لاختيار صورة",
+  "file_uploaded": "تم رفع الملف",
+  "choose_image": "اختر صورة",
+  "remove_image": "حذف الصورة",
+  "view_image": "عرض الصورة",
+   "please_complete_vehicle_info": "يرجى تعبئة كافة بيانات المركبة أولاً",
+  "please_upload_all_documents": "يرجى رفع كافة المستندات المطلوبة"
+  
+  
+  
 }

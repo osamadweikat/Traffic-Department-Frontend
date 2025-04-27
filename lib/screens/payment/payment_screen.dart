@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart' as ui;
 import '../../theme/app_theme.dart';
-import 'license_payment_view.dart';
+import '../services/license_renewal/license_payment_view.dart';
 
 class PaymentScreen extends StatelessWidget {
   final String transactionType; 
