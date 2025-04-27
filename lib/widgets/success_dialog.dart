@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 
 class SuccessDialog extends StatelessWidget {
   final VoidCallback onConfirm;
+
   const SuccessDialog({super.key, required this.onConfirm});
 
   @override
@@ -30,7 +31,9 @@ class SuccessDialog extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: onConfirm,
+              onPressed: () {
+                _goToDashboard(context); // ✅ استدعاء الدالة هنا لما يضغط المستخدم
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
@@ -46,4 +49,12 @@ class SuccessDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+/// ✅ تضيف هذه الدالة تحت الكلاس SuccessDialog مباشرة
+void _goToDashboard(BuildContext context) {
+  Navigator.of(context, rootNavigator: true).popUntil((route) => route.isFirst);
+  Future.delayed(const Duration(milliseconds: 100), () {
+    Navigator.of(context, rootNavigator: true).pushReplacementNamed('/dashboard');
+  });
 }

@@ -91,7 +91,7 @@ class _JawwalPayPaymentScreenState extends State<JawwalPayPaymentScreen> {
             const SizedBox(height: 20),
             Image.asset(
               "assets/images/jawwalpay_logo.png",
-              height: 25,
+              height: 200,
             ),
             const SizedBox(height: 30),
             Text(

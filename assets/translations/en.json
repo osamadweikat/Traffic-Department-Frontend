@@ -371,5 +371,21 @@
   "pay_easy_with_jawwal": "ادفع بسهولة عبر جوال باي",
   "phone_number": "رقم الجوال",
   "phone_must_be_registered": "يجب أن يكون رقم الهاتف مسجل في حساب جوال باي.",
-  "invalid_phone_number": "Invalid phone number. It must start with 059 and be 10 digits long."
+  "invalid_phone_number": "Invalid phone number. It must start with 059 and be 10 digits long.",
+  "submit_order": "Submit Order Now",
+  "cod_warning_message": "By choosing cash on delivery, you legally commit to attending and paying. If you fail to comply, your account will be suspended immediately and legal action may be taken.",
+  "cod_warning_highlight1": "immediate account suspension ",
+  "cod_warning_message_part2": "and may lead to ",
+  "cod_warning_highlight2": "legal actions ",
+  "cod_warning_message_part3": "against you.",
+
+  "cod_warning_title": "Official Warning",
+  "cod_warning_message_part1": "By choosing cash on delivery, you fully assume legal responsibility for receiving and paying for the transaction on time.",
+  "cod_warning_list1": "Your account will be permanently suspended without prior notice.",
+  "cod_warning_list2": "Severe legal action may be taken against you according to applicable laws.",
+  "cod_warning_list3": "You may incur additional financial penalties and compensation for damages.",
+  "i_accept_terms_cod": "I accept the terms and conditions.",
+  "confirm_order": "Confirm Order",
+  "you_have_seconds": "You have",
+  "seconds_left": "seconds left"
 }
