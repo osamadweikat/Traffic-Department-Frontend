@@ -16,7 +16,7 @@ class _FAQScreenState extends State<FAQScreen> {
       "category": "transactions",
       "question": "faq_1_q",
       "answer": "faq_1_a",
-      "isHelpful": null // null: لم يتم التقييم، true: أعجبني، false: لم يعجبني
+      "isHelpful": null 
     },
     {
       "category": "vehicles",

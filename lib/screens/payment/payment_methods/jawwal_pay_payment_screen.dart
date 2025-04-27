@@ -6,8 +6,9 @@ import 'package:traffic_department/widgets/success_dialog.dart';
 
 class JawwalPayPaymentScreen extends StatefulWidget {
   final int totalAmount;
+  final String currencySymbol; 
 
-  const JawwalPayPaymentScreen({super.key, required this.totalAmount});
+  const JawwalPayPaymentScreen({super.key, required this.totalAmount, required this.currencySymbol});
 
   @override
   State<JawwalPayPaymentScreen> createState() => _JawwalPayPaymentScreenState();
@@ -140,7 +141,7 @@ class _JawwalPayPaymentScreenState extends State<JawwalPayPaymentScreen> {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    "${widget.totalAmount} ₪",
+                    "${widget.currencySymbol} ${widget.totalAmount}", 
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                   ),
                 ],

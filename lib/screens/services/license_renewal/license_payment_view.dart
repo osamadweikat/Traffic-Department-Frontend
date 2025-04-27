@@ -56,7 +56,7 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
         context,
         MaterialPageRoute(
           builder: (_) => PaypalPaymentScreen(
-            totalAmount: total,
+            totalAmount: total, currencySymbol: '₪',
           ),
         ),
       );
@@ -65,7 +65,7 @@ class _LicensePaymentViewState extends State<LicensePaymentView> {
         context,
         MaterialPageRoute(
           builder: (_) => JawwalPayPaymentScreen(
-            totalAmount: total,
+            totalAmount: total, currencySymbol: '₪',
           ),
         ),
       );

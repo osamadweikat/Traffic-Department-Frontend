@@ -422,7 +422,21 @@
   "remove_image": "Remove Image",
   "view_image": "View Image",
   "please_complete_vehicle_info": "Please complete all vehicle information first",
-  "please_upload_all_documents": "Please upload all required documents"
+  "please_upload_all_documents": "Please upload all required documents",
+  "fees_details": "Fees Details",
+  "basic_license_fee": "Basic License Fee",
+  "total": "Total",
+  "عرض بالدينار": "Show in Dinar",
+  "تحويل إلى شيكل": "Convert to Shekel",
+  "vehicle_weight": "Vehicle Weight (kg)",
+  "passenger_count": "Passenger Count",
+  "select_payment_method": "Select Payment Method",
+  "visa_mastercard": "Visa / MasterCard",
+  "palpay": "PalPay",
+  "jawwalpay": "Jawwal Pay",
+  "cash_on_delivery": "Cash on Delivery",
+  "please_select_payment_method": "Please select a payment method first"
+ 
   
   
   

@@ -1,5 +1,3 @@
-// 🚀 ثالث كود: RequiredDocumentsStep (رفع الوثائق مع تظليل أحمر ونص إذا ناقصة)
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

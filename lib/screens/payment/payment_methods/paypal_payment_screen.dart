@@ -6,8 +6,9 @@ import 'package:traffic_department/widgets/success_dialog.dart';
 
 class PaypalPaymentScreen extends StatefulWidget {
   final int totalAmount;
+  final String currencySymbol; 
 
-  const PaypalPaymentScreen({super.key, required this.totalAmount});
+  const PaypalPaymentScreen({super.key, required this.totalAmount, required this.currencySymbol});
 
   @override
   State<PaypalPaymentScreen> createState() => _PaypalPaymentScreenState();
@@ -23,7 +24,6 @@ class _PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
       return;
     }
 
-    
     showGeneralDialog(
       context: context,
       barrierDismissible: false,
@@ -34,9 +34,8 @@ class _PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
       },
     );
 
-    await Future.delayed(const Duration(seconds: 10)); 
-
-    Navigator.of(context, rootNavigator: true).pop(); 
+    await Future.delayed(const Duration(seconds: 10));
+    Navigator.of(context, rootNavigator: true).pop();
 
     showDialog(
       context: context,
@@ -53,7 +52,7 @@ class _PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
-      useRootNavigator: true, 
+      useRootNavigator: true,
       builder: (_) => AlertDialog(
         title: Text("error".tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
         content: Text(message),
@@ -125,7 +124,7 @@ class _PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
                     ),
                     const SizedBox(height: 6),
                     Text(
-                      "${widget.totalAmount} ₪",
+                      "${widget.currencySymbol} ${widget.totalAmount}",
                       style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                   ],

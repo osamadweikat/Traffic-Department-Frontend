@@ -1,14 +1,14 @@
-// 🚀 أول كود: VehicleLicenseRenewalScreen (الشاشة الرئيسية)
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../theme/app_theme.dart';
 import 'vehicle_info_step.dart';
 import 'required_documents_step.dart';
+import 'request_summary_step.dart';
+import 'payment_method_step.dart';
 
 class VehicleLicenseRenewalScreen extends StatefulWidget {
-  const VehicleLicenseRenewalScreen({Key? key}) : super(key: key);
+  const VehicleLicenseRenewalScreen({super.key});
 
   @override
   State<VehicleLicenseRenewalScreen> createState() => _VehicleLicenseRenewalScreenState();
@@ -18,13 +18,17 @@ class _VehicleLicenseRenewalScreenState extends State<VehicleLicenseRenewalScree
   int _currentStep = 0;
   List<bool> stepCompleted = [false, false, false, false];
 
-  Map<String, dynamic> vehicleInfoData = {}; 
-  Map<String, File> requiredDocumentsData = {}; 
+  Map<String, dynamic> vehicleInfoData = {};
+  Map<String, File> requiredDocumentsData = {};
+
+  double totalAmount = 0.0;
+  bool isShekel = false;
 
   final GlobalKey<VehicleInfoStepState> _vehicleInfoStepKey = GlobalKey();
   final GlobalKey<RequiredDocumentsStepState> _requiredDocumentsStepKey = GlobalKey();
+  final GlobalKey<PaymentMethodStepState> _paymentMethodStepKey = GlobalKey();
 
-  void _onStepContinue() {
+  void _onStepContinue() async {
     if (_currentStep == 0) {
       if (_vehicleInfoStepKey.currentState?.validateAndSave() ?? false) {
         setState(() {
@@ -39,13 +43,13 @@ class _VehicleLicenseRenewalScreenState extends State<VehicleLicenseRenewalScree
           _currentStep++;
         });
       }
-    } else {
-      if (_currentStep < 3) {
-        setState(() {
-          stepCompleted[_currentStep] = true;
-          _currentStep++;
-        });
-      }
+    } else if (_currentStep == 2) {
+      setState(() {
+        stepCompleted[_currentStep] = true;
+        _currentStep++;
+      });
+    } else if (_currentStep == 3) {
+      await _paymentMethodStepKey.currentState?.continueToSelectedPayment();
     }
   }
 
@@ -134,13 +138,23 @@ class _VehicleLicenseRenewalScreenState extends State<VehicleLicenseRenewalScree
             ),
             Step(
               title: Text('request_summary'.tr(), style: TextStyle(color: _getStepColor(2))),
-              content: const Center(child: Text('Coming Soon...')),
+              content: RequestSummaryStep(
+                vehicleInfoData: vehicleInfoData,
+                onAmountCalculated: (double amount, bool isShekelSelected) {
+                  totalAmount = amount;
+                  isShekel = isShekelSelected;
+                },
+              ),
               isActive: _currentStep >= 2,
               state: _getStepState(2),
             ),
             Step(
               title: Text('payment_method'.tr(), style: TextStyle(color: _getStepColor(3))),
-              content: const Center(child: Text('Coming Soon...')),
+              content: PaymentMethodStep(
+                key: _paymentMethodStepKey,
+                totalAmount: totalAmount,
+                isShekel: isShekel,
+              ),
               isActive: _currentStep >= 3,
               state: _getStepState(3),
             ),

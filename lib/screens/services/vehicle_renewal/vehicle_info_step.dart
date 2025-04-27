@@ -1,5 +1,3 @@
-// 🚀 ثاني كود: VehicleInfoStep (معلومات المركبة مع التحقق البصري)
-
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../theme/app_theme.dart';
@@ -19,31 +17,24 @@ class VehicleInfoStepState extends State<VehicleInfoStep> {
   final TextEditingController _vehicleNumberController = TextEditingController();
   final TextEditingController _engineCapacityController = TextEditingController();
   final TextEditingController _productionYearController = TextEditingController();
+  final TextEditingController _weightController = TextEditingController();
+  final TextEditingController _passengerCountController = TextEditingController();
+
+  final TextEditingController _vehicleTypeController = TextEditingController();
+  final TextEditingController _fuelTypeController = TextEditingController();
 
   String? selectedVehicleType;
   String? selectedFuelType;
 
-  bool showVehicleTypeError = false;
-  bool showFuelTypeError = false;
-
   final List<String> vehicleTypes = [
-    'خصوصي',
-    'عمومي',
-    'شحن خفيف',
-    'شحن ثقيل',
-    'مركبة نقل وقود/مواد خطرة',
-    'حافلة نقل عام أو خاصة',
-    'مركبة مدارس',
-    'مركبة حكومية',
-    'مركبة تأجير',
-    'صهريج نضح أو مياه أو حليب',
+    'خصوصي', 'عمومي', 'شحن خفيف', 'شحن ثقيل',
+    'مركبة نقل وقود/مواد خطرة', 'حافلة نقل عام أو خاصة',
+    'مركبة مدارس', 'مركبة حكومية', 'مركبة تأجير',
+    'صهريج نضح أو مياه أو حليب', 'دراجة نارية', 'مقطورة', 'جرار'
   ];
 
   final List<String> fuelTypes = [
-    'بنزين',
-    'ديزل',
-    'هايبرد',
-    'كهرباء',
+    'بنزين', 'ديزل', 'هايبرد', 'كهرباء'
   ];
 
   Future<void> _selectProductionYear() async {
@@ -66,23 +57,93 @@ class VehicleInfoStepState extends State<VehicleInfoStep> {
 
   bool validateAndSave() {
     final isValid = _formKey.currentState?.validate() ?? false;
-    setState(() {
-      showVehicleTypeError = selectedVehicleType == null;
-      showFuelTypeError = selectedFuelType == null;
-    });
+    if (selectedVehicleType == null || selectedFuelType == null) return false;
 
-    if (isValid && !showVehicleTypeError && !showFuelTypeError) {
+    final requiresWeight = _requiresWeight(selectedVehicleType);
+    final requiresPassengerCount = _requiresPassengerCount(selectedVehicleType);
+
+    if (isValid) {
+      if (requiresWeight && (_weightController.text.isEmpty)) return false;
+      if (requiresPassengerCount && (_passengerCountController.text.isEmpty)) return false;
+
       widget.onStepCompleted({
         'vehicleNumber': _vehicleNumberController.text,
         'vehicleType': selectedVehicleType,
         'fuelType': selectedFuelType,
         'engineCapacity': int.tryParse(_engineCapacityController.text) ?? 0,
         'productionYear': int.tryParse(_productionYearController.text) ?? 0,
+        'weight': _weightController.text.isNotEmpty ? int.tryParse(_weightController.text) : null,
+        'passengerCount': _passengerCountController.text.isNotEmpty ? int.tryParse(_passengerCountController.text) : null,
       });
       return true;
     }
     return false;
   }
+
+  bool _requiresWeight(String? vehicleType) {
+    return vehicleType == 'شحن خفيف' || vehicleType == 'شحن ثقيل' || vehicleType == 'مقطورة';
+  }
+
+  bool _requiresPassengerCount(String? vehicleType) {
+    return vehicleType == 'مركبة تأجير' || vehicleType == 'حافلة نقل عام أو خاصة';
+  }
+
+  void _showBottomSheet({
+  required List<String> options,
+  required ValueChanged<String> onSelected,
+  required String title,
+  required String? selected,
+}) {
+  showModalBottomSheet(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    ),
+    backgroundColor: Colors.white,
+    builder: (context) {
+      return Container(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.6, 
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const Divider(),
+            Flexible( 
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(), 
+                itemCount: options.length,
+                itemBuilder: (context, index) {
+                  final option = options[index];
+                  final isSelected = selected == option;
+                  return ListTile(
+                    title: Text(
+                      option,
+                      style: TextStyle(
+                        color: isSelected ? AppTheme.navy : Colors.black87,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    trailing: isSelected ? const Icon(Icons.check_circle, color: Colors.green) : null,
+                    onTap: () {
+                      onSelected(option);
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -102,25 +163,83 @@ class VehicleInfoStepState extends State<VehicleInfoStep> {
           ),
           const SizedBox(height: 16),
 
-          Text('choose_vehicle_type'.tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8),
-          _buildSelectionList(vehicleTypes, selectedVehicleType, (value) {
-            setState(() {
-              selectedVehicleType = value;
-              showVehicleTypeError = false;
-            });
-          }, showVehicleTypeError),
+          GestureDetector(
+            onTap: () => _showBottomSheet(
+              options: vehicleTypes,
+              onSelected: (value) => setState(() {
+                selectedVehicleType = value;
+                _vehicleTypeController.text = value;
+              }),
+              title: 'choose_vehicle_type'.tr(),
+              selected: selectedVehicleType,
+            ),
+            child: AbsorbPointer(
+              child: TextFormField(
+                controller: _vehicleTypeController,
+                decoration: InputDecoration(
+                  labelText: 'choose_vehicle_type'.tr(),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                validator: (value) => selectedVehicleType == null ? 'required_field'.tr() : null,
+              ),
+            ),
+          ),
           const SizedBox(height: 16),
 
-          Text('choose_fuel_type'.tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8),
-          _buildSelectionList(fuelTypes, selectedFuelType, (value) {
-            setState(() {
-              selectedFuelType = value;
-              showFuelTypeError = false;
-            });
-          }, showFuelTypeError),
+          GestureDetector(
+            onTap: () => _showBottomSheet(
+              options: fuelTypes,
+              onSelected: (value) => setState(() {
+                selectedFuelType = value;
+                _fuelTypeController.text = value;
+              }),
+              title: 'choose_fuel_type'.tr(),
+              selected: selectedFuelType,
+            ),
+            child: AbsorbPointer(
+              child: TextFormField(
+                controller: _fuelTypeController,
+                decoration: InputDecoration(
+                  labelText: 'choose_fuel_type'.tr(),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                validator: (value) => selectedFuelType == null ? 'required_field'.tr() : null,
+              ),
+            ),
+          ),
           const SizedBox(height: 16),
+
+          if (_requiresWeight(selectedVehicleType))
+            Column(
+              children: [
+                TextFormField(
+                  controller: _weightController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'vehicle_weight'.tr(),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                  validator: (value) => value == null || value.isEmpty ? 'required_field'.tr() : null,
+                ),
+                const SizedBox(height: 16),
+              ],
+            ),
+
+          if (_requiresPassengerCount(selectedVehicleType))
+            Column(
+              children: [
+                TextFormField(
+                  controller: _passengerCountController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'passenger_count'.tr(),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                  validator: (value) => value == null || value.isEmpty ? 'required_field'.tr() : null,
+                ),
+                const SizedBox(height: 16),
+              ],
+            ),
 
           TextFormField(
             controller: _engineCapacityController,
@@ -147,47 +266,6 @@ class VehicleInfoStepState extends State<VehicleInfoStep> {
           const SizedBox(height: 24),
         ],
       ),
-    );
-  }
-
-  Widget _buildSelectionList(List<String> options, String? selectedValue, ValueChanged<String> onSelected, bool showError) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: options.map((option) {
-            final bool isSelected = selectedValue == option;
-            return GestureDetector(
-              onTap: () => onSelected(option),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: isSelected ? AppTheme.navy.withOpacity(0.1) : Colors.white,
-                  border: Border.all(color: isSelected ? AppTheme.navy : (showError ? Colors.red : Colors.grey.shade400)),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  option,
-                  style: TextStyle(
-                    color: isSelected ? AppTheme.navy : Colors.black87,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
-        ),
-        if (showError)
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-            child: Text(
-              'required_field'.tr(),
-              style: const TextStyle(color: Colors.red, fontSize: 12),
-            ),
-          ),
-      ],
     );
   }
 }
