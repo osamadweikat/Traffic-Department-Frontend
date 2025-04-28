@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart' as ui;
+import 'package:traffic_department/screens/services/vehicle_renewal_existing/vehicle_license_renewal_dialogs.dart';
 import '/theme/app_theme.dart';
 
 class VehicleDetailsScreen extends StatelessWidget {
@@ -33,7 +34,8 @@ class VehicleDetailsScreen extends StatelessWidget {
                     children: [
                       const Icon(Icons.directions_car, color: AppTheme.navy),
                       const SizedBox(width: 8),
-                      Text("${"plate_number".tr()}: ${vehicle["plateNumber"]}", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      Text("${"plate_number".tr()}: ${vehicle["plateNumber"]}",
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -64,7 +66,7 @@ class VehicleDetailsScreen extends StatelessWidget {
                   Text("available_services".tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 15),
 
-                  buildServiceButton(context, "service_renew_license".tr(), Icons.update, () {}),
+                  buildServiceButton(context, "service_renew_license".tr(), Icons.update, () => _handleRenewLicense(context)),
                   buildServiceButton(context, "service_transfer_ownership".tr(), Icons.transfer_within_a_station, () {}),
                   buildServiceButton(context, "service_change_color".tr(), Icons.color_lens, () {}),
                   buildServiceButton(context, "service_replace_plate".tr(), Icons.report_problem, () {}),
@@ -109,4 +111,9 @@ class VehicleDetailsScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _handleRenewLicense(BuildContext context) {
+  VehicleRenewalDialogs.checkAndRenewLicense(context, vehicle);
+}
+
 }

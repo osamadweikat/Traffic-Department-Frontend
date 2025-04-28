@@ -435,6 +435,20 @@
   "palpay": "بال باي",
   "jawwalpay": "جوال باي",
   "cash_on_delivery": "الدفع عند الاستلام",
-  "please_select_payment_method": "يرجى اختيار طريقة الدفع أولاً"
-
+  "please_select_payment_method": "يرجى اختيار طريقة الدفع أولاً",
+  "insurance_expired_message": "تأمين المركبة منتهي، لا يمكنك تجديد الرخصة.",
+  "missing_license_expiry": "تاريخ انتهاء رخصة المركبة غير متوفر.",
+  "license_already_expired": "رخصة المركبة منتهية ويجب إصدار رخصة جديدة.",
+  "license_near_expiry": "رخصة المركبة قاربت على الانتهاء. يرجى التجديد في أقرب وقت.",
+  "vehicle_has_pending_violations": "لا يمكن تجديد الرخصة بسبب وجود مخالفات غير مدفوعة.",
+  "warning": "تحذير",
+  "all_good": "كل شيء على ما يرام",
+  "you_have_pending_violations": "لا يمكنك تجديد الرخصة بسبب وجود مخالفات غير مدفوعة. يرجى تسويتها قبل انتهاء الرخصة.",
+  "license_is_valid_no_action_needed": "رخصة المركبة ما زالت سارية ولا تحتاج إلى تجديد حالياً.",
+  "license_expired": "انتهاء الرخصة",
+  "license_expired_please_renew": "انتهت صلاحية رخصة المركبة. يرجى تجديدها الآن.",
+  "renew_now": "تجديد الآن",
+  "insurance_document": "وثيقة التأمين",
+  "violations_clearance_document": "إثبات دفع المخالفات"
+  
 }

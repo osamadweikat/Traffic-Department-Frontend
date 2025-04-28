@@ -378,7 +378,6 @@
   "cod_warning_message_part2": "and may lead to ",
   "cod_warning_highlight2": "legal actions ",
   "cod_warning_message_part3": "against you.",
-
   "cod_warning_title": "Official Warning",
   "cod_warning_message_part1": "By choosing cash on delivery, you fully assume legal responsibility for receiving and paying for the transaction on time.",
   "cod_warning_list1": "Your account will be permanently suspended without prior notice.",
@@ -389,7 +388,6 @@
   "you_have_seconds": "You have",
   "seconds_left": "seconds left",
   "vehicle_number": "Vehicle Number",
-
   "engine_capacity": "Engine Capacity (cc)",
   "production_year": "Production Year",
   "summary": "Order Summary",
@@ -435,9 +433,19 @@
   "palpay": "PalPay",
   "jawwalpay": "Jawwal Pay",
   "cash_on_delivery": "Cash on Delivery",
-  "please_select_payment_method": "Please select a payment method first"
- 
-  
-  
-  
+  "please_select_payment_method": "Please select a payment method first",
+  "insurance_expired_message": "Vehicle insurance has expired, you cannot renew the license.",
+  "missing_license_expiry": "Vehicle license expiry date is missing.",
+  "license_already_expired": "Vehicle license has already expired. You must issue a new license.",
+  "license_near_expiry": "Vehicle license is about to expire. Please renew it soon.",
+  "vehicle_has_pending_violations": "Cannot renew license due to pending violations.",
+  "warning": "Warning",
+  "all_good": "All Good",
+  "you_have_pending_violations": "You cannot renew the license because there are unpaid violations. Please settle them before the license expires.",
+  "license_is_valid_no_action_needed": "The vehicle license is still valid and does not require renewal currently.",
+  "license_expired": "License Expired",
+  "license_expired_please_renew": "The vehicle license has expired. Please renew it now.",
+  "renew_now": "Renew Now",
+  "insurance_document": "Insurance Document",
+  "violations_clearance_document": "Violations Clearance Document"
 }
