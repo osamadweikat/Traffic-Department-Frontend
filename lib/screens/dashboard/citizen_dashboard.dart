@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traffic_department/screens/services/ownership_transfer/ownership_transfer_screen.dart';
+import 'package:traffic_department/screens/services/vehicle_modification/vehicle_modification_screen.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/custom_drawer.dart';
 import '../notifications/notifications_screen.dart';
 import '../services/license_renewal/license_renewal_screen.dart';
 import '../services/vehicle_renewal/vehicle_renewal_form.dart';
-import '../services/vehicle_registration/vehicle_registration_screen.dart'; 
+import '../services/vehicle_registration/vehicle_registration_screen.dart';
 
 class CitizenDashboard extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -56,6 +57,8 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
       Navigator.push(context, MaterialPageRoute(builder: (_) => const OwnershipTransferScreen()));
     } else if (index == 3) {
       Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleRegistrationNewScreen()));
+    } else if (index == 6) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleModificationScreen()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('coming_soon'.tr())),
