@@ -6,6 +6,7 @@ import '../../widgets/custom_drawer.dart';
 import '../notifications/notifications_screen.dart';
 import '../services/license_renewal/license_renewal_screen.dart';
 import '../services/vehicle_renewal/vehicle_renewal_form.dart';
+import '../services/vehicle_registration/vehicle_registration_screen.dart'; 
 
 class CitizenDashboard extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -43,6 +44,20 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
     setState(() {
       notificationsEnabled = prefs.getBool('notificationsEnabled') ?? true;
     });
+  }
+
+  void _navigateToService(int index) {
+    if (index == 0) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => const LicenseRenewalScreen()));
+    } else if (index == 1) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleLicenseRenewalScreen()));
+    } else if (index == 3) { 
+      Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleRegistrationNewScreen()));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('coming_soon'.tr())),
+      );
+    }
   }
 
   @override
@@ -134,19 +149,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
                     curve: Curves.easeOut,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(15),
-                      onTap: () {
-                        if (index == 0) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => const LicenseRenewalScreen()),
-                          );
-                        } else if (index == 1) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => const VehicleLicenseRenewalScreen()),
-                          );
-                        }
-                      },
+                      onTap: () => _navigateToService(index),
                       child: Card(
                         elevation: 4,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
