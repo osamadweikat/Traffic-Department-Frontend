@@ -23,17 +23,20 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
   bool notificationsEnabled = true;
 
   final List<Map<String, dynamic>> services = const [
-    {"title": "renew_driver_license", "icon": Icons.credit_card, "route": "/license_renewal"},
-    {"title": "renew_vehicle_license", "icon": Icons.car_repair, "route": "/vehicle_license_renewal"},
-    {"title": "transfer_ownership", "icon": Icons.swap_horiz, "route": "/ownership_transfer"},
-    {"title": "vehicle_registration", "icon": Icons.directions_car, "route": "/vehicle_registration"},
-    {"title": "theory_test_result", "icon": Icons.description, "route": "/theoretical_test_result"},
-    {"title": "practical_test_result", "icon": Icons.assignment_turned_in, "route": "/practical_test_result"},
-    {"title": "vehicle_technical_change", "icon": Icons.engineering, "route": "/technical_change"},
-    {"title": "lost_driver_license", "icon": Icons.credit_card_off, "route": "/lost_license"},
-    {"title": "lost_vehicle_plate", "icon": Icons.confirmation_number, "route": "/lost_plate"},
-    {"title": "traffic_violations", "icon": Icons.warning, "route": "/traffic_violations"},
-  ];
+  {"title": "renew_driver_license", "icon": Icons.credit_card, "screen": LicenseRenewalScreen()},
+  {"title": "renew_vehicle_license", "icon": Icons.car_repair, "screen": VehicleLicenseRenewalScreen()},
+  {"title": "vehicle_registration", "icon": Icons.directions_car, "screen": VehicleRegistrationNewScreen()},
+  {"title": "transfer_ownership", "icon": Icons.swap_horiz, "screen": OwnershipTransferScreen()},
+  {"title": "lost_or_damaged_documents", "icon": Icons.credit_card_off, "screen": null},
+  {"title": "test_results", "icon": Icons.assignment_turned_in, "screen": null},
+  {"title": "vehicle_technical_change", "icon": Icons.engineering, "screen": VehicleModificationScreen()},
+  {"title": "vehicle_conversion", "icon": Icons.cached, "screen": null},
+  {"title": "vehicle_deactivation", "icon": Icons.car_crash, "screen": null},
+  {"title": "appointment_booking", "icon": Icons.calendar_month, "screen": null},
+  {"title": "vehicle_unmortgage", "icon": Icons.lock_open, "screen": null},
+  {"title": "traffic_violations", "icon": Icons.warning_amber_outlined, "screen": null}
+];
+
 
   @override
   void initState() {
@@ -48,17 +51,9 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
     });
   }
 
-  void _navigateToService(int index) {
-    if (index == 0) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => const LicenseRenewalScreen()));
-    } else if (index == 1) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleLicenseRenewalScreen()));
-    } else if (index == 2) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => const OwnershipTransferScreen()));
-    } else if (index == 3) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleRegistrationNewScreen()));
-    } else if (index == 6) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleModificationScreen()));
+  void _navigateToService(dynamic screen) {
+    if (screen != null) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('coming_soon'.tr())),
@@ -143,6 +138,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
           ),
           itemCount: services.length,
           itemBuilder: (context, index) {
+            final service = services[index];
             return StatefulBuilder(
               builder: (context, setState) {
                 double scale = 1.0;
@@ -155,7 +151,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
                     curve: Curves.easeOut,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(15),
-                      onTap: () => _navigateToService(index),
+                      onTap: () => _navigateToService(service['screen']),
                       child: Card(
                         elevation: 4,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -164,13 +160,13 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              services[index]["icon"],
+                              service["icon"],
                               size: 50,
                               color: AppTheme.navy,
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              services[index]["title"].toString().tr(),
+                              service["title"].toString().tr(),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,

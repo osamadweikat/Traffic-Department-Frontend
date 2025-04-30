@@ -570,5 +570,12 @@
   "vehicle_modification": "Vehicle Technical Modification",
   "modification_form": "Technical Modification Details",
   "modification_summary": "Technical Modification Summary",
-  "modification_type": "Modification Type"
+  "modification_type": "Modification Type",
+  "lost_or_damaged_documents": "Lost / Damaged Replacement",
+  "test_results": "Test Results",
+  "vehicle_conversion": "Convert Vehicle Type",
+  "vehicle_deactivation": "Deactivate Vehicle",
+  "appointment_booking": "Book Appointment",
+  "vehicle_unmortgage": "Vehicle Unmortgage",
+  "clearance_certificate": "Clearance Certificate"
 }

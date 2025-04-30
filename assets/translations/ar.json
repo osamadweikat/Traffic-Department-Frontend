@@ -573,5 +573,13 @@
   "vehicle_modification": "تغيير فني على المركبة",
   "modification_form": "بيانات التعديل الفني",
   "modification_summary": "ملخص التعديل الفني",
-  "modification_type": "نوع التعديل الفني"
+  "modification_type": "نوع التعديل الفني",
+  "lost_or_damaged_documents": "بدل فاقد / تالف",
+  "test_results": "نتائج الفحص",
+  "vehicle_conversion": "تحويل نوع المركبة",
+  "vehicle_deactivation": "شطب مركبة",
+  "appointment_booking": "حجز موعد",
+  "vehicle_unmortgage": "فك رهن مركبة"
+  
+
 }
