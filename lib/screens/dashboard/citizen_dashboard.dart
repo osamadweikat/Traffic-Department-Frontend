@@ -28,7 +28,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
     {"title": "vehicle_registration", "icon": Icons.directions_car, "route": "/vehicle_registration"},
     {"title": "theory_test_result", "icon": Icons.description, "route": "/theoretical_test_result"},
     {"title": "practical_test_result", "icon": Icons.assignment_turned_in, "route": "/practical_test_result"},
-    {"title": "change_vehicle_color", "icon": Icons.color_lens, "route": "/color_change"},
+    {"title": "vehicle_technical_change", "icon": Icons.engineering, "route": "/technical_change"},
     {"title": "lost_driver_license", "icon": Icons.credit_card_off, "route": "/lost_license"},
     {"title": "lost_vehicle_plate", "icon": Icons.confirmation_number, "route": "/lost_plate"},
     {"title": "traffic_violations", "icon": Icons.warning, "route": "/traffic_violations"},
@@ -48,21 +48,20 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
   }
 
   void _navigateToService(int index) {
-  if (index == 0) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => const LicenseRenewalScreen()));
-  } else if (index == 1) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleLicenseRenewalScreen()));
-  } else if (index == 2) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => const OwnershipTransferScreen()));
-  } else if (index == 3) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleRegistrationNewScreen()));
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('coming_soon'.tr())),
-    );
+    if (index == 0) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => const LicenseRenewalScreen()));
+    } else if (index == 1) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleLicenseRenewalScreen()));
+    } else if (index == 2) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => const OwnershipTransferScreen()));
+    } else if (index == 3) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleRegistrationNewScreen()));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('coming_soon'.tr())),
+      );
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {

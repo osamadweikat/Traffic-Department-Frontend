@@ -544,5 +544,6 @@
   "current_owner_id": "Current Owner ID",
   "current_owner_name": "Current Owner Name",
   "buyer_id": "Buyer ID",
-  "buyer_name": "Buyer Name"
+  "buyer_name": "Buyer Name",
+  "vehicle_technical_change": "Vehicle Technical Change"
 }

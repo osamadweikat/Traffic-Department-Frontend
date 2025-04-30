@@ -547,5 +547,6 @@
   "current_owner_name": "اسم المالك الحالي",
   "buyer_id": "رقم هوية المشتري",
   "buyer_name": "اسم المشتري",
-  "transfer_summary": "ملخص نقل الملكية"
+  "transfer_summary": "ملخص نقل الملكية",
+  "vehicle_technical_change": "تغيير فني على المركبة"
 }
