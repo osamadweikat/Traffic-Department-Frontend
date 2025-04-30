@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:traffic_department/screens/services/ownership_transfer/ownership_transfer_screen.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/custom_drawer.dart';
 import '../notifications/notifications_screen.dart';
@@ -47,18 +48,21 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
   }
 
   void _navigateToService(int index) {
-    if (index == 0) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => const LicenseRenewalScreen()));
-    } else if (index == 1) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleLicenseRenewalScreen()));
-    } else if (index == 3) { 
-      Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleRegistrationNewScreen()));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('coming_soon'.tr())),
-      );
-    }
+  if (index == 0) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => const LicenseRenewalScreen()));
+  } else if (index == 1) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleLicenseRenewalScreen()));
+  } else if (index == 2) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => const OwnershipTransferScreen()));
+  } else if (index == 3) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => const VehicleRegistrationNewScreen()));
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('coming_soon'.tr())),
+    );
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
