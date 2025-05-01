@@ -645,5 +645,13 @@
   "upload_required_documents": "Upload Required Documents",
   "mortgage_summary": "Request Summary",
   "mortgage": "Mortgage",
-  "release": "Release"
+  "release": "Release",
+  "deregistration_request_letter": "Vehicle Deregistration Request Letter",
+  "approval_from_relevant_authorities": "Approval from Relevant Authorities Based on Vehicle Type",
+  "vehicle_plate_or_police_report": "Vehicle Plates or Police Report",
+  "vehicle_chassis_plate": "Vehicle Chassis Identification Plate",
+  "deregistration_notice": "All outstanding fees must be paid before starting the deregistration process",
+  "vehicle_deregistration": "Vehicle Deregistration",
+  "fill_deregistration_form": "Fill Deregistration Form",
+  "deregistration_summary": "Deregistration Summary"
 }

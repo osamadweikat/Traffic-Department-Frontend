@@ -648,5 +648,13 @@
   "mortgage_summary": "ملخص الطلب",
   "mortgage": "رهن",
   "release": "فك رهن",
-  "vehicle_mortgage_release": "رهن / فك رهن مركبة"
+  "vehicle_mortgage_release": "رهن / فك رهن مركبة",
+  "deregistration_request_letter": "طلب شطب المركبة",
+  "approval_from_relevant_authorities": "موافقة الجهات المختصة حسب نوع المركبة",
+  "vehicle_plate_or_police_report": "لوحات التمييز أو بلاغ الشرطة",
+  "vehicle_chassis_plate": "لوحة تعريف رقم الشاصي",
+  "deregistration_notice": "سيتم تحصيل كافة الرسوم المستحقة على المركبة قبل البدء بإجراءات الشطب",
+  "vehicle_deregistration": "شطب مركبة",
+  "fill_deregistration_form": "تعبئة نموذج شطب المركبة",
+  "deregistration_summary": "ملخص طلب الشطب"
 }

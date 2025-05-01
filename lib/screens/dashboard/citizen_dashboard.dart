@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traffic_department/screens/services/lost_documents/lost_documents_screen.dart';
 import 'package:traffic_department/screens/services/ownership_transfer/ownership_transfer_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_conversion/vehicle_conversion_screen.dart';
+import 'package:traffic_department/screens/services/vehicle_deregistration/vehicle_deregistration_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_modification/vehicle_modification_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_mortgage_release/vehicle_mortgage_release_screen.dart';
 import '../../theme/app_theme.dart';
@@ -34,7 +35,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
   {"title": "test_results", "icon": Icons.assignment_turned_in, "screen": null},
   {"title": "vehicle_technical_change", "icon": Icons.engineering, "screen": VehicleModificationScreen()},
   {"title": "vehicle_conversion", "icon": Icons.cached, "screen": VehicleConversionScreen()},
-  {"title": "vehicle_deactivation", "icon": Icons.car_crash, "screen": null},
+  {"title": "vehicle_deregistration", "icon": Icons.car_crash, "screen": VehicleDeregistrationScreen()},
   {"title": "appointment_booking", "icon": Icons.calendar_month, "screen": null},
   {"title": "vehicle_mortgage_release", "icon": Icons.lock_open, "screen": VehicleMortgageReleaseScreen()},
   {"title": "traffic_violations", "icon": Icons.warning_amber_outlined, "screen": null}
