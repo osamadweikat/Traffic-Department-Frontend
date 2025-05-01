@@ -632,5 +632,21 @@
   "new_type_fee": "رسوم نوع التحويل",
   "bank_fee": "رسوم البنك",
   "color_changed": "تغيير اللون",
-  "structure_changed": "تعديل الهيكل"
+  "structure_changed": "تعديل الهيكل",
+  "mortgage_request_letter": "استدعاء طلب رهن",
+  "release_request_letter": "استدعاء طلب فك رهن",
+  "valid_vehicle_license_or_replacement": "رخصة المركبة سارية أو نموذج بدل فاقد",
+  "original_mortgage_court_document": "سند الرهن العدلي الأصلي",
+  "original_release_court_document": "سند فك الرهن العدلي الأصلي",
+  "mortgage_request_from_lien_holder": "كتاب طلب الرهن من الجهة المرهونة إليها",
+  "release_letter_from_lien_holder": "كتاب فك الرهن من الجهة المرهونة إليها",
+  "mortgage_action_type": "نوع المعاملة",
+  "mortgage_release_fee": "رسوم المعاملة",
+  "mortgage_and_release": "رهن / فك رهن",
+  "fill_mortgage_release_form": "تعبئة نموذج الرهن / فك الرهن",
+  "upload_required_documents": "رفع الوثائق المطلوبة",
+  "mortgage_summary": "ملخص الطلب",
+  "mortgage": "رهن",
+  "release": "فك رهن",
+  "vehicle_mortgage_release": "رهن / فك رهن مركبة"
 }

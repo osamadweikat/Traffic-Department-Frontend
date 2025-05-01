@@ -630,5 +630,20 @@
   "new_type_fee": "New Type Fee",
   "bank_fee": "Bank Fee",
   "color_changed": "Color Changed",
-  "structure_changed": "Structure Modified"
+  "structure_changed": "Structure Modified",
+  "mortgage_request_letter": "Mortgage Request Letter",
+  "release_request_letter": "Release Request Letter",
+  "valid_vehicle_license_or_replacement": "Valid Vehicle License or Replacement Form",
+  "original_mortgage_court_document": "Original Court Mortgage Document (2 copies)",
+  "original_release_court_document": "Original Court Release Document",
+  "mortgage_request_from_lien_holder": "Mortgage Request from Lien Holder",
+  "release_letter_from_lien_holder": "Release Letter from Lien Holder",
+  "mortgage_action_type": "Mortgage Action Type",
+  "mortgage_release_fee": "Service Fee",
+  "mortgage_and_release": "Mortgage / Release",
+  "fill_mortgage_release_form": "Fill Mortgage/Release Form",
+  "upload_required_documents": "Upload Required Documents",
+  "mortgage_summary": "Request Summary",
+  "mortgage": "Mortgage",
+  "release": "Release"
 }
