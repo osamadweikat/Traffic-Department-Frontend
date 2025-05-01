@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traffic_department/screens/services/lost_documents/lost_documents_screen.dart';
 import 'package:traffic_department/screens/services/ownership_transfer/ownership_transfer_screen.dart';
+import 'package:traffic_department/screens/services/vehicle_conversion/vehicle_conversion_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_modification/vehicle_modification_screen.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/custom_drawer.dart';
@@ -31,7 +32,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
   {"title": "lost_or_damaged_documents", "icon": Icons.credit_card_off, "screen": LostDocumentsScreen()},
   {"title": "test_results", "icon": Icons.assignment_turned_in, "screen": null},
   {"title": "vehicle_technical_change", "icon": Icons.engineering, "screen": VehicleModificationScreen()},
-  {"title": "vehicle_conversion", "icon": Icons.cached, "screen": null},
+  {"title": "vehicle_conversion", "icon": Icons.cached, "screen": VehicleConversionScreen()},
   {"title": "vehicle_deactivation", "icon": Icons.car_crash, "screen": null},
   {"title": "appointment_booking", "icon": Icons.calendar_month, "screen": null},
   {"title": "vehicle_unmortgage", "icon": Icons.lock_open, "screen": null},
