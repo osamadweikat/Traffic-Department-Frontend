@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:traffic_department/screens/services/lost_documents/lost_documents_screen.dart';
 import 'package:traffic_department/screens/services/ownership_transfer/ownership_transfer_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_modification/vehicle_modification_screen.dart';
 import '../../theme/app_theme.dart';
@@ -27,7 +28,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
   {"title": "renew_vehicle_license", "icon": Icons.car_repair, "screen": VehicleLicenseRenewalScreen()},
   {"title": "vehicle_registration", "icon": Icons.directions_car, "screen": VehicleRegistrationNewScreen()},
   {"title": "transfer_ownership", "icon": Icons.swap_horiz, "screen": OwnershipTransferScreen()},
-  {"title": "lost_or_damaged_documents", "icon": Icons.credit_card_off, "screen": null},
+  {"title": "lost_or_damaged_documents", "icon": Icons.credit_card_off, "screen": LostDocumentsScreen()},
   {"title": "test_results", "icon": Icons.assignment_turned_in, "screen": null},
   {"title": "vehicle_technical_change", "icon": Icons.engineering, "screen": VehicleModificationScreen()},
   {"title": "vehicle_conversion", "icon": Icons.cached, "screen": null},

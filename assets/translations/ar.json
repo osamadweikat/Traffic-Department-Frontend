@@ -579,7 +579,21 @@
   "vehicle_conversion": "تحويل نوع المركبة",
   "vehicle_deactivation": "شطب مركبة",
   "appointment_booking": "حجز موعد",
-  "vehicle_unmortgage": "فك رهن مركبة"
-  
-
+  "vehicle_unmortgage": "فك رهن مركبة",
+  "document_request_letter": "استدعاء من مالك المركبة",
+  "replacement_form": "نموذج بدل فاقد/تالف",
+  "valid_insurance": "شهادة تأمين سارية",
+  "identity_or_power_of_attorney": "إثبات الشخصية أو وكالة عدلية",
+  "police_report": "بلاغ شرطة",
+  "damaged_license_copy": "نسخة الرخصة التالفة",
+  "owner_id": "رقم هوية المالك",
+  "owner_name": "اسم المالك الرباعي",
+  "replacement_type": "نوع الطلب (فاقد / تالف)",
+  "replacement_base_fee": "رسوم بدل فاقد/تالف",
+  "replacement_bank_fee": "عمولة البنك",
+  "replacement_total_fee": "المجموع الكلي",
+  "fill_lost_form": "تعبئة نموذج بدل فاقد / تالف",
+  "identity_or_passport": "هوية شخصية أو جواز سفر فلسطيني",
+  "lost_license_affidavit": "إقرار بدل فاقد للرخصة",
+  "document_type": "نوع الوثيقة"
 }

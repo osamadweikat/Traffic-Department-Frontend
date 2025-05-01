@@ -577,5 +577,21 @@
   "vehicle_deactivation": "Deactivate Vehicle",
   "appointment_booking": "Book Appointment",
   "vehicle_unmortgage": "Vehicle Unmortgage",
-  "clearance_certificate": "Clearance Certificate"
+  "clearance_certificate": "Clearance Certificate",
+  "document_request_letter": "Request letter from vehicle owner",
+  "replacement_form": "Lost/Damaged Replacement Form",
+  "valid_insurance": "Valid insurance certificate",
+  "identity_or_power_of_attorney": "ID or Power of Attorney",
+  "police_report": "Police report",
+  "damaged_license_copy": "Copy of damaged license",
+  "owner_id": "Owner ID Number",
+  "owner_name": "Owner Full Name",
+  "replacement_type": "Request Type (Lost / Damaged)",
+  "replacement_base_fee": "Replacement Fee",
+  "replacement_bank_fee": "Bank Fee",
+  "replacement_total_fee": "Total",
+  "fill_lost_form": "Fill Lost/Damaged Request Form",
+  "identity_or_passport": "ID or Palestinian Passport",
+  "lost_license_affidavit": "Lost License Affidavit",
+  "document_type": "Document Type"
 }
