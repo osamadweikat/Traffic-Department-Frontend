@@ -653,5 +653,10 @@
   "deregistration_notice": "All outstanding fees must be paid before starting the deregistration process",
   "vehicle_deregistration": "Vehicle Deregistration",
   "fill_deregistration_form": "Fill Deregistration Form",
-  "deregistration_summary": "Deregistration Summary"
+  "deregistration_summary": "Deregistration Summary",
+  "service_technical_modification": "Technical Modification",
+  "service_replace_damaged_or_lost": "Issue Replacement (Lost/Damaged)",
+  "service_deregister_vehicle": "Deregister Vehicle",
+  "service_mortgage_release": "Mortgage / Release Vehicle",
+  "service_vehicle_type_conversion": "Convert Vehicle Type"
 }

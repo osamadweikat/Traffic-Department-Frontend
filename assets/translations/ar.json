@@ -656,5 +656,10 @@
   "deregistration_notice": "سيتم تحصيل كافة الرسوم المستحقة على المركبة قبل البدء بإجراءات الشطب",
   "vehicle_deregistration": "شطب مركبة",
   "fill_deregistration_form": "تعبئة نموذج شطب المركبة",
-  "deregistration_summary": "ملخص طلب الشطب"
+  "deregistration_summary": "ملخص طلب الشطب",
+  "service_technical_modification": "تعديل فني على المركبة",
+  "service_replace_damaged_or_lost": "إصدار بدل فاقد / تالف للمركبة",
+  "service_deregister_vehicle": "شطب مركبة",
+  "service_mortgage_release": "رهن / فك رهن مركبة",
+  "service_vehicle_type_conversion": "تحويل نوع المركبة"
 }

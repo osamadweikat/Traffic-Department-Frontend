@@ -68,8 +68,11 @@ class VehicleDetailsScreen extends StatelessWidget {
 
                   buildServiceButton(context, "service_renew_license".tr(), Icons.update, () => _handleRenewLicense(context)),
                   buildServiceButton(context, "service_transfer_ownership".tr(), Icons.transfer_within_a_station, () {}),
-                  buildServiceButton(context, "service_change_color".tr(), Icons.color_lens, () {}),
-                  buildServiceButton(context, "service_replace_plate".tr(), Icons.report_problem, () {}),
+                  buildServiceButton(context, "service_technical_modification".tr(), Icons.build, () {}),
+                  buildServiceButton(context, "service_replace_damaged_or_lost".tr(), Icons.report_problem, () {}),
+                  buildServiceButton(context, "service_deregister_vehicle".tr(), Icons.car_crash, () {}),
+                  buildServiceButton(context, "service_mortgage_release".tr(), Icons.lock, () {}),
+                  buildServiceButton(context, "service_vehicle_type_conversion".tr(), Icons.cached, () {}),
                 ],
               ),
             ),
@@ -113,7 +116,6 @@ class VehicleDetailsScreen extends StatelessWidget {
   }
 
   void _handleRenewLicense(BuildContext context) {
-  VehicleRenewalDialogs.checkAndRenewLicense(context, vehicle);
-}
-
+    VehicleRenewalDialogs.checkAndRenewLicense(context, vehicle);
+  }
 }
