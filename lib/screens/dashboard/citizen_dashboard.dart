@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traffic_department/screens/services/lost_documents/lost_documents_screen.dart';
 import 'package:traffic_department/screens/services/ownership_transfer/ownership_transfer_screen.dart';
+import 'package:traffic_department/screens/services/test_results/test_results_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_conversion/vehicle_conversion_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_deregistration/vehicle_deregistration_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_modification/vehicle_modification_screen.dart';
@@ -32,7 +33,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
   {"title": "vehicle_registration", "icon": Icons.directions_car, "screen": VehicleRegistrationNewScreen()},
   {"title": "transfer_ownership", "icon": Icons.swap_horiz, "screen": OwnershipTransferScreen()},
   {"title": "lost_or_damaged_documents", "icon": Icons.credit_card_off, "screen": LostDocumentsScreen()},
-  {"title": "test_results", "icon": Icons.assignment_turned_in, "screen": null},
+  {"title": "test_results", "icon": Icons.assignment_turned_in, "screen": TestResultsScreen()},
   {"title": "vehicle_technical_change", "icon": Icons.engineering, "screen": VehicleModificationScreen()},
   {"title": "vehicle_conversion", "icon": Icons.cached, "screen": VehicleConversionScreen()},
   {"title": "vehicle_deregistration", "icon": Icons.car_crash, "screen": VehicleDeregistrationScreen()},
