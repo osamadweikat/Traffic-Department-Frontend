@@ -8,7 +8,9 @@ import 'request_summary_step.dart';
 import 'payment_method_step.dart';
 
 class VehicleLicenseRenewalScreen extends StatefulWidget {
-  const VehicleLicenseRenewalScreen({super.key});
+  final Map<String, dynamic>? prefilledData; 
+
+  const VehicleLicenseRenewalScreen({super.key, this.prefilledData}); 
 
   @override
   State<VehicleLicenseRenewalScreen> createState() => _VehicleLicenseRenewalScreenState();
@@ -63,7 +65,6 @@ class _VehicleLicenseRenewalScreenState extends State<VehicleLicenseRenewalScree
   }
 
   StepState _getStepState(int step) => stepCompleted[step] ? StepState.complete : StepState.indexed;
-
   Color _getStepColor(int step) => stepCompleted[step] ? Colors.green : Colors.black87;
 
   @override
@@ -77,9 +78,7 @@ class _VehicleLicenseRenewalScreenState extends State<VehicleLicenseRenewalScree
       backgroundColor: Colors.grey.shade100,
       body: Theme(
         data: Theme.of(context).copyWith(
-          colorScheme: Theme.of(context).colorScheme.copyWith(
-            primary: Colors.green,
-          ),
+          colorScheme: Theme.of(context).colorScheme.copyWith(primary: Colors.green),
         ),
         child: Stepper(
           type: StepperType.vertical,
@@ -117,9 +116,8 @@ class _VehicleLicenseRenewalScreenState extends State<VehicleLicenseRenewalScree
               title: Text('vehicle_info'.tr(), style: TextStyle(color: _getStepColor(0))),
               content: VehicleInfoStep(
                 key: _vehicleInfoStepKey,
-                onStepCompleted: (data) {
-                  vehicleInfoData = data;
-                },
+                prefilledData: widget.prefilledData, 
+                onStepCompleted: (data) => vehicleInfoData = data,
               ),
               isActive: _currentStep >= 0,
               state: _getStepState(0),
@@ -129,9 +127,7 @@ class _VehicleLicenseRenewalScreenState extends State<VehicleLicenseRenewalScree
               content: RequiredDocumentsStep(
                 key: _requiredDocumentsStepKey,
                 vehicleInfoData: vehicleInfoData,
-                onStepCompleted: (data) {
-                  requiredDocumentsData = data;
-                },
+                onStepCompleted: (data) => requiredDocumentsData = data,
               ),
               isActive: _currentStep >= 1,
               state: _getStepState(1),
@@ -140,9 +136,9 @@ class _VehicleLicenseRenewalScreenState extends State<VehicleLicenseRenewalScree
               title: Text('request_summary'.tr(), style: TextStyle(color: _getStepColor(2))),
               content: RequestSummaryStep(
                 vehicleInfoData: vehicleInfoData,
-                onAmountCalculated: (double amount, bool isShekelSelected) {
+                onAmountCalculated: (amount, shekel) {
                   totalAmount = amount;
-                  isShekel = isShekelSelected;
+                  isShekel = shekel;
                 },
               ),
               isActive: _currentStep >= 2,

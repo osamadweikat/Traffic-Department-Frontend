@@ -3,8 +3,13 @@ import 'package:easy_localization/easy_localization.dart';
 
 class VehicleMortgageReleaseFormStep extends StatefulWidget {
   final Function(Map<String, dynamic>) onStepCompleted;
+  final Map<String, dynamic>? prefilledData;
 
-  const VehicleMortgageReleaseFormStep({super.key, required this.onStepCompleted});
+  const VehicleMortgageReleaseFormStep({
+    super.key,
+    required this.onStepCompleted,
+    this.prefilledData,
+  });
 
   @override
   State<VehicleMortgageReleaseFormStep> createState() => VehicleMortgageReleaseFormStepState();
@@ -21,6 +26,19 @@ class VehicleMortgageReleaseFormStepState extends State<VehicleMortgageReleaseFo
 
   final List<String> actionTypes = ['mortgage'.tr(), 'release'.tr()];
   String? selectedActionType;
+
+  bool readOnly = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.prefilledData != null) {
+      ownerIdController.text = widget.prefilledData!['ownerId'] ?? '';
+      ownerNameController.text = widget.prefilledData!['ownerName'] ?? '';
+      plateNumberController.text = widget.prefilledData!['plateNumber'] ?? '';
+      readOnly = true;
+    }
+  }
 
   @override
   void dispose() {
@@ -53,9 +71,9 @@ class VehicleMortgageReleaseFormStepState extends State<VehicleMortgageReleaseFo
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTextField(ownerIdController, 'owner_id'),
-          _buildTextField(ownerNameController, 'owner_name'),
-          _buildTextField(plateNumberController, 'plate_number'),
+          _buildTextField(ownerIdController, 'owner_id', readOnly),
+          _buildTextField(ownerNameController, 'owner_name', readOnly),
+          _buildTextField(plateNumberController, 'plate_number', readOnly),
           _buildSelectableField(
             controller: actionTypeController,
             label: 'mortgage_action_type'.tr(),
@@ -73,16 +91,26 @@ class VehicleMortgageReleaseFormStepState extends State<VehicleMortgageReleaseFo
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String labelKey) {
+  Widget _buildTextField(TextEditingController controller, String labelKey, bool readOnly) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: labelKey.tr(),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      child: StatefulBuilder(
+        builder: (context, setState) => TextFormField(
+          controller: controller,
+          readOnly: readOnly,
+          onChanged: (_) => setState(() {}),
+          decoration: InputDecoration(
+            labelText: labelKey.tr(),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+            suffixIcon: controller.text.isNotEmpty
+                ? const Icon(Icons.check_circle, color: Colors.green)
+                : null,
+            filled: controller.text.isNotEmpty,
+            fillColor: controller.text.isNotEmpty ? Colors.green.shade50 : null,
+          ),
+          validator: (value) =>
+              (value == null || value.isEmpty) ? 'required_field'.tr() : null,
         ),
-        validator: (value) => (value == null || value.isEmpty) ? 'required_field'.tr() : null,
       ),
     );
   }
@@ -106,8 +134,11 @@ class VehicleMortgageReleaseFormStepState extends State<VehicleMortgageReleaseFo
           suffixIcon: controller.text.isNotEmpty
               ? const Icon(Icons.check_circle, color: Colors.green)
               : null,
+          filled: controller.text.isNotEmpty,
+          fillColor: controller.text.isNotEmpty ? Colors.green.shade50 : null,
         ),
-        validator: (value) => (value == null || value.isEmpty) ? 'required_field'.tr() : null,
+        validator: (value) =>
+            (value == null || value.isEmpty) ? 'required_field'.tr() : null,
       ),
     );
   }

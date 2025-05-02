@@ -8,10 +8,14 @@ import 'package:traffic_department/screens/services/vehicle_renewal/payment_meth
 import '../../../theme/app_theme.dart';
 
 class VehicleModificationScreen extends StatefulWidget {
-  const VehicleModificationScreen({super.key});
+  final Map<String, dynamic>? prefilledData;
+
+  const VehicleModificationScreen({super.key, this.prefilledData});
+
 
   @override
-  State<VehicleModificationScreen> createState() => _VehicleModificationScreenState();
+  State<VehicleModificationScreen> createState() =>
+      _VehicleModificationScreenState();
 }
 
 class _VehicleModificationScreenState extends State<VehicleModificationScreen> {
@@ -24,7 +28,8 @@ class _VehicleModificationScreenState extends State<VehicleModificationScreen> {
   bool isShekel = true;
 
   final GlobalKey<ModificationFormStepState> _formStepKey = GlobalKey();
-  final GlobalKey<ModificationUploadDocumentsStepState> _uploadDocsKey = GlobalKey();
+  final GlobalKey<ModificationUploadDocumentsStepState> _uploadDocsKey =
+      GlobalKey();
   final GlobalKey<PaymentMethodStepState> _paymentKey = GlobalKey();
 
   Future<void> _onStepContinue() async {
@@ -35,10 +40,12 @@ class _VehicleModificationScreenState extends State<VehicleModificationScreen> {
     }
 
     if (_currentStep == 1) {
-      final requiredDocs = ModificationRequiredDocumentsHelper.getRequiredDocuments(
-        modificationData['modificationType'] ?? '',
-      );
-      final missingDocs = requiredDocs.where((doc) => uploadedDocs[doc] == null).toList();
+      final requiredDocs =
+          ModificationRequiredDocumentsHelper.getRequiredDocuments(
+            modificationData['modificationType'] ?? '',
+          );
+      final missingDocs =
+          requiredDocs.where((doc) => uploadedDocs[doc] == null).toList();
       if (missingDocs.isNotEmpty) {
         _uploadDocsKey.currentState?.markMissingDocuments(missingDocs);
         return;
@@ -75,8 +82,10 @@ class _VehicleModificationScreenState extends State<VehicleModificationScreen> {
     }
   }
 
-  StepState _getStepState(int step) => stepCompleted[step] ? StepState.complete : StepState.indexed;
-  Color _getStepColor(int step) => stepCompleted[step] ? Colors.green : Colors.black87;
+  StepState _getStepState(int step) =>
+      stepCompleted[step] ? StepState.complete : StepState.indexed;
+  Color _getStepColor(int step) =>
+      stepCompleted[step] ? Colors.green : Colors.black87;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +98,9 @@ class _VehicleModificationScreenState extends State<VehicleModificationScreen> {
       backgroundColor: Colors.grey.shade100,
       body: Theme(
         data: Theme.of(context).copyWith(
-          colorScheme: Theme.of(context).colorScheme.copyWith(primary: Colors.green),
+          colorScheme: Theme.of(
+            context,
+          ).colorScheme.copyWith(primary: Colors.green),
         ),
         child: Stepper(
           type: StepperType.vertical,
@@ -105,16 +116,27 @@ class _VehicleModificationScreenState extends State<VehicleModificationScreen> {
                     onPressed: details.onStepContinue,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppTheme.navy,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                     ),
-                    child: Text('next'.tr(), style: const TextStyle(color: Colors.white)),
+                    child: Text(
+                      'next'.tr(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
                   const SizedBox(width: 10),
                   if (_currentStep > 0)
                     OutlinedButton(
                       onPressed: details.onStepCancel,
-                      style: OutlinedButton.styleFrom(side: BorderSide(color: AppTheme.navy)),
-                      child: Text('back'.tr(), style: TextStyle(color: AppTheme.navy)),
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: AppTheme.navy),
+                      ),
+                      child: Text(
+                        'back'.tr(),
+                        style: TextStyle(color: AppTheme.navy),
+                      ),
                     ),
                 ],
               ),
@@ -122,16 +144,24 @@ class _VehicleModificationScreenState extends State<VehicleModificationScreen> {
           },
           steps: [
             Step(
-              title: Text('modification_form'.tr(), style: TextStyle(color: _getStepColor(0))),
+              title: Text(
+                'modification_form'.tr(),
+                style: TextStyle(color: _getStepColor(0)),
+              ),
               content: ModificationFormStep(
                 key: _formStepKey,
+                prefilledData: widget.prefilledData, 
                 onStepCompleted: (data) => modificationData = data,
               ),
               isActive: _currentStep >= 0,
               state: _getStepState(0),
             ),
+
             Step(
-              title: Text('upload_documents'.tr(), style: TextStyle(color: _getStepColor(1))),
+              title: Text(
+                'upload_documents'.tr(),
+                style: TextStyle(color: _getStepColor(1)),
+              ),
               content: ModificationUploadDocumentsStep(
                 key: _uploadDocsKey,
                 modificationType: modificationData['modificationType'] ?? '',
@@ -141,7 +171,10 @@ class _VehicleModificationScreenState extends State<VehicleModificationScreen> {
               state: _getStepState(1),
             ),
             Step(
-              title: Text('request_summary'.tr(), style: TextStyle(color: _getStepColor(2))),
+              title: Text(
+                'request_summary'.tr(),
+                style: TextStyle(color: _getStepColor(2)),
+              ),
               content: ModificationSummaryStep(
                 modificationData: modificationData,
                 onFeesCalculated: (total, shekel) {
@@ -153,7 +186,10 @@ class _VehicleModificationScreenState extends State<VehicleModificationScreen> {
               state: _getStepState(2),
             ),
             Step(
-              title: Text('payment_method'.tr(), style: TextStyle(color: _getStepColor(3))),
+              title: Text(
+                'payment_method'.tr(),
+                style: TextStyle(color: _getStepColor(3)),
+              ),
               content: PaymentMethodStep(
                 key: _paymentKey,
                 totalAmount: totalAmount,

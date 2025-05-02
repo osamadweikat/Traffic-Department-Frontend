@@ -8,18 +8,25 @@ import 'vehicle_deregistration_upload_documents_step.dart';
 import 'vehicle_deregistration_summary_step.dart';
 
 class VehicleDeregistrationScreen extends StatefulWidget {
-  const VehicleDeregistrationScreen({super.key});
+final Map<String, dynamic>? prefilledData;
+
+const VehicleDeregistrationScreen({super.key, this.prefilledData});
+
 
   @override
-  State<VehicleDeregistrationScreen> createState() => _VehicleDeregistrationScreenState();
+  State<VehicleDeregistrationScreen> createState() =>
+      _VehicleDeregistrationScreenState();
 }
 
-class _VehicleDeregistrationScreenState extends State<VehicleDeregistrationScreen> {
+class _VehicleDeregistrationScreenState
+    extends State<VehicleDeregistrationScreen> {
   int _currentStep = 0;
   List<bool> stepCompleted = [false, false, false, false];
 
-  final GlobalKey<VehicleDeregistrationFormStepState> _formStepKey = GlobalKey();
-  final GlobalKey<VehicleDeregistrationUploadDocumentsStepState> _uploadDocsKey = GlobalKey();
+  final GlobalKey<VehicleDeregistrationFormStepState> _formStepKey =
+      GlobalKey();
+  final GlobalKey<VehicleDeregistrationUploadDocumentsStepState>
+  _uploadDocsKey = GlobalKey();
   final GlobalKey<PaymentMethodStepState> _paymentStepKey = GlobalKey();
 
   Map<String, dynamic> formData = {};
@@ -61,8 +68,10 @@ class _VehicleDeregistrationScreenState extends State<VehicleDeregistrationScree
     }
   }
 
-  StepState _getStepState(int step) => stepCompleted[step] ? StepState.complete : StepState.indexed;
-  Color _getStepColor(int step) => stepCompleted[step] ? Colors.green : Colors.black87;
+  StepState _getStepState(int step) =>
+      stepCompleted[step] ? StepState.complete : StepState.indexed;
+  Color _getStepColor(int step) =>
+      stepCompleted[step] ? Colors.green : Colors.black87;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +84,9 @@ class _VehicleDeregistrationScreenState extends State<VehicleDeregistrationScree
       backgroundColor: Colors.grey.shade100,
       body: Theme(
         data: Theme.of(context).copyWith(
-          colorScheme: Theme.of(context).colorScheme.copyWith(primary: Colors.green),
+          colorScheme: Theme.of(
+            context,
+          ).colorScheme.copyWith(primary: Colors.green),
         ),
         child: Stepper(
           type: StepperType.vertical,
@@ -91,16 +102,27 @@ class _VehicleDeregistrationScreenState extends State<VehicleDeregistrationScree
                     onPressed: details.onStepContinue,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppTheme.navy,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                     ),
-                    child: Text('next'.tr(), style: const TextStyle(color: Colors.white)),
+                    child: Text(
+                      'next'.tr(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
                   const SizedBox(width: 10),
                   if (_currentStep > 0)
                     OutlinedButton(
                       onPressed: details.onStepCancel,
-                      style: OutlinedButton.styleFrom(side: BorderSide(color: AppTheme.navy)),
-                      child: Text('back'.tr(), style: TextStyle(color: AppTheme.navy)),
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: AppTheme.navy),
+                      ),
+                      child: Text(
+                        'back'.tr(),
+                        style: TextStyle(color: AppTheme.navy),
+                      ),
                     ),
                 ],
               ),
@@ -108,16 +130,25 @@ class _VehicleDeregistrationScreenState extends State<VehicleDeregistrationScree
           },
           steps: [
             Step(
-              title: Text('fill_deregistration_form'.tr(), style: TextStyle(color: _getStepColor(0))),
+              title: Text(
+                'fill_deregistration_form'.tr(),
+                style: TextStyle(color: _getStepColor(0)),
+              ),
               content: VehicleDeregistrationFormStep(
                 key: _formStepKey,
+                prefilledData:
+                    widget.prefilledData, 
                 onStepCompleted: (data) => formData = data,
               ),
               isActive: _currentStep >= 0,
               state: _getStepState(0),
             ),
+
             Step(
-              title: Text('upload_required_documents'.tr(), style: TextStyle(color: _getStepColor(1))),
+              title: Text(
+                'upload_required_documents'.tr(),
+                style: TextStyle(color: _getStepColor(1)),
+              ),
               content: VehicleDeregistrationUploadDocumentsStep(
                 key: _uploadDocsKey,
                 onStepCompleted: (docs) => uploadedDocs = docs,
@@ -126,7 +157,10 @@ class _VehicleDeregistrationScreenState extends State<VehicleDeregistrationScree
               state: _getStepState(1),
             ),
             Step(
-              title: Text('deregistration_summary'.tr(), style: TextStyle(color: _getStepColor(2))),
+              title: Text(
+                'deregistration_summary'.tr(),
+                style: TextStyle(color: _getStepColor(2)),
+              ),
               content: VehicleDeregistrationSummaryStep(
                 formData: formData,
                 onFeesCalculated: (total, shekel) {
@@ -138,7 +172,10 @@ class _VehicleDeregistrationScreenState extends State<VehicleDeregistrationScree
               state: _getStepState(2),
             ),
             Step(
-              title: Text('payment_method'.tr(), style: TextStyle(color: _getStepColor(3))),
+              title: Text(
+                'payment_method'.tr(),
+                style: TextStyle(color: _getStepColor(3)),
+              ),
               content: PaymentMethodStep(
                 key: _paymentStepKey,
                 totalAmount: totalAmount,

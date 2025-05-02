@@ -19,6 +19,8 @@ class VehiclesScreen extends StatelessWidget {
       "engine": "ENG987654321",
       "fuel": "بنزين",
       "capacity": 5,
+      "weight": 1300,
+      "engineCapacity": 1800,
       "expiry": "2025-12-31",
       "violations": ["مخالفة سرعة", "مخالفة اصطفاف"],
       "insurance": "سارية"
@@ -34,10 +36,29 @@ class VehiclesScreen extends StatelessWidget {
       "engine": "ENG123456789",
       "fuel": "ديزل",
       "capacity": 9,
+      "weight": 1800,
+      "engineCapacity": 2500,
       "expiry": "2024-10-15",
       "violations": [],
       "insurance": "منتهية"
     },
+    {
+      "plateNumber": "2468-هـ-246",
+      "type": "خصوصي",
+      "brand": "كيا - سبورتاج",
+      "year": "2021",
+      "color": "أسود",
+      "status": "مرخصة",
+      "chassis": "CHS334455667",
+      "engine": "ENG998877665",
+      "fuel": "هايبرد",
+      "capacity": 5,
+      "weight": 1450,
+      "engineCapacity": 1600,
+      "expiry": "2026-01-20",
+      "violations": [],
+      "insurance": "سارية"
+    }
   ];
 
   Color getStatusColor(String status) {
@@ -87,7 +108,7 @@ class VehiclesScreen extends StatelessWidget {
                     Text("${"manufacture_year".tr()}: ${vehicle["year"]}"),
                     Text("${"color".tr()}: ${vehicle["color"]}"),
                     Text("${"status".tr()}: ${vehicle["status"]}",
-                      style: TextStyle(color: getStatusColor(vehicle["status"]))),
+                        style: TextStyle(color: getStatusColor(vehicle["status"]))),
                   ],
                 ),
                 onTap: () {

@@ -3,8 +3,13 @@ import 'package:easy_localization/easy_localization.dart';
 
 class ModificationFormStep extends StatefulWidget {
   final Function(Map<String, dynamic>) onStepCompleted;
+  final Map<String, dynamic>? prefilledData;
 
-  const ModificationFormStep({super.key, required this.onStepCompleted});
+  const ModificationFormStep({
+    super.key,
+    required this.onStepCompleted,
+    this.prefilledData,
+  });
 
   @override
   State<ModificationFormStep> createState() => ModificationFormStepState();
@@ -26,6 +31,16 @@ class ModificationFormStepState extends State<ModificationFormStep> {
   ];
 
   String? selectedModificationType;
+  bool readOnly = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.prefilledData != null) {
+      vehicleNumberController.text = widget.prefilledData!['plateNumber'] ?? '';
+      readOnly = true;
+    }
+  }
 
   bool validateAndSave() {
     if (_formKey.currentState?.validate() ?? false) {
@@ -69,6 +84,7 @@ class ModificationFormStepState extends State<ModificationFormStep> {
             label: 'vehicle_number'.tr(),
             fieldKey: 'vehicleNumber',
             keyboardType: TextInputType.number,
+            readOnly: readOnly,
           ),
           _buildTextField(
             controller: notesController,
@@ -87,20 +103,30 @@ class ModificationFormStepState extends State<ModificationFormStep> {
     required String fieldKey,
     bool required = true,
     TextInputType keyboardType = TextInputType.text,
+    bool readOnly = false,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: TextFormField(
-        controller: controller,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          labelText: label,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      child: StatefulBuilder(
+        builder: (context, setState) => TextFormField(
+          controller: controller,
+          readOnly: readOnly,
+          keyboardType: keyboardType,
+          onChanged: (_) => setState(() {}),
+          decoration: InputDecoration(
+            labelText: label,
+            suffixIcon: controller.text.isNotEmpty
+                ? const Icon(Icons.check_circle, color: Colors.green)
+                : null,
+            filled: controller.text.isNotEmpty,
+            fillColor: controller.text.isNotEmpty ? Colors.green.shade50 : null,
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          validator: required
+              ? (value) => (value == null || value.isEmpty) ? 'required_field'.tr() : null
+              : null,
+          onSaved: (value) => modificationData[fieldKey] = value,
         ),
-        validator: required
-            ? (value) => (value == null || value.isEmpty) ? 'required_field'.tr() : null
-            : null,
-        onSaved: (value) => modificationData[fieldKey] = value,
       ),
     );
   }
@@ -125,6 +151,8 @@ class ModificationFormStepState extends State<ModificationFormStep> {
           suffixIcon: controller.text.isNotEmpty
               ? const Icon(Icons.check_circle, color: Colors.green)
               : null,
+          filled: controller.text.isNotEmpty,
+          fillColor: controller.text.isNotEmpty ? Colors.green.shade50 : null,
         ),
         validator: (value) =>
             (value == null || value.isEmpty) ? 'required_field'.tr() : null,

@@ -8,10 +8,12 @@ import '../../../theme/app_theme.dart';
 import 'ownership_transfer_form_step.dart';
 
 class OwnershipTransferScreen extends StatefulWidget {
-  const OwnershipTransferScreen({super.key});
+  final Map<String, dynamic>? prefilledData;
+  const OwnershipTransferScreen({super.key, this.prefilledData});
 
   @override
-  State<OwnershipTransferScreen> createState() => _OwnershipTransferScreenState();
+  State<OwnershipTransferScreen> createState() =>
+      _OwnershipTransferScreenState();
 }
 
 class _OwnershipTransferScreenState extends State<OwnershipTransferScreen> {
@@ -19,8 +21,9 @@ class _OwnershipTransferScreenState extends State<OwnershipTransferScreen> {
   List<bool> stepCompleted = [false, false, false, false];
 
   final GlobalKey<OwnershipTransferFormStepState> _formStepKey = GlobalKey();
-  final GlobalKey<OwnershipUploadDocumentsStepState> _uploadDocsKey = GlobalKey();
-  final GlobalKey<PaymentMethodStepState> _paymentMethodStepKey = GlobalKey(); 
+  final GlobalKey<OwnershipUploadDocumentsStepState> _uploadDocsKey =
+      GlobalKey();
+  final GlobalKey<PaymentMethodStepState> _paymentMethodStepKey = GlobalKey();
 
   Map<String, dynamic> ownershipData = {};
   Map<String, dynamic> uploadedDocs = {};
@@ -39,7 +42,8 @@ class _OwnershipTransferScreenState extends State<OwnershipTransferScreen> {
       final requiredDocs =
           OwnershipRequiredDocumentsHelper.getRequiredDocuments(vehicleType);
 
-      final missingDocs = requiredDocs.where((doc) => uploadedDocs[doc] == null).toList();
+      final missingDocs =
+          requiredDocs.where((doc) => uploadedDocs[doc] == null).toList();
 
       if (missingDocs.isNotEmpty) {
         _uploadDocsKey.currentState?.markMissingDocuments(missingDocs);
@@ -56,7 +60,7 @@ class _OwnershipTransferScreenState extends State<OwnershipTransferScreen> {
     }
 
     if (_currentStep == 3) {
-      await _paymentMethodStepKey.currentState?.continueToSelectedPayment(); 
+      await _paymentMethodStepKey.currentState?.continueToSelectedPayment();
     }
 
     if (_currentStep < 3) {
@@ -93,7 +97,9 @@ class _OwnershipTransferScreenState extends State<OwnershipTransferScreen> {
       backgroundColor: Colors.grey.shade100,
       body: Theme(
         data: Theme.of(context).copyWith(
-          colorScheme: Theme.of(context).colorScheme.copyWith(primary: Colors.green),
+          colorScheme: Theme.of(
+            context,
+          ).colorScheme.copyWith(primary: Colors.green),
         ),
         child: Stepper(
           type: StepperType.vertical,
@@ -109,9 +115,15 @@ class _OwnershipTransferScreenState extends State<OwnershipTransferScreen> {
                     onPressed: details.onStepContinue,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppTheme.navy,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                     ),
-                    child: Text('next'.tr(), style: const TextStyle(color: Colors.white)),
+                    child: Text(
+                      'next'.tr(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
                   const SizedBox(width: 10),
                   if (_currentStep > 0)
@@ -120,7 +132,10 @@ class _OwnershipTransferScreenState extends State<OwnershipTransferScreen> {
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: AppTheme.navy),
                       ),
-                      child: Text('back'.tr(), style: TextStyle(color: AppTheme.navy)),
+                      child: Text(
+                        'back'.tr(),
+                        style: TextStyle(color: AppTheme.navy),
+                      ),
                     ),
                 ],
               ),
@@ -128,16 +143,30 @@ class _OwnershipTransferScreenState extends State<OwnershipTransferScreen> {
           },
           steps: [
             Step(
-              title: Text('fill_transfer_form'.tr(), style: TextStyle(color: _getStepColor(0))),
+              title: Text(
+                'fill_transfer_form'.tr(),
+                style: TextStyle(color: _getStepColor(0)),
+              ),
               content: OwnershipTransferFormStep(
                 key: _formStepKey,
+                prefilledData:
+                    widget.prefilledData != null
+                        ? {
+                          'ownerId': '1234567890',
+                          'ownerName': 'محمد أحمد خالد علي',
+                          'type': widget.prefilledData!['type'],
+                          'fuel': widget.prefilledData!['fuel'],
+                        }
+                        : null,
                 onStepCompleted: (data) => ownershipData = data,
               ),
-              isActive: _currentStep >= 0,
-              state: _getStepState(0),
             ),
+
             Step(
-              title: Text('upload_documents'.tr(), style: TextStyle(color: _getStepColor(1))),
+              title: Text(
+                'upload_documents'.tr(),
+                style: TextStyle(color: _getStepColor(1)),
+              ),
               content: OwnershipUploadDocumentsStep(
                 key: _uploadDocsKey,
                 vehicleType: ownershipData['vehicleType'] ?? '',
@@ -147,7 +176,10 @@ class _OwnershipTransferScreenState extends State<OwnershipTransferScreen> {
               state: _getStepState(1),
             ),
             Step(
-              title: Text('request_summary'.tr(), style: TextStyle(color: _getStepColor(2))),
+              title: Text(
+                'request_summary'.tr(),
+                style: TextStyle(color: _getStepColor(2)),
+              ),
               content: OwnershipSummaryStep(
                 ownershipData: ownershipData,
                 onFeesCalculated: (total, shekel) {
@@ -159,9 +191,12 @@ class _OwnershipTransferScreenState extends State<OwnershipTransferScreen> {
               state: _getStepState(2),
             ),
             Step(
-              title: Text('payment_method'.tr(), style: TextStyle(color: _getStepColor(3))),
+              title: Text(
+                'payment_method'.tr(),
+                style: TextStyle(color: _getStepColor(3)),
+              ),
               content: PaymentMethodStep(
-                key: _paymentMethodStepKey, 
+                key: _paymentMethodStepKey,
                 totalAmount: totalAmount,
                 isShekel: isShekel,
               ),

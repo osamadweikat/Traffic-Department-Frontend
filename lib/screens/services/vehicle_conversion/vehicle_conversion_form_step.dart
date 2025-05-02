@@ -3,8 +3,13 @@ import 'package:easy_localization/easy_localization.dart';
 
 class VehicleConversionFormStep extends StatefulWidget {
   final Function(Map<String, dynamic>) onStepCompleted;
+  final Map<String, dynamic>? prefilledData;
 
-  const VehicleConversionFormStep({super.key, required this.onStepCompleted});
+  const VehicleConversionFormStep({
+    super.key,
+    required this.onStepCompleted,
+    this.prefilledData,
+  });
 
   @override
   State<VehicleConversionFormStep> createState() => VehicleConversionFormStepState();
@@ -24,6 +29,18 @@ class VehicleConversionFormStepState extends State<VehicleConversionFormStep> {
 
   bool colorChanged = false;
   bool structureChanged = false;
+  bool readOnly = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.prefilledData != null) {
+      ownerIdController.text = widget.prefilledData!['ownerId'] ?? '';
+      ownerNameController.text = widget.prefilledData!['ownerName'] ?? '';
+      plateNumberController.text = widget.prefilledData!['plateNumber'] ?? '';
+      readOnly = true;
+    }
+  }
 
   @override
   void dispose() {
@@ -55,9 +72,9 @@ class VehicleConversionFormStepState extends State<VehicleConversionFormStep> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTextField(ownerIdController, 'owner_id', 'ownerId'),
-          _buildTextField(ownerNameController, 'owner_name', 'ownerName'),
-          _buildTextField(plateNumberController, 'plate_number', 'plateNumber'),
+          _buildTextField(ownerIdController, 'owner_id', 'ownerId', readOnly),
+          _buildTextField(ownerNameController, 'owner_name', 'ownerName', readOnly),
+          _buildTextField(plateNumberController, 'plate_number', 'plateNumber', readOnly),
           _buildSelectableField(
             controller: targetTypeController,
             label: 'target_vehicle_type1'.tr(),
@@ -72,20 +89,15 @@ class VehicleConversionFormStepState extends State<VehicleConversionFormStep> {
               });
             },
           ),
-
           const SizedBox(height: 12),
           CheckboxListTile(
             value: colorChanged,
-            onChanged: (value) {
-              setState(() => colorChanged = value ?? false);
-            },
+            onChanged: (value) => setState(() => colorChanged = value ?? false),
             title: Text('color_changed'.tr()),
           ),
           CheckboxListTile(
             value: structureChanged,
-            onChanged: (value) {
-              setState(() => structureChanged = value ?? false);
-            },
+            onChanged: (value) => setState(() => structureChanged = value ?? false),
             title: Text('structure_changed'.tr()),
           ),
         ],
@@ -93,17 +105,32 @@ class VehicleConversionFormStepState extends State<VehicleConversionFormStep> {
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String labelKey, String fieldKey) {
+  Widget _buildTextField(
+    TextEditingController controller,
+    String labelKey,
+    String fieldKey,
+    bool readOnly,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: labelKey.tr(),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      child: StatefulBuilder(
+        builder: (context, setState) => TextFormField(
+          controller: controller,
+          readOnly: readOnly,
+          onChanged: (_) => setState(() {}),
+          decoration: InputDecoration(
+            labelText: labelKey.tr(),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+            suffixIcon: controller.text.isNotEmpty
+                ? const Icon(Icons.check_circle, color: Colors.green)
+                : null,
+            filled: controller.text.isNotEmpty,
+            fillColor: controller.text.isNotEmpty ? Colors.green.shade50 : null,
+          ),
+          validator: (value) =>
+              (value == null || value.isEmpty) ? 'required_field'.tr() : null,
+          onSaved: (value) => formData[fieldKey] = value,
         ),
-        validator: (value) => (value == null || value.isEmpty) ? 'required_field'.tr() : null,
-        onSaved: (value) => formData[fieldKey] = value,
       ),
     );
   }
@@ -128,8 +155,11 @@ class VehicleConversionFormStepState extends State<VehicleConversionFormStep> {
           suffixIcon: controller.text.isNotEmpty
               ? const Icon(Icons.check_circle, color: Colors.green)
               : null,
+          filled: controller.text.isNotEmpty,
+          fillColor: controller.text.isNotEmpty ? Colors.green.shade50 : null,
         ),
-        validator: (value) => (value == null || value.isEmpty) ? 'required_field'.tr() : null,
+        validator: (value) =>
+            (value == null || value.isEmpty) ? 'required_field'.tr() : null,
         onSaved: (value) => formData[fieldKey] = value,
       ),
     );
@@ -154,18 +184,19 @@ class VehicleConversionFormStepState extends State<VehicleConversionFormStep> {
           itemCount: options.length,
           separatorBuilder: (_, __) => const Divider(height: 1),
           itemBuilder: (context, index) {
-            final isSelected = selectedValue == options[index];
+            final value = options[index];
+            final isSelected = value == selectedTargetType;
             return ListTile(
               title: Text(
-                options[index],
+                value,
                 style: TextStyle(
                   color: isSelected ? Colors.green : Colors.black,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
               onTap: () {
-                controller.text = options[index];
-                onSelected(options[index]);
+                controller.text = value;
+                onSelected(value);
                 Navigator.pop(context);
               },
             );

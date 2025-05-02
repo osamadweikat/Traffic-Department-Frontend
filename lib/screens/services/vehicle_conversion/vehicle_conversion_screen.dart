@@ -8,7 +8,9 @@ import 'package:traffic_department/screens/services/vehicle_renewal/payment_meth
 import '../../../theme/app_theme.dart';
 
 class VehicleConversionScreen extends StatefulWidget {
-  const VehicleConversionScreen({super.key});
+  final Map<String, dynamic>? prefilledData;
+const VehicleConversionScreen({super.key, this.prefilledData});
+
 
   @override
   State<VehicleConversionScreen> createState() =>
@@ -131,11 +133,14 @@ class _VehicleConversionScreenState extends State<VehicleConversionScreen> {
               ),
               content: VehicleConversionFormStep(
                 key: _formStepKey,
+                prefilledData:
+                    widget.prefilledData, 
                 onStepCompleted: (data) => formData = data,
               ),
               isActive: _currentStep >= 0,
               state: _getStepState(0),
             ),
+
             Step(
               title: Text(
                 'upload_conversion_documents'.tr(),
@@ -143,8 +148,7 @@ class _VehicleConversionScreenState extends State<VehicleConversionScreen> {
               ),
               content: VehicleConversionUploadDocumentsStep(
                 key: _uploadDocsKey,
-                conversionType:
-                    formData['conversionType'] ?? '', 
+                conversionType: formData['conversionType'] ?? '',
                 onStepCompleted: (docs) => uploadedDocs = docs,
               ),
               isActive: _currentStep >= 1,

@@ -3,8 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 
 class OwnershipTransferFormStep extends StatefulWidget {
   final Function(Map<String, dynamic>) onStepCompleted;
+  final Map<String, dynamic>? prefilledData;
 
-  const OwnershipTransferFormStep({super.key, required this.onStepCompleted});
+  const OwnershipTransferFormStep({super.key, required this.onStepCompleted, this.prefilledData});
 
   @override
   State<OwnershipTransferFormStep> createState() => OwnershipTransferFormStepState();
@@ -31,9 +32,24 @@ class OwnershipTransferFormStepState extends State<OwnershipTransferFormStep> {
   ];
 
   final List<String> fuelTypes = ["بنزين", "ديزل", "هايبرد", "كهرباء"];
-
   String? selectedVehicleType;
   String? selectedFuelType;
+
+  bool isReadOnly = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.prefilledData != null) {
+      currentOwnerIdController.text = widget.prefilledData!["ownerId"] ?? '';
+      currentOwnerNameController.text = widget.prefilledData!["ownerName"] ?? '';
+      vehicleTypeController.text = widget.prefilledData!["type"] ?? '';
+      selectedVehicleType = widget.prefilledData!["type"];
+      fuelTypeController.text = widget.prefilledData!["fuel"] ?? '';
+      selectedFuelType = widget.prefilledData!["fuel"];
+      isReadOnly = true;
+    }
+  }
 
   bool validateAndSave() {
     if (_formKey.currentState?.validate() ?? false) {
@@ -61,122 +77,69 @@ class OwnershipTransferFormStepState extends State<OwnershipTransferFormStep> {
       key: _formKey,
       child: Column(
         children: [
-          _buildNumberField(
-            controller: currentOwnerIdController,
-            label: 'current_owner_id'.tr(),
-            fieldKey: 'currentOwnerId',
-          ),
-          _buildTextField(
-            controller: currentOwnerNameController,
-            label: 'current_owner_name'.tr(),
-            fieldKey: 'currentOwnerName',
-          ),
-          _buildNumberField(
-            controller: buyerIdController,
-            label: 'buyer_id'.tr(),
-            fieldKey: 'buyerId',
-          ),
-          _buildTextField(
-            controller: buyerNameController,
-            label: 'buyer_name'.tr(),
-            fieldKey: 'buyerName',
-          ),
-          _buildSelectableField(
-            controller: vehicleTypeController,
-            label: 'vehicle_type'.tr(),
-            items: vehicleTypes,
-            fieldKey: 'vehicleType',
-            selectedValue: selectedVehicleType,
-            onSelected: (value) => setState(() => selectedVehicleType = value),
-          ),
-          _buildSelectableField(
-            controller: fuelTypeController,
-            label: 'fuel_type'.tr(),
-            items: fuelTypes,
-            fieldKey: 'fuelType',
-            selectedValue: selectedFuelType,
-            onSelected: (value) => setState(() => selectedFuelType = value),
-          ),
+          _buildTextField(currentOwnerIdController, 'current_owner_id'.tr(), 'currentOwnerId', isReadOnly),
+          _buildTextField(currentOwnerNameController, 'current_owner_name'.tr(), 'currentOwnerName', isReadOnly),
+          _buildTextField(buyerIdController, 'buyer_id'.tr(), 'buyerId', false, isNumber: true),
+          _buildTextField(buyerNameController, 'buyer_name'.tr(), 'buyerName', false),
+          _buildDropdown(vehicleTypeController, 'vehicle_type'.tr(), vehicleTypes, 'vehicleType', selectedVehicleType, (value) => setState(() => selectedVehicleType = value), isReadOnly),
+          _buildDropdown(fuelTypeController, 'fuel_type'.tr(), fuelTypes, 'fuelType', selectedFuelType, (value) => setState(() => selectedFuelType = value), isReadOnly),
         ],
       ),
     );
   }
 
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required String fieldKey,
-  }) {
+  Widget _buildTextField(TextEditingController controller, String label, String fieldKey, bool readOnly, {bool isNumber = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: label,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      child: StatefulBuilder(
+        builder: (context, setState) => TextFormField(
+          controller: controller,
+          readOnly: readOnly,
+          keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+          onChanged: (_) => setState(() {}),
+          decoration: InputDecoration(
+            labelText: label,
+            suffixIcon: controller.text.isNotEmpty ? const Icon(Icons.check_circle, color: Colors.green) : null,
+            filled: controller.text.isNotEmpty,
+            fillColor: controller.text.isNotEmpty ? Colors.green.shade50 : null,
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          validator: (value) => value == null || value.isEmpty ? 'required_field'.tr() : null,
+          onSaved: (value) => vehicleData[fieldKey] = value,
         ),
-        validator: (value) =>
-            value == null || value.isEmpty ? 'required_field'.tr() : null,
-        onSaved: (value) => vehicleData[fieldKey] = value,
       ),
     );
   }
 
-  Widget _buildNumberField({
-    required TextEditingController controller,
-    required String label,
-    required String fieldKey,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: TextFormField(
-        controller: controller,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-          labelText: label,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-        ),
-        validator: (value) =>
-            value == null || value.isEmpty ? 'required_field'.tr() : null,
-        onSaved: (value) => vehicleData[fieldKey] = value,
-      ),
-    );
-  }
-
-  Widget _buildSelectableField({
-    required TextEditingController controller,
-    required String label,
-    required List<String> items,
-    required String fieldKey,
+  Widget _buildDropdown(
+    TextEditingController controller,
+    String label,
+    List<String> items,
+    String fieldKey,
     String? selectedValue,
-    required Function(String) onSelected,
-  }) {
+    Function(String) onSelected,
+    bool readOnly,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
         controller: controller,
         readOnly: true,
-        onTap: () => _showOptionsBottomSheet(controller, items, selectedValue, onSelected),
+        onTap: readOnly ? null : () => _showOptionsBottomSheet(controller, items, selectedValue, onSelected),
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-          suffixIcon: controller.text.isNotEmpty
-              ? const Icon(Icons.check_circle, color: Colors.green)
-              : null,
+          suffixIcon: controller.text.isNotEmpty ? const Icon(Icons.check_circle, color: Colors.green) : null,
+          filled: controller.text.isNotEmpty,
+          fillColor: controller.text.isNotEmpty ? Colors.green.shade50 : null,
         ),
-        validator: (value) =>
-            value == null || value.isEmpty ? 'required_field'.tr() : null,
+        validator: (value) => value == null || value.isEmpty ? 'required_field'.tr() : null,
         onSaved: (value) => vehicleData[fieldKey] = value,
       ),
     );
   }
 
-  void _showOptionsBottomSheet(
-    TextEditingController controller,
-    List<String> options,
-    String? selectedValue,
-    Function(String) onSelected,
-  ) {
+  void _showOptionsBottomSheet(TextEditingController controller, List<String> options, String? selectedValue, Function(String) onSelected) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.grey.shade100,
