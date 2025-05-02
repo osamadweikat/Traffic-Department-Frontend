@@ -661,5 +661,6 @@
   "service_replace_damaged_or_lost": "إصدار بدل فاقد / تالف للمركبة",
   "service_deregister_vehicle": "شطب مركبة",
   "service_mortgage_release": "رهن / فك رهن مركبة",
-  "service_vehicle_type_conversion": "تحويل نوع المركبة"
+  "service_vehicle_type_conversion": "تحويل نوع المركبة",
+  "cannot_perform_services_due_to_violations": "لا يمكن تنفيذ أي خدمات على هذه المركبة بسبب وجود مخالفات، يرجى تسويتها أولاً."
 }
