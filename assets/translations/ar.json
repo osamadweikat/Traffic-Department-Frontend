@@ -703,5 +703,18 @@
   "close": "إغلاق",
   "no_violations_title": "لا توجد مخالفات مرورية",
   "no_violations_message": "تفيد سجلاتنا بأنه لا توجد أي مخالفات مرورية مسجلة على هويتك أو مركبتك في الوقت الحالي.\nنشكرك على التزامك بقوانين وأنظمة المرور.",
-  "great_thanks": "تم"
+  "great_thanks": "تم",
+  "appointment_confirmed": "تم حجز الموعد بنجاح",
+  "please_complete_all_fields": "يرجى تعبئة جميع الحقول المطلوبة",
+  "please_show_barcode": "يرجى الاحتفاظ بالباركود وإبرازه عند وصولك للفرع",
+  "book_appointment": "حجز موعد",
+  "choose_city": "اختر المدينة",
+  "choose_branch": "اختر الفرع",
+  "choose_date": "اختر التاريخ",
+  "tap_to_select_date": "اضغط لاختيار التاريخ",
+  "choose_time": "اختر وقت الموعد",
+  "tap_to_select_time": "اضغط لاختيار الوقت",
+  "confirm_booking": "احجز الموعد",
+  "time_note": "سيتم حفظ الوقت تلقائيًا عند التحديد",
+  "select_time": "اختر الوقت"
 }

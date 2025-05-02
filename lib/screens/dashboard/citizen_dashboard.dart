@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:traffic_department/screens/services/appointment_booking/appointment_booking_screen.dart';
 import 'package:traffic_department/screens/services/lost_documents/lost_documents_screen.dart';
 import 'package:traffic_department/screens/services/ownership_transfer/ownership_transfer_screen.dart';
 import 'package:traffic_department/screens/services/test_results/test_results_screen.dart';
@@ -38,7 +39,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
   {"title": "vehicle_technical_change", "icon": Icons.engineering, "screen": VehicleModificationScreen()},
   {"title": "vehicle_conversion", "icon": Icons.cached, "screen": VehicleConversionScreen()},
   {"title": "vehicle_deregistration", "icon": Icons.car_crash, "screen": VehicleDeregistrationScreen()},
-  {"title": "appointment_booking", "icon": Icons.calendar_month, "screen": null},
+  {"title": "appointment_booking", "icon": Icons.calendar_month, "screen": AppointmentBookingScreen()},
   {"title": "vehicle_mortgage_release", "icon": Icons.lock_open, "screen": VehicleMortgageReleaseScreen()},
   {"title": "traffic_violations", "icon": Icons.warning_amber_outlined, "screen": TrafficViolationsScreen()}
 ];

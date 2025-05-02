@@ -700,5 +700,18 @@
   "close": "Close",
   "no_violations_title": "No Traffic Violations Found",
   "no_violations_message": "Our records indicate that there are currently no traffic violations registered under your ID or vehicle.\nThank you for adhering to traffic laws and regulations.",
-  "great_thanks": "Close"
+  "great_thanks": "Close",
+  "book_appointment": "Appointment Booking",
+  "choose_city": "Choose City",
+  "choose_branch": "Choose Branch",
+  "choose_date": "Choose Date",
+  "tap_to_select_date": "Tap to select date",
+  "choose_time": "Choose Appointment Time",
+  "tap_to_select_time": "Tap to select time",
+  "confirm_booking": "Confirm Appointment",
+  "appointment_confirmed": "Appointment Confirmed Successfully",
+  "please_show_barcode": "Please show this barcode upon arrival at the branch",
+  "please_complete_all_fields": "Please complete all required fields",
+  "time_note": "Time will be saved automatically upon selection",
+  "select_time": "Select Time"
 }
