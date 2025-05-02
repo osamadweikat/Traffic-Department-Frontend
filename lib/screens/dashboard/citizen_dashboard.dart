@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traffic_department/screens/services/lost_documents/lost_documents_screen.dart';
 import 'package:traffic_department/screens/services/ownership_transfer/ownership_transfer_screen.dart';
 import 'package:traffic_department/screens/services/test_results/test_results_screen.dart';
+import 'package:traffic_department/screens/services/traffic_violations/traffic_violations_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_conversion/vehicle_conversion_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_deregistration/vehicle_deregistration_screen.dart';
 import 'package:traffic_department/screens/services/vehicle_modification/vehicle_modification_screen.dart';
@@ -39,7 +40,7 @@ class _CitizenDashboardState extends State<CitizenDashboard> {
   {"title": "vehicle_deregistration", "icon": Icons.car_crash, "screen": VehicleDeregistrationScreen()},
   {"title": "appointment_booking", "icon": Icons.calendar_month, "screen": null},
   {"title": "vehicle_mortgage_release", "icon": Icons.lock_open, "screen": VehicleMortgageReleaseScreen()},
-  {"title": "traffic_violations", "icon": Icons.warning_amber_outlined, "screen": null}
+  {"title": "traffic_violations", "icon": Icons.warning_amber_outlined, "screen": TrafficViolationsScreen()}
 ];
 
 
