@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:traffic_department/screens/contact/contact_us_screen.dart';
-import 'package:traffic_department/screens/profile/profile_screen.dart';
-import 'package:traffic_department/screens/transactions/transactions_screen.dart';
-import 'package:traffic_department/screens/vehicles/vehicles_screen.dart';
-import 'package:traffic_department/screens/complaints/complaints_suggestions_screen.dart';
-import 'package:traffic_department/screens/settings/general_settings_screen.dart';
-import 'package:traffic_department/screens/faq/faq_screen.dart';
+import 'package:traffic_department/screens/citizen/contact/contact_us_screen.dart';
+import 'package:traffic_department/screens/citizen/profile/profile_screen.dart';
+import 'package:traffic_department/screens/citizen/transactions/transactions_screen.dart';
+import 'package:traffic_department/screens/citizen/vehicles/vehicles_screen.dart';
+import 'package:traffic_department/screens/citizen/complaints/complaints_suggestions_screen.dart';
+import 'package:traffic_department/screens/citizen/settings/general_settings_screen.dart';
+import 'package:traffic_department/screens/citizen/faq/faq_screen.dart';
 import 'package:flutter/services.dart' as ui;
 import '../theme/app_theme.dart';
 

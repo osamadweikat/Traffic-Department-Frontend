@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'theme/app_theme.dart';
-import 'screens/auth/splash_screen.dart';
-import 'screens/auth/login_screen.dart';
-import 'screens/auth/register_screen.dart';
-import 'screens/dashboard/citizen_dashboard.dart';
+import 'screens/citizen/auth/splash_screen.dart';
+import 'screens/citizen/auth/login_screen.dart';
+import 'screens/citizen/auth/register_screen.dart';
+import 'screens/citizen/dashboard/citizen_dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
