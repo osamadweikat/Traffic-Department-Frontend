@@ -1,43 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:traffic_department/screens/web_portal/news_data.dart';
 
 class NewsScreen extends StatelessWidget {
-  final List<Map<String, String>> newsList = [
-    {
-      'title': 'إطلاق الحملة الوطنية لفحص المركبات',
-      'date': '10 مايو 2025',
-      'summary':
-          'بدأت دائرة السير تنفيذ حملة وطنية لفحص المركبات العمومية والخاصة...',
-    },
-    {
-      'title': 'تمديد فترة الترخيص حتى نهاية الشهر',
-      'date': '8 مايو 2025',
-      'summary':
-          'أعلنت الوزارة عن تمديد مهلة تجديد رخص المركبات حتى نهاية الشهر...',
-    },
-    {
-      'title': 'إتاحة رخص القيادة الإلكترونية',
-      'date': '6 مايو 2025',
-      'summary':
-          'يمكن الآن استخراج رخص القيادة الرقمية من خلال التطبيق الإلكتروني المعتمد.',
-    },
-    {
-      'title': 'تقرير أداء شهر أبريل متاح الآن',
-      'date': '4 مايو 2025',
-      'summary':
-          'نشر تقرير مفصل حول أداء المعاملات وعدد الطلبات المنجزة في شهر أبريل.',
-    },
-    {
-      'title': 'حوادث السير اليوم: 5 حوادث طفيفة',
-      'date': '3 مايو 2025',
-      'summary': 'سجلت الإدارة العامة للمرور 5 حوادث سير دون إصابات خطرة.',
-    },
-    {
-      'title': 'افتتاح فرع جديد لدائرة السير في الوسطى',
-      'date': '2 مايو 2025',
-      'summary': 'تم افتتاح مركز جديد لخدمة المواطنين في المنطقة الوسطى.',
-    },
-  ];
+  const NewsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +15,7 @@ class NewsScreen extends StatelessWidget {
             child: Opacity(
               opacity: 0.07,
               child: Transform.scale(
-                scale:
-                    1.2, 
+                scale: 1.2,
                 child: Image.asset(
                   'assets/images/news_background_bw.png',
                   fit: BoxFit.cover,
@@ -58,11 +23,9 @@ class NewsScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Column(
             children: [
               const SizedBox(height: 40),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -85,25 +48,21 @@ class NewsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(height: 20),
-
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: GridView.builder(
                     padding: const EdgeInsets.only(top: 10, bottom: 40),
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 320,
-                          mainAxisSpacing: 20,
-                          crossAxisSpacing: 20,
-                          childAspectRatio: 1.1,
-                        ),
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 320,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      childAspectRatio: 1.1,
+                    ),
                     itemCount: newsList.length,
-                    itemBuilder:
-                        (context, index) =>
-                            _buildNewsCard(context, newsList[index]),
+                    itemBuilder: (context, index) =>
+                        _buildNewsCard(context, newsList[index], context),
                   ),
                 ),
               ),
@@ -114,7 +73,7 @@ class NewsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildNewsCard(BuildContext context, Map<String, String> news) {
+  Widget _buildNewsCard(BuildContext context, Map<String, String> news, BuildContext ctx) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -127,15 +86,9 @@ class NewsScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            news['title']!,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
+          Text(news['title']!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
           const SizedBox(height: 6),
-          Text(
-            news['date']!,
-            style: const TextStyle(color: Colors.grey, fontSize: 12),
-          ),
+          Text('${news['date']} - ${news['time']}', style: const TextStyle(color: Colors.grey, fontSize: 12)),
           const SizedBox(height: 10),
           Expanded(
             child: Text(
@@ -149,6 +102,11 @@ class NewsScreen extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             child: TextButton(
               onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/news-details',
+                  arguments: news,
+                );
               },
               child: const Text(
                 'عرض التفاصيل',

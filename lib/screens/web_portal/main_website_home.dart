@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:traffic_department/screens/web_portal/news_screen.dart';
+import 'package:traffic_department/screens/web_portal/news_data.dart';
 
 class MainWebsiteHome extends StatefulWidget {
   const MainWebsiteHome({super.key});
@@ -12,15 +12,6 @@ class MainWebsiteHome extends StatefulWidget {
 class _MainWebsiteHomeState extends State<MainWebsiteHome> {
   late String currentTime;
   late String currentDate;
-
-  final List<Map<String, String>> newsList = [
-    {'title': 'إطلاق الحملة الوطنية لفحص المركبات', 'date': '10 مايو 2025'},
-    {'title': 'تمديد فترة الترخيص حتى نهاية الشهر', 'date': '8 مايو 2025'},
-    {
-      'title': 'بدء استقبال طلبات تجديد الرخصة إلكترونيًا',
-      'date': '5 مايو 2025',
-    },
-  ];
 
   final List<Map<String, dynamic>> testimonials = [
     {'name': 'أحمد يوسف', 'rating': 5, 'comment': 'خدمة ممتازة وسريعة جدًا'},
@@ -52,10 +43,13 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
 
   @override
   Widget build(BuildContext context) {
+    final latestNews = newsList.take(3).toList();
+
     return Scaffold(
       backgroundColor: const Color(0xFFF4F6F8),
       body: Column(
         children: [
+          // 🔵 Header Bar
           Container(
             color: const Color(0xFF1E3A5F),
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
@@ -161,49 +155,52 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
                     spacing: 20,
                     runSpacing: 20,
                     children:
-                        newsList
-                            .map(
-                              (news) => GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  width: 320,
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        blurRadius: 6,
-                                        offset: Offset(0, 2),
-                                      ),
-                                    ],
+                        latestNews.map((news) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/news-details',
+                                arguments: news,
+                              );
+                            },
+                            child: Container(
+                              width: 320,
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 6,
+                                    offset: Offset(0, 2),
                                   ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        news['title']!,
-                                        style: const TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 6),
-                                      Text(
-                                        news['date']!,
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                ],
                               ),
-                            )
-                            .toList(),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    news['title']!,
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    '${news['date']} - ${news['time']}',
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).toList(),
                   ),
 
                   const SizedBox(height: 40),
@@ -212,6 +209,7 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
+
                   Wrap(
                     spacing: 20,
                     children: [
@@ -227,65 +225,63 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
+
                   Wrap(
                     spacing: 20,
                     runSpacing: 20,
                     children:
-                        testimonials
-                            .map(
-                              (t) => Container(
-                                width: 250,
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: Colors.grey.shade200,
-                                  ),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                        testimonials.map((t) {
+                          return Container(
+                            width: 250,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.grey.shade200),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
                                   children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          t['name'],
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        Row(
-                                          children: List.generate(
-                                            5,
-                                            (i) => Icon(
-                                              Icons.star,
-                                              size: 16,
-                                              color:
-                                                  i < t['rating']
-                                                      ? Colors.amber
-                                                      : Colors.grey[300],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
                                     Text(
-                                      t['comment'],
-                                      style: const TextStyle(fontSize: 13),
+                                      t['name'],
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Row(
+                                      children: List.generate(
+                                        5,
+                                        (i) => Icon(
+                                          Icons.star,
+                                          size: 16,
+                                          color:
+                                              i < t['rating']
+                                                  ? Colors.amber
+                                                  : Colors.grey[300],
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
-                            )
-                            .toList(),
+                                const SizedBox(height: 8),
+                                Text(
+                                  t['comment'],
+                                  style: const TextStyle(fontSize: 13),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
                   ),
                 ],
               ),
             ),
           ),
 
+          // 🔵 Footer
           Container(
             color: const Color(0xFF1E3A5F),
             padding: const EdgeInsets.all(16),
@@ -320,24 +316,16 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
   }
 
   Widget _buildNavButton(BuildContext context, String label, String route) {
-  return TextButton(
-    onPressed: () {
-      if (route == '/news') {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) =>  NewsScreen()),
-        );
-      } else if (route != '/') {
+    return TextButton(
+      onPressed: () {
         Navigator.pushNamed(context, route);
-      }
-    },
-    child: Text(
-      label,
-      style: const TextStyle(fontSize: 15, color: Colors.black87),
-    ),
-  );
-}
-
+      },
+      child: Text(
+        label,
+        style: const TextStyle(fontSize: 15, color: Colors.black87),
+      ),
+    );
+  }
 
   Widget _buildStatCard(String label, String value) {
     return Container(
