@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:traffic_department/screens/web_portal/main_website_home.dart';
+import 'package:traffic_department/screens/web_portal/news_screen.dart';
 import 'package:traffic_department/screens/web_portal/staff_portal_screen.dart';
 import 'theme/staff_theme.dart';
 
@@ -28,6 +29,7 @@ class PanelApp extends StatelessWidget {
       routes: {
         '/web-home': (context) => const MainWebsiteHome(),
          '/staff-portal': (context) => const StaffPortalScreen(),
+         '/news': (context) =>  NewsScreen(),
       },
     );
   }

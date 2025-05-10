@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:traffic_department/screens/web_portal/news_screen.dart';
 
 class MainWebsiteHome extends StatefulWidget {
   const MainWebsiteHome({super.key});
@@ -319,18 +320,24 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
   }
 
   Widget _buildNavButton(BuildContext context, String label, String route) {
-    return TextButton(
-      onPressed: () {
-        if (route != '/') {
-          Navigator.pushNamed(context, route);
-        }
-      },
-      child: Text(
-        label,
-        style: const TextStyle(fontSize: 15, color: Colors.black87),
-      ),
-    );
-  }
+  return TextButton(
+    onPressed: () {
+      if (route == '/news') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) =>  NewsScreen()),
+        );
+      } else if (route != '/') {
+        Navigator.pushNamed(context, route);
+      }
+    },
+    child: Text(
+      label,
+      style: const TextStyle(fontSize: 15, color: Colors.black87),
+    ),
+  );
+}
+
 
   Widget _buildStatCard(String label, String value) {
     return Container(
