@@ -97,10 +97,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/traffic_logo.png
-    - assets/images/paypal_logo.png
-    - assets/images/jawwalpay_logo.png
-    - assets/images/traffic_illustration.png
+    - assets/images/
     - assets/translations/
     - assets/animations/
     
