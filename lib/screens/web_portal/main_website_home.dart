@@ -91,7 +91,7 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
                 _buildNavButton(context, 'الأخبار', '/news'),
                 _buildNavButton(context, 'تقديم شكوى', '/complaints'),
                 _buildNavButton(context, 'الاقتراحات', '/suggestions'),
-                _buildNavButton(context, 'تقييم البوابة', '/rating'),
+                _buildNavButton(context, 'تقييم البوابة', '/rate-portal'),
                 _buildNavButton(context, 'تواصل معنا', '/contact'),
               ],
             ),
