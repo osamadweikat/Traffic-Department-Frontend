@@ -5,6 +5,7 @@ import 'package:traffic_department/screens/web_portal/main_website_home.dart';
 import 'package:traffic_department/screens/web_portal/news_screen.dart';
 import 'package:traffic_department/screens/web_portal/news_details_screen.dart';
 import 'package:traffic_department/screens/staff/staff_portal_screen.dart';
+import 'package:traffic_department/screens/web_portal/suggestions_screen.dart';
 import 'theme/staff_theme.dart';
 
 void main() {
@@ -34,18 +35,20 @@ class PanelApp extends StatelessWidget {
         '/staff-portal': (context) => const StaffPortalScreen(),
         '/news': (context) => const NewsScreen(),
         '/complaints': (context) => const ComplaintFormScreen(),
-
+        '/suggestions': (context) => const SuggestionsScreen(),
       },
+
       onGenerateRoute: (settings) {
         if (settings.name == '/news-details') {
           final args = settings.arguments as Map<String, String>;
           return MaterialPageRoute(
-            builder: (context) => NewsDetailsScreen(
-              title: args['title'] ?? '',
-              date: args['date'] ?? '',
-              time: args['time'] ?? '',
-              content: args['content'] ?? '',
-            ),
+            builder:
+                (context) => NewsDetailsScreen(
+                  title: args['title'] ?? '',
+                  date: args['date'] ?? '',
+                  time: args['time'] ?? '',
+                  content: args['content'] ?? '',
+                ),
           );
         }
         return null;
