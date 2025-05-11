@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:traffic_department/screens/web_portal/complaint_form_screen.dart';
 import 'package:traffic_department/screens/web_portal/main_website_home.dart';
 import 'package:traffic_department/screens/web_portal/news_screen.dart';
 import 'package:traffic_department/screens/web_portal/news_details_screen.dart';
-import 'package:traffic_department/screens/web_portal/staff_portal_screen.dart';
+import 'package:traffic_department/screens/staff/staff_portal_screen.dart';
 import 'theme/staff_theme.dart';
 
 void main() {
@@ -32,6 +33,8 @@ class PanelApp extends StatelessWidget {
         '/web-home': (context) => const MainWebsiteHome(),
         '/staff-portal': (context) => const StaffPortalScreen(),
         '/news': (context) => const NewsScreen(),
+        '/complaints': (context) => const ComplaintFormScreen(),
+
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/news-details') {

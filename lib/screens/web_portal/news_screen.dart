@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:traffic_department/screens/web_portal/news_data.dart';
+import 'package:traffic_department/data/news_data.dart';
 
 class NewsScreen extends StatelessWidget {
   const NewsScreen({super.key});

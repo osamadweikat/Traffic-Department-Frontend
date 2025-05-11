@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:traffic_department/screens/web_portal/news_data.dart';
+import 'package:traffic_department/data/news_data.dart';
 
 class MainWebsiteHome extends StatefulWidget {
   const MainWebsiteHome({super.key});
@@ -49,7 +49,6 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
       backgroundColor: const Color(0xFFF4F6F8),
       body: Column(
         children: [
-          // 🔵 Header Bar
           Container(
             color: const Color(0xFF1E3A5F),
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
@@ -281,7 +280,6 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
             ),
           ),
 
-          // 🔵 Footer
           Container(
             color: const Color(0xFF1E3A5F),
             padding: const EdgeInsets.all(16),
