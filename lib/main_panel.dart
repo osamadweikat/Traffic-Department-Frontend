@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:traffic_department/screens/web_portal/complaint_form_screen.dart';
+import 'package:traffic_department/screens/web_portal/contact_screen.dart';
 import 'package:traffic_department/screens/web_portal/main_website_home.dart';
 import 'package:traffic_department/screens/web_portal/news_screen.dart';
 import 'package:traffic_department/screens/web_portal/news_details_screen.dart';
@@ -38,6 +39,8 @@ class PanelApp extends StatelessWidget {
         '/complaints': (context) => const ComplaintFormScreen(),
         '/suggestions': (context) => const SuggestionsScreen(),
         '/rate-portal': (context) => const PortalRatingScreen(),
+        '/contact': (context) => const ContactScreen(),
+
       },
 
       onGenerateRoute: (settings) {
