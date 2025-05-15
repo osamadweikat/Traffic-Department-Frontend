@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'change_password_screen.dart';
+//import 'staff_dashboard_screen.dart';
 
-class StaffPortalScreen extends StatelessWidget {
+class StaffPortalScreen extends StatefulWidget {
   const StaffPortalScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final idController = TextEditingController();
-    final passwordController = TextEditingController();
+  State<StaffPortalScreen> createState() => _StaffPortalScreenState();
+}
 
+class _StaffPortalScreenState extends State<StaffPortalScreen> {
+  final idController = TextEditingController();
+  final passwordController = TextEditingController();
+  bool isFirstLogin = true;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F6F8),
       body: Stack(
         children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
+          Positioned.fill(
             child: Image.asset(
               'assets/images/staff_background2.png',
               fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
               opacity: const AlwaysStoppedAnimation(0.05),
             ),
           ),
@@ -86,10 +88,25 @@ class StaffPortalScreen extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('تم تسجيل الدخول!')),
-                            );
+                          onPressed: () async {
+                            if (isFirstLogin) {
+                              setState(() {
+                                isFirstLogin = false;
+                              });
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const ChangePasswordScreen(),
+                                ),
+                              );
+                            } else {
+                              /*Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const StaffDashboardScreen(),
+                                ),
+                              );*/
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1E3A5F),
