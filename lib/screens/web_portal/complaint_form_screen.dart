@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:traffic_department/data/complaint_types.dart';
+import 'package:traffic_department/screens/web_portal/success_dialog.dart';
 
 class ComplaintFormScreen extends StatefulWidget {
   const ComplaintFormScreen({super.key});
@@ -155,7 +156,7 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
                       _buildTextField(
                         'رقم الهاتف',
                         phoneController,
-                        '05xXXXXXXX',
+                        '05XXXXXXXX',
                       ),
                       _buildTextField(
                         'البريد الإلكتروني (اختياري)',
@@ -316,16 +317,19 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
   }
 
   void _submitForm() {
-    if (_formKey.currentState!.validate() && selectedType != null) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('تم إرسال الشكوى بنجاح')));
-    } else if (selectedType == null) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('يرجى اختيار نوع الشكوى')));
-    }
+  if (_formKey.currentState!.validate() && selectedType != null) {
+    showSuccessDialog(
+      context: context,
+      title: 'تم إرسال الشكوى بنجاح',
+      message: 'شكراً لتواصلك معنا. سيتم معالجة الشكوى من قبل فريقنا بأقرب وقت.',
+    );
+  } else if (selectedType == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('يرجى اختيار نوع الشكوى')),
+    );
   }
+}
+
 
   TextStyle _labelStyle() {
     return const TextStyle(fontWeight: FontWeight.w600, fontSize: 13.5);

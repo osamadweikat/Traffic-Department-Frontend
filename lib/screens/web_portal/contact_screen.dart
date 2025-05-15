@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:traffic_department/screens/web_portal/success_dialog.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
@@ -256,12 +257,15 @@ class _ContactUsScreenState extends State<ContactScreen>
   }
 
   void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('تم إرسال رسالتك بنجاح!')));
-    }
+  if (_formKey.currentState!.validate()) {
+    showSuccessDialog(
+      context: context,
+      title: 'تم إرسال رسالتك',
+      message: 'شكرًا لتواصلك معنا. سيتم الرد عليك في أقرب وقت ممكن.',
+    );
   }
+}
+
 }
 
 class ContactInfoRow extends StatelessWidget {

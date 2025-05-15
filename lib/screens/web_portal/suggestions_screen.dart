@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:traffic_department/data/sample_suggestions.dart';
+import 'package:traffic_department/screens/web_portal/success_dialog.dart';
 
 class SuggestionsScreen extends StatefulWidget {
   const SuggestionsScreen({super.key});
@@ -347,10 +348,13 @@ class _SuggestionsScreenState extends State<SuggestionsScreen>
   }
 
   void _submitSuggestion() {
-    if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('تم إرسال اقتراحك بنجاح!')));
-    }
+  if (_formKey.currentState!.validate()) {
+    showSuccessDialog(
+      context: context,
+      title: 'تم استلام اقتراحك',
+      message: 'نقدّر مساهمتك في تحسين خدمات المنصة، سيتم دراسة اقتراحك بعناية.',
+    );
   }
+}
+
 }
