@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class StaffDrawer extends StatelessWidget {
   final String currentPage;
   const StaffDrawer({super.key, required this.currentPage});
@@ -8,7 +7,7 @@ class StaffDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 260,
-      color: const Color(0xFF102542), 
+      color: const Color(0xFF102542),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -55,10 +54,27 @@ class StaffDrawer extends StatelessWidget {
                 'المعاملات المنجزة',
                 'completed',
               ),
-              _buildItem(Icons.swap_horiz_rounded, 'تحويل معاملة', 'transfer'),
-              _buildItem(Icons.description_outlined, 'تقديم تقرير', 'reports'),
-              _buildItem(Icons.support_agent, 'طلب دعم فني', 'report'),
-              _buildItem(Icons.email_outlined, 'مراسلة الإدارة', 'contact'),
+              _buildItem(
+                Icons.swap_horiz_rounded,
+                'المعاملات المحولة',
+                'transfer',
+              ),
+
+              _buildItem(
+                Icons.email_outlined,
+                'مراسلة الإدارة',
+                'contact',
+              ), 
+              _buildItem(
+                Icons.support_agent,
+                'طلب دعم فني',
+                'report',
+              ), 
+              _buildItem(
+                Icons.lock_reset_rounded,
+                'تغيير كلمة المرور',
+                'change_password',
+              ), 
             ],
           ),
 
