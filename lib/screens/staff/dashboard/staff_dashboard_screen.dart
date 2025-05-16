@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:traffic_department/screens/staff/staff_drawer.dart';
+import 'package:traffic_department/screens/staff/drawer/staff_drawer.dart';
 
 class StaffDashboardScreen extends StatefulWidget {
   const StaffDashboardScreen({super.key});

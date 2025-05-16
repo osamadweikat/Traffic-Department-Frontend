@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'change_password_screen.dart';
-import 'staff_dashboard_screen.dart';
+import '../dashboard/staff_dashboard_screen.dart';
 
 class StaffPortalScreen extends StatefulWidget {
   const StaffPortalScreen({super.key});
