@@ -1,0 +1,86 @@
+import 'package:traffic_department/screens/staff/notifications/notifications_screen.dart';
+
+final List<Map<String, dynamic>> notifications = [
+  {
+    'title': 'إشعار هام من الإدارة',
+    'message': 'تم تحديث سياسة العمل الداخلية، يرجى الاطلاع عليها.',
+    'date': '18 مايو 2025',
+    'time': '9:30 صباحاً',
+    'isUnread': true,
+    'type': NotificationType.admin,
+  },
+  {
+    'title': 'مهمة جديدة عاجلة',
+    'message': 'تم تحويل معاملة ترخيص مركبة نقل بضائع إليك.',
+    'date': '17 مايو 2025',
+    'time': '3:00 مساءً',
+    'isUnread': true,
+    'type': NotificationType.transaction,
+  },
+  {
+    'title': 'رسالة من النظام',
+    'message': 'تم تفعيل ميزة الإشعارات الذكية في النظام.',
+    'date': '17 مايو 2025',
+    'time': '11:00 صباحاً',
+    'isUnread': true,
+    'type': NotificationType.system,
+  },
+  {
+    'title': 'مراجعة أداء الموظف',
+    'message':
+        'يرجى الاطلاع على تقييم الأداء الشهري الخاص بك واتخاذ الإجراء اللازم إن وُجد.',
+    'date': '16 مايو 2025',
+    'time': '6:00 مساءً',
+    'isUnread': false,
+    'type': NotificationType.admin,
+  },
+
+  {
+    'title': 'معاملة مكتملة',
+    'message': 'تم إتمام معاملة المركبة رقم 254613 بنجاح.',
+    'date': '16 مايو 2025',
+    'time': '10:30 صباحاً',
+    'isUnread': false,
+    'type': NotificationType.transaction,
+  },
+  {
+    'title': 'تنبيه صيانة النظام',
+    'message': 'سيتم إجراء صيانة للنظام يوم الجمعة من الساعة 2 صباحًا.',
+    'date': '15 مايو 2025',
+    'time': '4:00 مساءً',
+    'isUnread': false,
+    'type': NotificationType.system,
+  },
+  {
+    'title': 'مخالفة إدارية',
+    'message': 'تم تسجيل مخالفة بسبب تأخير في معالجة معاملة رقم 990312.',
+    'date': '15 مايو 2025',
+    'time': '11:00 صباحاً',
+    'isUnread': false,
+    'type': NotificationType.admin,
+  },
+  {
+    'title': 'طلب تفعيل حساب',
+    'message': 'يرجى تفعيل حساب الموظف رقم 845789.',
+    'date': '14 مايو 2025',
+    'time': '12:30 مساءً',
+    'isUnread': false,
+    'type': NotificationType.admin,
+  },
+  {
+    'title': 'إشعار من النظام',
+    'message': 'تم تسجيل دخول جديد من متصفح غير معتاد.',
+    'date': '13 مايو 2025',
+    'time': '8:00 صباحاً',
+    'isUnread': false,
+    'type': NotificationType.system,
+  },
+  {
+    'title': 'مهمة قديمة غير مكتملة',
+    'message': 'المعاملة رقم 112398 لا تزال بحاجة إلى مراجعة.',
+    'date': '12 مايو 2025',
+    'time': '9:45 صباحاً',
+    'isUnread': false,
+    'type': NotificationType.transaction,
+  },
+];
