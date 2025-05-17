@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:traffic_department/screens/staff/tasks/confirm_user_screen.dart';
+import 'package:traffic_department/screens/staff/tasks/track_complaints_screen.dart';
 
 class DashboardWelcomeAndActions extends StatelessWidget {
   const DashboardWelcomeAndActions({super.key});
@@ -39,14 +40,26 @@ class DashboardWelcomeAndActions extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(color: Color(0xFF1E3A5F), shape: BoxShape.circle),
-            child: const Icon(Icons.workspace_premium_rounded, color: Colors.white, size: 30),
+            decoration: const BoxDecoration(
+              color: Color(0xFF1E3A5F),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.workspace_premium_rounded,
+              color: Colors.white,
+              size: 30,
+            ),
           ),
           const SizedBox(width: 16),
           const Expanded(
             child: Text(
               'مرحبًا بك في منصتك الوظيفية. حضورك هو بداية الإنجاز، ودورك محور في خدمة الوطن والمواطن.',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Color(0xFF1E3A5F), height: 1.6),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF1E3A5F),
+                height: 1.6,
+              ),
               textAlign: TextAlign.right,
             ),
           ),
@@ -61,7 +74,8 @@ class DashboardWelcomeAndActions extends StatelessWidget {
         'icon': Icons.verified_user_rounded,
         'label': 'تأكيد حساب مستخدم',
         'color': Colors.green.shade700,
-        'onTap': () => Navigator.push(
+        'onTap':
+            () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const ConfirmUserScreen()),
             ),
@@ -70,7 +84,11 @@ class DashboardWelcomeAndActions extends StatelessWidget {
         'icon': Icons.report_gmailerrorred_rounded,
         'label': 'متابعة الشكاوى',
         'color': Colors.deepOrange,
-        'onTap': () {}, 
+        'onTap':
+            () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const TrackComplaintsScreen()),
+            ),
       },
       {
         'icon': Icons.chat_bubble_outline,
@@ -101,19 +119,25 @@ class DashboardWelcomeAndActions extends StatelessWidget {
     return Wrap(
       spacing: 16,
       runSpacing: 12,
-      children: actions.map((action) {
-        return ElevatedButton.icon(
-          onPressed: () => (action['onTap'] as VoidCallback)(),
-          icon: Icon(action['icon'] as IconData, size: 20),
-          label: Text(action['label'] as String),
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-            backgroundColor: action['color'] as Color,
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          ),
-        );
-      }).toList(),
+      children:
+          actions.map((action) {
+            return ElevatedButton.icon(
+              onPressed: () => (action['onTap'] as VoidCallback)(),
+              icon: Icon(action['icon'] as IconData, size: 20),
+              label: Text(action['label'] as String),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 14,
+                ),
+                backgroundColor: action['color'] as Color,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            );
+          }).toList(),
     );
   }
 }
