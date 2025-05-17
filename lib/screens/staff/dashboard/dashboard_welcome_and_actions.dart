@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_department/screens/staff/tasks/confirm_user_screen.dart';
 
 class DashboardWelcomeAndActions extends StatelessWidget {
   const DashboardWelcomeAndActions({super.key});
@@ -10,7 +11,7 @@ class DashboardWelcomeAndActions extends StatelessWidget {
       children: [
         _buildWelcomeBanner(),
         const SizedBox(height: 16),
-        _buildActionButtons(),
+        _buildActionButtons(context),
       ],
     );
   }
@@ -54,14 +55,47 @@ class DashboardWelcomeAndActions extends StatelessWidget {
     );
   }
 
-  Widget _buildActionButtons() {
+  Widget _buildActionButtons(BuildContext context) {
     final actions = [
-      {'icon': Icons.verified_user_rounded, 'label': 'تأكيد حساب مستخدم', 'color': Colors.green.shade700},
-      {'icon': Icons.report_gmailerrorred_rounded, 'label': 'متابعة الشكاوى', 'color': Colors.deepOrange},
-      {'icon': Icons.chat_bubble_outline, 'label': 'مراسلة موظف', 'color': Colors.indigo.shade600},
-      {'icon': Icons.report_problem_rounded, 'label': 'مخالفة إدارية', 'color': Colors.red.shade700},
-      {'icon': Icons.history_rounded, 'label': 'سجل النشاطات', 'color': Colors.teal.shade600},
-      {'icon': Icons.insert_chart_outlined, 'label': 'تقريري الشهري', 'color': Colors.blueGrey.shade700},
+      {
+        'icon': Icons.verified_user_rounded,
+        'label': 'تأكيد حساب مستخدم',
+        'color': Colors.green.shade700,
+        'onTap': () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ConfirmUserScreen()),
+            ),
+      },
+      {
+        'icon': Icons.report_gmailerrorred_rounded,
+        'label': 'متابعة الشكاوى',
+        'color': Colors.deepOrange,
+        'onTap': () {}, 
+      },
+      {
+        'icon': Icons.chat_bubble_outline,
+        'label': 'مراسلة موظف',
+        'color': Colors.indigo.shade600,
+        'onTap': () {},
+      },
+      {
+        'icon': Icons.report_problem_rounded,
+        'label': 'مخالفة إدارية',
+        'color': Colors.red.shade700,
+        'onTap': () {},
+      },
+      {
+        'icon': Icons.history_rounded,
+        'label': 'سجل النشاطات',
+        'color': Colors.teal.shade600,
+        'onTap': () {},
+      },
+      {
+        'icon': Icons.insert_chart_outlined,
+        'label': 'تقريري الشهري',
+        'color': Colors.blueGrey.shade700,
+        'onTap': () {},
+      },
     ];
 
     return Wrap(
@@ -69,7 +103,7 @@ class DashboardWelcomeAndActions extends StatelessWidget {
       runSpacing: 12,
       children: actions.map((action) {
         return ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () => (action['onTap'] as VoidCallback)(),
           icon: Icon(action['icon'] as IconData, size: 20),
           label: Text(action['label'] as String),
           style: ElevatedButton.styleFrom(
