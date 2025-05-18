@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class StaffDrawer extends StatelessWidget {
   final String currentPage;
   const StaffDrawer({super.key, required this.currentPage});
@@ -59,22 +60,17 @@ class StaffDrawer extends StatelessWidget {
                 'المعاملات المحولة',
                 'transfer',
               ),
-
+              _buildItem(Icons.email_outlined, 'مراسلة الإدارة', 'contact'),
               _buildItem(
-                Icons.email_outlined,
-                'مراسلة الإدارة',
-                'contact',
-              ), 
-              _buildItem(
-                Icons.support_agent,
-                'طلب دعم فني',
-                'report',
-              ), 
+                Icons.menu_book_rounded,
+                'دليل الإجراءات الرسمية',
+                'procedures',
+              ),
               _buildItem(
                 Icons.lock_reset_rounded,
                 'تغيير كلمة المرور',
                 'change_password',
-              ), 
+              ),
             ],
           ),
 

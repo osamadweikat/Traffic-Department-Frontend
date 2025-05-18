@@ -102,12 +102,12 @@ class DashboardWelcomeAndActions extends StatelessWidget {
           );
         },
       },
-
       {
-        'icon': Icons.report_problem_rounded,
-        'label': 'مخالفة إدارية',
-        'color': Colors.red.shade700,
-        'onTap': () {},
+        'icon': Icons.manage_search_rounded,
+        'label': 'البحث في النظام',
+        'color': Colors.brown.shade600,
+        'onTap': () {
+        },
       },
       {
         'icon': Icons.history_rounded,
