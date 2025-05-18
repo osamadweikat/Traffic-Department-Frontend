@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:traffic_department/screens/staff/tasks/confirm_user_screen.dart';
+import 'package:traffic_department/screens/staff/tasks/staff_messages/message_inbox_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/track_complaints_screen.dart';
 
 class DashboardWelcomeAndActions extends StatelessWidget {
@@ -94,8 +95,14 @@ class DashboardWelcomeAndActions extends StatelessWidget {
         'icon': Icons.chat_bubble_outline,
         'label': 'مراسلة موظف',
         'color': Colors.indigo.shade600,
-        'onTap': () {},
+        'onTap': () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const MessageInboxScreen()),
+          );
+        },
       },
+
       {
         'icon': Icons.report_problem_rounded,
         'label': 'مخالفة إدارية',
