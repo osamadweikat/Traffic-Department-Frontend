@@ -121,7 +121,7 @@ class _SmartSearchScreenState extends State<SmartSearchScreen>
         backgroundColor: const Color(0xFFF4F6FA),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.blue.shade900,
+          backgroundColor: Colors.indigo.shade600,
           centerTitle: true,
           title: const Text(
             'البحث في النظام',
@@ -155,7 +155,7 @@ class _SmartSearchScreenState extends State<SmartSearchScreen>
                   ElevatedButton(
                     onPressed: _performSearch,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue.shade700,
+                      backgroundColor: Colors.indigo.shade600,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 24,
                         vertical: 18,

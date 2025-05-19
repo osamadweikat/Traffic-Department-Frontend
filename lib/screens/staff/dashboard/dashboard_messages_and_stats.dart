@@ -39,25 +39,30 @@ class DashboardMessagesAndStats extends StatelessWidget {
               SizedBox(width: 8),
               Text(
                 'الرسائل الهامة والتوجيهات الإدارية',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
               ),
             ],
           ),
           const SizedBox(height: 16),
           _buildSingleMessage(
             sender: 'أسامة الخطيب – مدير دائرة السير',
-            caseId: '98217364',
-            content: 'يرجى إنجاز المعاملة المشار إليها أعلاه بأسرع وقت ممكن، حيث أن تأخرها يؤثر على سير العمل. نؤكد ضرورة معالجتها فورًا لتجنّب أي تأخير إضافي.',
-            date: '16 مايو 2025',
-            time: '12:45 مساءً',
+            content:
+                'نود إعلامكم بأن تقريركم الشهري قد تم إصداره وهو متاح الآن للاطلاع ضمن النظام. نرجو مراجعة التقرير في أقرب وقت، والتأكد من دقة البيانات الواردة فيه. نشكركم على جهودكم المستمرة.',
+            date: '15 مايو 2025',
+            time: '09:30 صباحًا',
           ),
           const SizedBox(height: 16),
           _buildSingleMessage(
-            sender: 'موظف رقم 342718 – قسم الترخيص',
-            caseId: '70842913',
-            content: 'تم تحويل معاملة ترخيص "مركبة نقل وقود مستعجلة" إليك. نرجو مراجعتها بأقرب وقت كونها من المعاملات ذات الأولوية القصوى.',
+            sender: 'أسامة الخطيب – مدير دائرة السير',
+            caseId: '98217364',
+            content:
+                'يرجى إنجاز المعاملة المشار إليها أعلاه بأسرع وقت ممكن، حيث أن تأخرها يؤثر على سير العمل. نؤكد ضرورة معالجتها فورًا لتجنّب أي تأخير إضافي.',
             date: '16 مايو 2025',
-            time: '09:30 صباحًا',
+            time: '12:45 مساءً',
           ),
         ],
       ),
@@ -66,7 +71,7 @@ class DashboardMessagesAndStats extends StatelessWidget {
 
   Widget _buildSingleMessage({
     required String sender,
-    required String caseId,
+    String? caseId,
     required String content,
     required String date,
     required String time,
@@ -83,11 +88,21 @@ class DashboardMessagesAndStats extends StatelessWidget {
         children: [
           Text(sender, style: const TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(height: 4),
-          Text('معاملة رقم: $caseId', style: const TextStyle(color: Colors.black87, fontSize: 13)),
-          const SizedBox(height: 8),
+
+          if (caseId != null && caseId.isNotEmpty)
+            Text(
+              'معاملة رقم: $caseId',
+              style: const TextStyle(color: Colors.black87, fontSize: 13),
+            ),
+
+          if (caseId != null && caseId.isNotEmpty) const SizedBox(height: 8),
+
           Text(content, style: const TextStyle(height: 1.5, fontSize: 14)),
           const SizedBox(height: 12),
-          Text('$date - $time', style: const TextStyle(fontSize: 12, color: Colors.black54)),
+          Text(
+            '$date - $time',
+            style: const TextStyle(fontSize: 12, color: Colors.black54),
+          ),
         ],
       ),
     );
@@ -102,13 +117,21 @@ class DashboardMessagesAndStats extends StatelessWidget {
       childAspectRatio: 1.9,
       physics: const NeverScrollableScrollPhysics(),
       children: [
-        _buildStatCard(Icons.move_to_inbox_rounded, 'المعاملات المستلمة اليوم', '18'),
+        _buildStatCard(
+          Icons.move_to_inbox_rounded,
+          'المعاملات المستلمة اليوم',
+          '18',
+        ),
         _buildStatCard(Icons.pending_actions, 'المعاملات قيد المعالجة', '9'),
         _buildStatCard(Icons.assignment_late, 'المعاملات المتأخرة', '6'),
         _buildStatCard(Icons.input, 'المعاملات المحولة اليك', '4'),
         _buildStatCard(Icons.campaign_rounded, 'الشكاوى المتابعة', '5'),
         _buildStatCard(Icons.task_alt, 'المعاملات المكتملة هذا الأسبوع', '41'),
-        _buildStatCard(Icons.schedule_rounded, 'متوسط مدة إنجاز المعاملة', '23 دقيقة'),
+        _buildStatCard(
+          Icons.schedule_rounded,
+          'متوسط مدة إنجاز المعاملة',
+          '23 دقيقة',
+        ),
         _buildStatCard(Icons.pie_chart, 'نسبة الإنجاز هذا الشهر', '78%'),
       ],
     );
@@ -131,11 +154,21 @@ class DashboardMessagesAndStats extends StatelessWidget {
             children: [
               Icon(icon, size: 32, color: const Color(0xFF1E3A5F)),
               const SizedBox(width: 10),
-              Text(value, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 10),
-          Text(title, textAlign: TextAlign.center, style: const TextStyle(fontSize: 13)),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 13),
+          ),
         ],
       ),
     );

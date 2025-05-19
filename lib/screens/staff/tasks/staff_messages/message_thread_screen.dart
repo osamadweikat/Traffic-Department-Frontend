@@ -15,7 +15,7 @@ class MessageThreadScreen extends StatelessWidget {
         backgroundColor: const Color(0xFFF4F6FA),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: const Color(0xFF1E3A5F),
+          backgroundColor: Colors.teal.shade600,
           centerTitle: true,
           title: const Text(
             'تفاصيل الرسالة',

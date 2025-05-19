@@ -87,7 +87,7 @@ class _TrackComplaintsScreenState extends State<TrackComplaintsScreen> {
         backgroundColor: const Color(0xFFF4F6FA),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: const Color(0xFF1E3A5F),
+          backgroundColor: Colors.deepOrange,
           title: const Text(
             'متابعة الشكاوى',
             style: TextStyle(color: Colors.white),
@@ -269,7 +269,7 @@ class _TrackComplaintsScreenState extends State<TrackComplaintsScreen> {
                           icon: const Icon(Icons.refresh), 
                           label: const Text('تحديث الحالة'),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF1E3A5F),
+                            backgroundColor: Colors.deepOrange,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20,
@@ -312,7 +312,7 @@ class _TrackComplaintsScreenState extends State<TrackComplaintsScreen> {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Colors.teal.shade700,
+                  color: Colors.deepOrange,
                 ),
               ),
               TextSpan(

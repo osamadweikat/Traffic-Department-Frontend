@@ -95,7 +95,7 @@ class DashboardWelcomeAndActions extends StatelessWidget {
       {
         'icon': Icons.chat_bubble_outline,
         'label': 'مراسلة موظف',
-        'color': Colors.indigo.shade600,
+        'color': Colors.teal.shade600,
         'onTap': () {
           Navigator.push(
             context,
@@ -104,23 +104,21 @@ class DashboardWelcomeAndActions extends StatelessWidget {
         },
       },
       {
-  'icon': Icons.manage_search_rounded,
-  'label': 'البحث في النظام',
-  'color': Colors.brown.shade600,
-  'onTap': () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SmartSearchScreen(),
-      ),
-    );
-  },
-},
+        'icon': Icons.manage_search_rounded,
+        'label': 'البحث في النظام',
+        'color': Colors.indigo.shade600,
+        'onTap': () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SmartSearchScreen()),
+          );
+        },
+      },
 
       {
         'icon': Icons.history_rounded,
         'label': 'سجل النشاطات',
-        'color': Colors.teal.shade600,
+        'color': Color(0xFF837060),
         'onTap': () {},
       },
       {

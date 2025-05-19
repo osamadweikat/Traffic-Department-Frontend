@@ -19,7 +19,7 @@ class _ComposeMessageScreenState extends State<ComposeMessageScreen> {
       child: Scaffold(
         backgroundColor: const Color(0xFFF4F6FA),
         appBar: AppBar(
-          backgroundColor: const Color(0xFF1E3A5F),
+          backgroundColor: Colors.teal.shade600,
           centerTitle: true,
           title: const Text(
             'رسالة جديدة',

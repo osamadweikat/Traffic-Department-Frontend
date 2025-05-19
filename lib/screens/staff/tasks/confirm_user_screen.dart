@@ -69,7 +69,7 @@ class _ConfirmUserScreenState extends State<ConfirmUserScreen> {
       body: Column(
         children: [
           Container(
-            color: const Color(0xFF1E3A5F),
+            color: Colors.green.shade700,
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
             alignment: Alignment.center,
             child: const Text(
@@ -102,7 +102,7 @@ class _ConfirmUserScreenState extends State<ConfirmUserScreen> {
                 ElevatedButton(
                   onPressed: searchUser,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Colors.green.shade700,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -155,7 +155,7 @@ class _ConfirmUserScreenState extends State<ConfirmUserScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Icon(Icons.person, color: Colors.teal.shade700),
+                                    Icon(Icons.person, color: Colors.green.shade700),
                                     const SizedBox(width: 8),
                                     Expanded(
                                       child: Text(
@@ -207,7 +207,7 @@ class _ConfirmUserScreenState extends State<ConfirmUserScreen> {
   }
 
   Widget _infoRow(String label, String value) {
-    final labelColor = Colors.teal.shade700;
+    final labelColor = Colors.green.shade700;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
