@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_department/screens/staff/tasks/activity_log_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/confirm_user_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/smart_search_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/staff_messages/message_inbox_screen.dart';
@@ -114,12 +115,16 @@ class DashboardWelcomeAndActions extends StatelessWidget {
           );
         },
       },
-
       {
         'icon': Icons.history_rounded,
         'label': 'سجل النشاطات',
         'color': Color(0xFF837060),
-        'onTap': () {},
+        'onTap': () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ActivityLogScreen()),
+          );
+        },
       },
       {
         'icon': Icons.insert_chart_outlined,
