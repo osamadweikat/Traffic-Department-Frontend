@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:traffic_department/screens/staff/tasks/confirm_user_screen.dart';
+import 'package:traffic_department/screens/staff/tasks/smart_search_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/staff_messages/message_inbox_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/track_complaints_screen.dart';
 
@@ -103,12 +104,19 @@ class DashboardWelcomeAndActions extends StatelessWidget {
         },
       },
       {
-        'icon': Icons.manage_search_rounded,
-        'label': 'البحث في النظام',
-        'color': Colors.brown.shade600,
-        'onTap': () {
-        },
-      },
+  'icon': Icons.manage_search_rounded,
+  'label': 'البحث في النظام',
+  'color': Colors.brown.shade600,
+  'onTap': () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SmartSearchScreen(),
+      ),
+    );
+  },
+},
+
       {
         'icon': Icons.history_rounded,
         'label': 'سجل النشاطات',

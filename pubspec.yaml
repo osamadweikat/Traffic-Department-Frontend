@@ -79,6 +79,7 @@ dependencies:
   printing: ^5.14.2
   universal_html: ^2.2.4
   analog_clock: ^0.1.1
+  data_table_2: ^2.6.0
 
 dev_dependencies:
   flutter_test:
