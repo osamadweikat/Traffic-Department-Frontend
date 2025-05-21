@@ -80,6 +80,8 @@ dependencies:
   universal_html: ^2.2.4
   analog_clock: ^0.1.1
   data_table_2: ^2.6.0
+  percent_indicator: ^4.2.5
+  bidi: ^2.0.13
 
 dev_dependencies:
   flutter_test:
@@ -123,6 +125,13 @@ flutter:
         - asset: assets/fonts/Cairo-Regular.ttf
         - asset: assets/fonts/Cairo-Bold.ttf
           weight: 700
+
+    - family: NotoNaskhArabic
+      fonts:
+        - asset: assets/fonts/NotoNaskhArabic-Regular.ttf
+        - asset: assets/fonts/NotoNaskhArabic-Bold.ttf
+          weight: 700
+
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

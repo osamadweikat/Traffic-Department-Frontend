@@ -56,16 +56,16 @@ class StaffDrawer extends StatelessWidget {
                 'completed',
               ),
               _buildItem(
+                Icons.cancel_outlined,
+                'المعاملات المرفوضة',
+                'rejected',
+              ),
+              _buildItem(
                 Icons.swap_horiz_rounded,
                 'المعاملات المحولة',
                 'transfer',
               ),
               _buildItem(Icons.email_outlined, 'مراسلة الإدارة', 'contact'),
-              _buildItem(
-                Icons.menu_book_rounded,
-                'دليل الإجراءات الرسمية',
-                'procedures',
-              ),
               _buildItem(
                 Icons.lock_reset_rounded,
                 'تغيير كلمة المرور',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:traffic_department/screens/staff/tasks/activity_log_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/confirm_user_screen.dart';
+import 'package:traffic_department/screens/staff/tasks/monthly_report/monthly_report_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/smart_search_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/staff_messages/message_inbox_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/track_complaints_screen.dart';
@@ -130,7 +131,14 @@ class DashboardWelcomeAndActions extends StatelessWidget {
         'icon': Icons.insert_chart_outlined,
         'label': 'تقريري الشهري',
         'color': Colors.blueGrey.shade700,
-        'onTap': () {},
+        'onTap': () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MonthlyReportScreen(),
+            ),
+          );
+        },
       },
     ];
 

@@ -49,11 +49,11 @@ class DashboardMessagesAndStats extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           _buildSingleMessage(
-            sender: 'أسامة الخطيب – مدير دائرة السير',
+            sender: 'أسامة دويكات – مدير دائرة السير',
             content:
                 'نود إعلامكم بأن تقريركم الشهري قد تم إصداره وهو متاح الآن للاطلاع ضمن النظام. نرجو مراجعة التقرير في أقرب وقت، والتأكد من دقة البيانات الواردة فيه. نشكركم على جهودكم المستمرة.',
-            date: '15 مايو 2025',
-            time: '09:30 صباحًا',
+            date: '31 مايو 2025',
+            time: '02:30 مساءً',
           ),
           const SizedBox(height: 16),
           _buildSingleMessage(
@@ -62,7 +62,7 @@ class DashboardMessagesAndStats extends StatelessWidget {
             content:
                 'يرجى إنجاز المعاملة المشار إليها أعلاه بأسرع وقت ممكن، حيث أن تأخرها يؤثر على سير العمل. نؤكد ضرورة معالجتها فورًا لتجنّب أي تأخير إضافي.',
             date: '16 مايو 2025',
-            time: '12:45 مساءً',
+            time: '09:45 صباحاً',
           ),
         ],
       ),
