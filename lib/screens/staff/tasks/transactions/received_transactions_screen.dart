@@ -29,39 +29,139 @@ class _ReceivedTransactionsScreenState
   void _handleBatchAction(String action) {
     final selectedTransactions =
         selectedRows.map((i) => receivedTransactions[i]).toList();
-    showDialog(
-      context: context,
-      builder:
-          (_) => AlertDialog(
-            title: Text('تأكيد $action'),
-            content: Text(
-              'هل تريد تنفيذ "$action" على ${selectedTransactions.length} معاملة؟',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('إلغاء'),
+
+    if (action == 'وضع قيد الإنجاز') {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: Colors.orange.shade100,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        'تم تطبيق "$action" على ${selectedTransactions.length} معاملة.',
-                      ),
+              content: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.timelapse, color: Colors.orange),
+                  const SizedBox(width: 10),
+                  Text(
+                    'تم وضع المعاملة قيد الإنجاز',
+                    style: TextStyle(
+                      color: Colors.orange.shade800,
+                      fontWeight: FontWeight.bold,
                     ),
-                  );
-                  setState(() {
-                    selectedRows.clear();
-                    selectAll = false;
-                  });
-                },
-                child: const Text('تأكيد'),
+                  ),
+                ],
               ),
-            ],
-          ),
-    );
+            ),
+      );
+
+      Future.delayed(const Duration(seconds: 3), () {
+        Navigator.pop(context); 
+        setState(() {
+          receivedTransactions.removeWhere(
+            (tx) => selectedTransactions.contains(tx),
+          );
+          selectedRows.clear();
+          selectAll = false;
+        });
+      });
+    } else if (action == 'رفض') {
+      String reason = '';
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: Colors.red.shade700, 
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
+              ),
+              title: const Text(
+                'سبب الرفض',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              content: TextField(
+                onChanged: (value) => reason = value,
+                maxLines: 3,
+                textDirection: TextDirection.rtl,
+                style: const TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  hintText: 'يرجى إدخال سبب الرفض...',
+                  hintStyle: const TextStyle(color: Colors.black45),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.blueAccent),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.blue),
+                  ),
+                ),
+              ),
+              actionsAlignment: MainAxisAlignment.center,
+              actionsPadding: const EdgeInsets.only(bottom: 12),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    'إلغاء',
+                    style: TextStyle(color: Colors.black87),
+                  ),
+                ),
+
+                OutlinedButton(
+                  onPressed: () {
+                    if (reason.trim().isNotEmpty) {
+                      Navigator.pop(context);
+                      setState(() {
+                        receivedTransactions.removeWhere(
+                          (tx) => selectedTransactions.contains(tx),
+                        );
+                        selectedRows.clear();
+                        selectAll = false;
+                      });
+                    }
+                  },
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.red, width: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    'تأكيد الرفض',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+      );
+    }
   }
 
   IconData _getPaymentIcon(String method) {
@@ -181,9 +281,9 @@ class _ReceivedTransactionsScreenState
     return Scaffold(
       backgroundColor: const Color(0xFFF0F3F9),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF102542), 
+        backgroundColor: const Color(0xFF102542),
         elevation: 0,
-        automaticallyImplyLeading: false, 
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: const Text(
           'قائمة المعاملات المستلمة',
@@ -357,7 +457,7 @@ class _ReceivedTransactionsScreenState
                       ),
                     ),
                     icon: const Icon(Icons.cancel),
-                    label: const Text('رفض المعاملات'),
+                    label: const Text('رفض الاستلام'),
                   ),
                 ],
               ),
