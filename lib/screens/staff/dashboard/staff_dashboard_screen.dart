@@ -10,6 +10,7 @@ import 'package:traffic_department/screens/staff/tasks/transactions/completed_tr
 import 'package:traffic_department/screens/staff/tasks/transactions/in_progress_transactions_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/received_transactions_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/rejected_transactions_screen.dart';
+import 'package:traffic_department/screens/staff/tasks/transactions/transferred_transactions_screen.dart';
 
 final RouteObserver<ModalRoute<void>> routeObserver =
     RouteObserver<ModalRoute<void>>();
@@ -75,56 +76,59 @@ class _StaffDashboardScreenState extends State<StaffDashboardScreen>
   }
 
   Widget _buildPageContent() {
-    switch (currentPage) {
-      case 'assigned':
-        return const ReceivedTransactionsScreen();
+  switch (currentPage) {
+    case 'assigned':
+      return const ReceivedTransactionsScreen();
 
-      case 'home':
-        return Column(
-          children: [
-            DashboardTopBar(
-              unreadCount: unreadCount,
-              onNotificationsPressed: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) => NotificationsScreen(
-                          notifications: localNotifications,
-                        ),
+    case 'home':
+      return Column(
+        children: [
+          DashboardTopBar(
+            unreadCount: unreadCount,
+            onNotificationsPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NotificationsScreen(
+                    notifications: localNotifications,
                   ),
-                );
-              },
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    DashboardWelcomeAndActions(),
-                    SizedBox(height: 24),
-                    DashboardMessagesAndStats(),
-                  ],
                 ),
+              );
+            },
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  DashboardWelcomeAndActions(),
+                  SizedBox(height: 24),
+                  DashboardMessagesAndStats(),
+                ],
               ),
             ),
-          ],
-        );
+          ),
+        ],
+      );
 
-      case 'in_progress':
-        return InProgressTransactionsScreen(
-          inProgressTransactions: receivedTransactions.take(5).toList(),
-        );
+    case 'in_progress':
+      return InProgressTransactionsScreen(
+        inProgressTransactions: receivedTransactions.take(5).toList(),
+      );
 
-      case 'completed':
-        return const CompletedTransactionsScreen();
+    case 'completed':
+      return const CompletedTransactionsScreen();
 
-      case 'rejected':
-        return const RejectedTransactionsScreen();
+    case 'rejected':
+      return const RejectedTransactionsScreen();
 
-      default:
-        return const Center(child: Text('الصفحة غير موجودة'));
-    }
+    case 'transfer': 
+      return const TransferredTransactionsScreen();
+
+    default:
+      return const Center(child: Text('الصفحة غير موجودة'));
   }
+}
+
 }
