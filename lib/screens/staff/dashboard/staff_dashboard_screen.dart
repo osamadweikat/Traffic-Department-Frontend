@@ -6,6 +6,7 @@ import 'package:traffic_department/screens/staff/dashboard/dashboard_top_bar.dar
 import 'package:traffic_department/screens/staff/dashboard/dashboard_welcome_and_actions.dart';
 import 'package:traffic_department/screens/staff/drawer/staff_drawer.dart';
 import 'package:traffic_department/screens/staff/notifications/notifications_screen.dart';
+import 'package:traffic_department/screens/staff/tasks/contact_admin_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/completed_transactions_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/in_progress_transactions_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/received_transactions_screen.dart';
@@ -75,7 +76,7 @@ class _StaffDashboardScreenState extends State<StaffDashboardScreen>
     );
   }
 
-  Widget _buildPageContent() {
+Widget _buildPageContent() {
   switch (currentPage) {
     case 'assigned':
       return const ReceivedTransactionsScreen();
@@ -126,9 +127,13 @@ class _StaffDashboardScreenState extends State<StaffDashboardScreen>
     case 'transfer': 
       return const TransferredTransactionsScreen();
 
+    case 'contact':
+      return const ContactAdminScreen();
+
     default:
       return const Center(child: Text('الصفحة غير موجودة'));
   }
 }
+
 
 }
