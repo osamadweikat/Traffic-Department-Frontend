@@ -6,6 +6,7 @@ import 'package:traffic_department/screens/staff/dashboard/dashboard_top_bar.dar
 import 'package:traffic_department/screens/staff/dashboard/dashboard_welcome_and_actions.dart';
 import 'package:traffic_department/screens/staff/drawer/staff_drawer.dart';
 import 'package:traffic_department/screens/staff/notifications/notifications_screen.dart';
+import 'package:traffic_department/screens/staff/tasks/change_password_in_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/contact_admin_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/completed_transactions_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/in_progress_transactions_screen.dart';
@@ -124,16 +125,18 @@ Widget _buildPageContent() {
     case 'rejected':
       return const RejectedTransactionsScreen();
 
-    case 'transfer': 
+    case 'transfer':
       return const TransferredTransactionsScreen();
 
     case 'contact':
       return const ContactAdminScreen();
 
+    case 'change_password': 
+      return const ChangePasswordinScreen();
+
     default:
       return const Center(child: Text('الصفحة غير موجودة'));
   }
 }
-
 
 }

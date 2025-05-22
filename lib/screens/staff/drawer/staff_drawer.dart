@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_department/screens/web_portal/main_website_home.dart';
+
 class StaffDrawer extends StatelessWidget {
   final String currentPage;
   final Function(String key) onPageChange;
@@ -48,21 +50,67 @@ class StaffDrawer extends StatelessWidget {
 
           Column(
             children: [
-              _buildItem(Icons.account_box_outlined, 'بوابة الموظف', 'home'),
-              _buildItem(Icons.move_to_inbox, 'المعاملات المستلمة', 'assigned'),
-              _buildItem(Icons.pending_actions, 'معاملات قيد الإنجاز', 'in_progress'),
-              _buildItem(Icons.task_alt_rounded, 'المعاملات المنجزة', 'completed'),
-              _buildItem(Icons.cancel_outlined, 'المعاملات المرفوضة', 'rejected'),
-              _buildItem(Icons.swap_horiz_rounded, 'المعاملات المحولة', 'transfer'),
-              _buildItem(Icons.email_outlined, 'مراسلة الإدارة', 'contact'),
-              _buildItem(Icons.lock_reset_rounded, 'تغيير كلمة المرور', 'change_password'),
+              _buildItem(
+                context,
+                Icons.account_box_outlined,
+                'بوابة الموظف',
+                'home',
+              ),
+              _buildItem(
+                context,
+                Icons.move_to_inbox,
+                'المعاملات المستلمة',
+                'assigned',
+              ),
+              _buildItem(
+                context,
+                Icons.pending_actions,
+                'معاملات قيد الإنجاز',
+                'in_progress',
+              ),
+              _buildItem(
+                context,
+                Icons.task_alt_rounded,
+                'المعاملات المنجزة',
+                'completed',
+              ),
+              _buildItem(
+                context,
+                Icons.cancel_outlined,
+                'المعاملات المرفوضة',
+                'rejected',
+              ),
+              _buildItem(
+                context,
+                Icons.swap_horiz_rounded,
+                'المعاملات المحولة',
+                'transfer',
+              ),
+              _buildItem(
+                context,
+                Icons.email_outlined,
+                'مراسلة الإدارة',
+                'contact',
+              ),
+              _buildItem(
+                context,
+                Icons.lock_reset_rounded,
+                'تغيير كلمة المرور',
+                'change_password',
+              ),
             ],
           ),
 
           Column(
             children: [
               const Divider(color: Colors.white24, thickness: 0.5),
-              _buildItem(Icons.logout_rounded, 'تسجيل الخروج', 'logout', isLogout: true),
+              _buildItem(
+                context,
+                Icons.logout_rounded,
+                'تسجيل الخروج',
+                'logout',
+                isLogout: true,
+              ),
               const SizedBox(height: 12),
             ],
           ),
@@ -72,6 +120,7 @@ class StaffDrawer extends StatelessWidget {
   }
 
   Widget _buildItem(
+    BuildContext context,
     IconData icon,
     String label,
     String key, {
@@ -82,11 +131,12 @@ class StaffDrawer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: isActive ? Colors.white10 : Colors.transparent,
-        border: isActive
-            ? const Border(
-                right: BorderSide(color: Color(0xFFFFC107), width: 4),
-              )
-            : null,
+        border:
+            isActive
+                ? const Border(
+                  right: BorderSide(color: Color(0xFFFFC107), width: 4),
+                )
+                : null,
       ),
       child: ListTile(
         dense: true,
@@ -105,9 +155,13 @@ class StaffDrawer extends StatelessWidget {
           if (!isLogout) {
             onPageChange(key);
           } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const MainWebsiteHome()),
+            );
           }
         },
       ),
     );
   }
-} 
+}
