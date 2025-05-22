@@ -9,8 +9,10 @@ import 'package:traffic_department/screens/staff/notifications/notifications_scr
 import 'package:traffic_department/screens/staff/tasks/transactions/completed_transactions_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/in_progress_transactions_screen.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/received_transactions_screen.dart';
+import 'package:traffic_department/screens/staff/tasks/transactions/rejected_transactions_screen.dart';
 
-final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<void>>();
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();
 
 class StaffDashboardScreen extends StatefulWidget {
   const StaffDashboardScreen({super.key});
@@ -19,9 +21,10 @@ class StaffDashboardScreen extends StatefulWidget {
   State<StaffDashboardScreen> createState() => _StaffDashboardScreenState();
 }
 
-class _StaffDashboardScreenState extends State<StaffDashboardScreen> with RouteAware {
+class _StaffDashboardScreenState extends State<StaffDashboardScreen>
+    with RouteAware {
   late List<Map<String, dynamic>> localNotifications;
-  String currentPage = 'home'; 
+  String currentPage = 'home';
 
   @override
   void initState() {
@@ -65,63 +68,63 @@ class _StaffDashboardScreenState extends State<StaffDashboardScreen> with RouteA
               });
             },
           ),
-          Expanded(
-            child: _buildPageContent(),
-          ),
+          Expanded(child: _buildPageContent()),
         ],
       ),
     );
   }
 
- Widget _buildPageContent() {
-  switch (currentPage) {
-    case 'assigned':
-      return const ReceivedTransactionsScreen();
+  Widget _buildPageContent() {
+    switch (currentPage) {
+      case 'assigned':
+        return const ReceivedTransactionsScreen();
 
-    case 'home':
-      return Column(
-        children: [
-          DashboardTopBar(
-            unreadCount: unreadCount,
-            onNotificationsPressed: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NotificationsScreen(
-                    notifications: localNotifications,
+      case 'home':
+        return Column(
+          children: [
+            DashboardTopBar(
+              unreadCount: unreadCount,
+              onNotificationsPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) => NotificationsScreen(
+                          notifications: localNotifications,
+                        ),
                   ),
+                );
+              },
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    DashboardWelcomeAndActions(),
+                    SizedBox(height: 24),
+                    DashboardMessagesAndStats(),
+                  ],
                 ),
-              );
-            },
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  DashboardWelcomeAndActions(),
-                  SizedBox(height: 24),
-                  DashboardMessagesAndStats(),
-                ],
               ),
             ),
-          ),
-        ],
-      );
+          ],
+        );
 
-    case 'in_progress':
-      return InProgressTransactionsScreen(
-        inProgressTransactions: receivedTransactions.take(5).toList(),
-      );
+      case 'in_progress':
+        return InProgressTransactionsScreen(
+          inProgressTransactions: receivedTransactions.take(5).toList(),
+        );
 
-    case 'completed': 
-      return const CompletedTransactionsScreen();
+      case 'completed':
+        return const CompletedTransactionsScreen();
 
-    default:
-      return const Center(child: Text('الصفحة غير موجودة'));
+      case 'rejected':
+        return const RejectedTransactionsScreen();
+
+      default:
+        return const Center(child: Text('الصفحة غير موجودة'));
+    }
   }
-}
-
-
 }
