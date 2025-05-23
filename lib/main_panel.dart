@@ -10,6 +10,7 @@ import 'package:traffic_department/screens/staff/auth/staff_portal_screen.dart';
 import 'package:traffic_department/screens/web_portal/portal_rating_screen.dart';
 import 'package:traffic_department/screens/web_portal/suggestions_screen.dart';
 import 'package:traffic_department/screens/web_portal/test_results_screen_web.dart';
+import 'package:traffic_department/screens/web_portal/traffic_violations_screen_web.dart';
 import 'theme/staff_theme.dart';
 
 void main() {
@@ -44,7 +45,7 @@ class PanelApp extends StatelessWidget {
         '/contact': (context) => const ContactScreen(),
         '/assigned': (context) => const ReceivedTransactionsScreen(),
         '/test-results': (context) => const TestResultsScreenWeb(),
-
+        '/traffic-violations': (context) => const TrafficViolationsScreenWeb(),
       },
 
       onGenerateRoute: (settings) {
