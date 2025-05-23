@@ -17,10 +17,22 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
 
   final List<Map<String, dynamic>> testimonials = [
     {'name': 'أحمد يوسف', 'rating': 5, 'comment': 'خدمة ممتازة وسريعة جدًا'},
-    {'name': 'نسرين صالح', 'rating': 4, 'comment': 'سهولة استخدام البوابة شيء رائع'},
-    {'name': 'خالد عمرو', 'rating': 5, 'comment': 'واجهة أنيقة وسرعة في الأداء'},
+    {
+      'name': 'نسرين صالح',
+      'rating': 4,
+      'comment': 'سهولة استخدام البوابة شيء رائع',
+    },
+    {
+      'name': 'خالد عمرو',
+      'rating': 5,
+      'comment': 'واجهة أنيقة وسرعة في الأداء',
+    },
     {'name': 'ميساء ناصر', 'rating': 4, 'comment': 'الدعم الفني استجاب بسرعة'},
-    {'name': 'فادي الزين', 'rating': 5, 'comment': 'شكراً لتسهيل المعاملات إلكترونيًا'},
+    {
+      'name': 'فادي الزين',
+      'rating': 5,
+      'comment': 'شكراً لتسهيل المعاملات إلكترونيًا',
+    },
   ];
 
   @override
@@ -84,10 +96,17 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
           const SizedBox(width: 12),
           const Text(
             'دولة فلسطين - وزارة النقل والمواصلات',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
           ),
           const Spacer(),
-          Text('$currentDate | $currentTime', style: const TextStyle(color: Colors.white)),
+          Text(
+            '$currentDate | $currentTime',
+            style: const TextStyle(color: Colors.white),
+          ),
         ],
       ),
     );
@@ -100,8 +119,10 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
       child: Row(
         children: [
           _buildNavButton(context, 'الرئيسية', '/'),
-          _buildNavButton(context, 'بوابة المواطنين', '/citizen/login'),
           _buildNavButton(context, 'بوابة الموظفين', '/staff-portal'),
+          _buildNavButton(context, 'بوابة المواطنين', '/citizen/login'),
+          _buildNavButton(context, 'نتائج الفحص', '/test-results'),
+          _buildNavButton(context, 'مخالفات مرورية', '/traffic-violations'),
           _buildNavButton(context, 'الأخبار', '/news'),
           _buildNavButton(context, 'تقديم شكوى', '/complaints'),
           _buildNavButton(context, 'الاقتراحات', '/suggestions'),
@@ -135,7 +156,10 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('🔢 الإحصائيات التالية محدثة منذ بداية عام 2025', style: TextStyle(fontSize: 13, color: Colors.grey)),
+        const Text(
+          '🔢 الإحصائيات التالية محدثة منذ بداية عام 2025',
+          style: TextStyle(fontSize: 13, color: Colors.grey),
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 24,
@@ -157,33 +181,60 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('📰 آخر الأخبار', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        const Text(
+          '📰 آخر الأخبار',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 16),
         Wrap(
           spacing: 20,
           runSpacing: 20,
-          children: latestNews.map((news) {
-            return GestureDetector(
-              onTap: () => Navigator.pushNamed(context, '/news-details', arguments: news),
-              child: Container(
-                width: 320,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 2))],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(news['title']!, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 6),
-                    Text('${news['date']} - ${news['time']}', style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                  ],
-                ),
-              ),
-            );
-          }).toList(),
+          children:
+              latestNews.map((news) {
+                return GestureDetector(
+                  onTap:
+                      () => Navigator.pushNamed(
+                        context,
+                        '/news-details',
+                        arguments: news,
+                      ),
+                  child: Container(
+                    width: 320,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 6,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          news['title']!,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          '${news['date']} - ${news['time']}',
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
         ),
       ],
     );
@@ -193,7 +244,10 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('📊 تقارير رسمية', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        const Text(
+          '📊 تقارير رسمية',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 16),
         Wrap(
           spacing: 20,
@@ -209,7 +263,9 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => ReportDetailsScreen(report: report)),
+          MaterialPageRoute(
+            builder: (_) => ReportDetailsScreen(report: report),
+          ),
         );
       },
       child: Container(
@@ -228,41 +284,55 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('💬 آراء المستخدمين', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        const Text(
+          '💬 آراء المستخدمين',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 16),
         Wrap(
           spacing: 20,
           runSpacing: 20,
-          children: testimonials.map((t) {
-            return Container(
-              width: 250,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey.shade200),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+          children:
+              testimonials.map((t) {
+                return Container(
+                  width: 250,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey.shade200),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(t['name'], style: const TextStyle(fontWeight: FontWeight.bold)),
-                      const Spacer(),
                       Row(
-                        children: List.generate(
-                          5,
-                          (i) => Icon(Icons.star, size: 16, color: i < t['rating'] ? Colors.amber : Colors.grey[300]),
-                        ),
+                        children: [
+                          Text(
+                            t['name'],
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const Spacer(),
+                          Row(
+                            children: List.generate(
+                              5,
+                              (i) => Icon(
+                                Icons.star,
+                                size: 16,
+                                color:
+                                    i < t['rating']
+                                        ? Colors.amber
+                                        : Colors.grey[300],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
+                      const SizedBox(height: 8),
+                      Text(t['comment'], style: const TextStyle(fontSize: 13)),
                     ],
                   ),
-                  const SizedBox(height: 8),
-                  Text(t['comment'], style: const TextStyle(fontSize: 13)),
-                ],
-              ),
-            );
-          }).toList(),
+                );
+              }).toList(),
         ),
       ],
     );
@@ -277,7 +347,10 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('© 2025 دائرة السير - وزارة النقل والمواصلات الفلسطينية | ', style: TextStyle(color: Colors.white)),
+            Text(
+              '© 2025 دائرة السير - وزارة النقل والمواصلات الفلسطينية | ',
+              style: TextStyle(color: Colors.white),
+            ),
             Icon(Icons.phone, size: 16, color: Colors.white),
             SizedBox(width: 4),
             Text('1800-123-456 | ', style: TextStyle(color: Colors.white)),
@@ -295,7 +368,10 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
       onPressed: () {
         Navigator.pushNamed(context, route);
       },
-      child: Text(label, style: const TextStyle(fontSize: 15, color: Colors.black87)),
+      child: Text(
+        label,
+        style: const TextStyle(fontSize: 15, color: Colors.black87),
+      ),
     );
   }
 
@@ -306,11 +382,20 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 2))],
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 2)),
+        ],
       ),
       child: Column(
         children: [
-          Text(value, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF1E3A5F))),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF1E3A5F),
+            ),
+          ),
           const SizedBox(height: 8),
           Text(label, style: const TextStyle(fontSize: 14)),
         ],
