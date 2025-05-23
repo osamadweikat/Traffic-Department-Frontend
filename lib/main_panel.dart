@@ -3,11 +3,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/received_transactions_screen.dart';
 import 'package:traffic_department/screens/web_portal/complaint_form_screen.dart';
 import 'package:traffic_department/screens/web_portal/contact_screen.dart';
+import 'package:traffic_department/screens/web_portal/login_screen_web.dart';
 import 'package:traffic_department/screens/web_portal/main_website_home.dart';
 import 'package:traffic_department/screens/web_portal/news_screen.dart';
 import 'package:traffic_department/screens/web_portal/news_details_screen.dart';
 import 'package:traffic_department/screens/staff/auth/staff_portal_screen.dart';
 import 'package:traffic_department/screens/web_portal/portal_rating_screen.dart';
+import 'package:traffic_department/screens/web_portal/register_screen_web.dart';
 import 'package:traffic_department/screens/web_portal/suggestions_screen.dart';
 import 'package:traffic_department/screens/web_portal/test_results_screen_web.dart';
 import 'package:traffic_department/screens/web_portal/traffic_violations_screen_web.dart';
@@ -46,6 +48,8 @@ class PanelApp extends StatelessWidget {
         '/assigned': (context) => const ReceivedTransactionsScreen(),
         '/test-results': (context) => const TestResultsScreenWeb(),
         '/traffic-violations': (context) => const TrafficViolationsScreenWeb(),
+        '/login': (context) => const LoginScreenWeb(),
+        '/register': (context) => const RegisterScreenWeb(),
       },
 
       onGenerateRoute: (settings) {
