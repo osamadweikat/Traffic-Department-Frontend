@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'custom_drawer_web.dart'; 
+import 'custom_drawer_web.dart';
 
 class CitizenDashboardWeb extends StatefulWidget {
   const CitizenDashboardWeb({super.key});
@@ -49,6 +49,7 @@ class _CitizenDashboardWebState extends State<CitizenDashboardWeb> {
               child: IconButton(
                 icon: const Icon(Icons.notifications_none, color: Colors.white),
                 onPressed: () {
+                  Navigator.pushNamed(context, '/notifications');
                 },
               ),
             ),
@@ -81,8 +82,7 @@ class _CitizenDashboardWebState extends State<CitizenDashboardWeb> {
                           curve: Curves.easeOut,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(16),
-                            onTap: () {
-                            },
+                            onTap: () {},
                             child: Card(
                               elevation: 4,
                               shape: RoundedRectangleBorder(
@@ -99,7 +99,9 @@ class _CitizenDashboardWebState extends State<CitizenDashboardWeb> {
                                   ),
                                   const SizedBox(height: 12),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
                                     child: Text(
                                       service["title"],
                                       textAlign: TextAlign.center,

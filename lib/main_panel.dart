@@ -9,6 +9,7 @@ import 'package:traffic_department/screens/web_portal/main_website_home.dart';
 import 'package:traffic_department/screens/web_portal/news_screen.dart';
 import 'package:traffic_department/screens/web_portal/news_details_screen.dart';
 import 'package:traffic_department/screens/staff/auth/staff_portal_screen.dart';
+import 'package:traffic_department/screens/web_portal/notifications_web.dart';
 import 'package:traffic_department/screens/web_portal/portal_rating_screen.dart';
 import 'package:traffic_department/screens/web_portal/register_screen_web.dart';
 import 'package:traffic_department/screens/web_portal/suggestions_screen.dart';
@@ -52,6 +53,8 @@ class PanelApp extends StatelessWidget {
         '/login': (context) => const LoginScreenWeb(),
         '/register': (context) => const RegisterScreenWeb(),
         '/citizen-dashboard': (context) => const CitizenDashboardWeb(),
+        '/notifications': (context) => const NotificationsWeb(),
+
       },
 
       onGenerateRoute: (settings) {
