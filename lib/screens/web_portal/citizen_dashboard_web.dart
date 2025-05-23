@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_department/screens/web_portal/license_renewal_screen_web.dart';
 import 'custom_drawer_web.dart';
 
 class CitizenDashboardWeb extends StatefulWidget {
@@ -82,7 +83,18 @@ class _CitizenDashboardWebState extends State<CitizenDashboardWeb> {
                           curve: Curves.easeOut,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(16),
-                            onTap: () {},
+                            onTap: () {
+                              if (index == 0) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (_) => const LicenseRenewalWeb(),
+                                  ),
+                                );
+                              }
+                            },
+
                             child: Card(
                               elevation: 4,
                               shape: RoundedRectangleBorder(
