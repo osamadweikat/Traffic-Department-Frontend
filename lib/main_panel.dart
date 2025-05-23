@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:traffic_department/screens/staff/tasks/transactions/received_transactions_screen.dart';
+import 'package:traffic_department/screens/web_portal/citizen_dashboard_web.dart';
 import 'package:traffic_department/screens/web_portal/complaint_form_screen.dart';
 import 'package:traffic_department/screens/web_portal/contact_screen.dart';
 import 'package:traffic_department/screens/web_portal/login_screen_web.dart';
@@ -50,6 +51,7 @@ class PanelApp extends StatelessWidget {
         '/traffic-violations': (context) => const TrafficViolationsScreenWeb(),
         '/login': (context) => const LoginScreenWeb(),
         '/register': (context) => const RegisterScreenWeb(),
+        '/citizen-dashboard': (context) => const CitizenDashboardWeb(),
       },
 
       onGenerateRoute: (settings) {

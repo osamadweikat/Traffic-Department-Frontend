@@ -64,7 +64,7 @@ class _LoginScreenWebState extends State<LoginScreenWeb> with SingleTickerProvid
                       child: ElevatedButton(
                         onPressed: () async {
                           await saveLastLogin();
-                          Navigator.pushReplacementNamed(context, '/dashboard');
+                          Navigator.pushReplacementNamed(context, '/citizen-dashboard');
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 15),
