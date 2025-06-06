@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:traffic_department/screens/admin/admin_drawer.dart';
+import 'package:traffic_department/screens/admin/admin_notifications_screen.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
   const AdminDashboardScreen({super.key});
@@ -19,7 +20,7 @@ class AdminDashboardScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildTopBar(),
+                  _buildTopBar(context),
 
                   Expanded(
                     child: SingleChildScrollView(
@@ -32,17 +33,37 @@ class AdminDashboardScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF1A237E), 
+                              color: Color(0xFF1A237E),
                             ),
                           ),
                           const SizedBox(height: 24),
 
                           Row(
                             children: [
-                              _buildStatCard('عدد المعاملات', '265', Icons.assignment, Colors.blue),
-                              _buildStatCard('عدد الشكاوى', '14', Icons.report, Colors.red),
-                              _buildStatCard('عدد المستخدمين', '1200', Icons.person, Colors.green),
-                              _buildStatCard('تقييم البوابة', '4.6 ⭐', Icons.star, Colors.amber.shade700),
+                              _buildStatCard(
+                                'عدد المعاملات',
+                                '265',
+                                Icons.assignment,
+                                Colors.blue,
+                              ),
+                              _buildStatCard(
+                                'عدد الشكاوى',
+                                '14',
+                                Icons.report,
+                                Colors.red,
+                              ),
+                              _buildStatCard(
+                                'عدد المستخدمين',
+                                '1200',
+                                Icons.person,
+                                Colors.green,
+                              ),
+                              _buildStatCard(
+                                'تقييم البوابة',
+                                '4.6 ⭐',
+                                Icons.star,
+                                Colors.amber.shade700,
+                              ),
                             ],
                           ),
 
@@ -50,7 +71,10 @@ class AdminDashboardScreen extends StatelessWidget {
 
                           const Text(
                             'إحصائية المعاملات آخر ٦ أشهر',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(height: 12),
                           Container(
@@ -72,9 +96,18 @@ class AdminDashboardScreen extends StatelessWidget {
                                     sideTitles: SideTitles(
                                       showTitles: true,
                                       getTitlesWidget: (value, meta) {
-                                        final months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو'];
+                                        final months = [
+                                          'يناير',
+                                          'فبراير',
+                                          'مارس',
+                                          'أبريل',
+                                          'مايو',
+                                          'يونيو',
+                                        ];
                                         return Padding(
-                                          padding: const EdgeInsets.only(top: 8.0),
+                                          padding: const EdgeInsets.only(
+                                            top: 8.0,
+                                          ),
                                           child: Text(months[value.toInt()]),
                                         );
                                       },
@@ -89,17 +122,75 @@ class AdminDashboardScreen extends StatelessWidget {
                                       },
                                     ),
                                   ),
-                                  topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                                  rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                                  topTitles: AxisTitles(
+                                    sideTitles: SideTitles(showTitles: false),
+                                  ),
+                                  rightTitles: AxisTitles(
+                                    sideTitles: SideTitles(showTitles: false),
+                                  ),
                                 ),
                                 borderData: FlBorderData(show: false),
                                 barGroups: [
-                                  BarChartGroupData(x: 0, barRods: [BarChartRodData(toY: 150, color: Colors.blue, width: 18)]),
-                                  BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: 180, color: Colors.blue, width: 18)]),
-                                  BarChartGroupData(x: 2, barRods: [BarChartRodData(toY: 220, color: Colors.blue, width: 18)]),
-                                  BarChartGroupData(x: 3, barRods: [BarChartRodData(toY: 170, color: Colors.blue, width: 18)]),
-                                  BarChartGroupData(x: 4, barRods: [BarChartRodData(toY: 240, color: Colors.blue, width: 18)]),
-                                  BarChartGroupData(x: 5, barRods: [BarChartRodData(toY: 200, color: Colors.blue, width: 18)]),
+                                  BarChartGroupData(
+                                    x: 0,
+                                    barRods: [
+                                      BarChartRodData(
+                                        toY: 150,
+                                        color: Colors.blue,
+                                        width: 18,
+                                      ),
+                                    ],
+                                  ),
+                                  BarChartGroupData(
+                                    x: 1,
+                                    barRods: [
+                                      BarChartRodData(
+                                        toY: 180,
+                                        color: Colors.blue,
+                                        width: 18,
+                                      ),
+                                    ],
+                                  ),
+                                  BarChartGroupData(
+                                    x: 2,
+                                    barRods: [
+                                      BarChartRodData(
+                                        toY: 220,
+                                        color: Colors.blue,
+                                        width: 18,
+                                      ),
+                                    ],
+                                  ),
+                                  BarChartGroupData(
+                                    x: 3,
+                                    barRods: [
+                                      BarChartRodData(
+                                        toY: 170,
+                                        color: Colors.blue,
+                                        width: 18,
+                                      ),
+                                    ],
+                                  ),
+                                  BarChartGroupData(
+                                    x: 4,
+                                    barRods: [
+                                      BarChartRodData(
+                                        toY: 240,
+                                        color: Colors.blue,
+                                        width: 18,
+                                      ),
+                                    ],
+                                  ),
+                                  BarChartGroupData(
+                                    x: 5,
+                                    barRods: [
+                                      BarChartRodData(
+                                        toY: 200,
+                                        color: Colors.blue,
+                                        width: 18,
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
@@ -109,7 +200,10 @@ class AdminDashboardScreen extends StatelessWidget {
 
                           const Text(
                             'آخر المعاملات',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(height: 12),
                           _buildLastTransactionsTable(),
@@ -126,24 +220,36 @@ class AdminDashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTopBar() {
+  Widget _buildTopBar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      color: const Color(0xFF1A237E), 
+      color: const Color(0xFF1A237E),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
             'بوابة الأدمن - وزارة النقل والمواصلات',
-            style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
 
           Row(
             children: [
               IconButton(
                 icon: const Icon(Icons.notifications, color: Colors.white),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AdminNotificationsScreen(),
+                    ),
+                  );
+                },
               ),
+
               IconButton(
                 icon: const Icon(Icons.logout, color: Colors.white),
                 onPressed: () {},
@@ -155,7 +261,12 @@ class AdminDashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon, Color color) {
+  Widget _buildStatCard(
+    String title,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.only(left: 16),
@@ -170,7 +281,10 @@ class AdminDashboardScreen extends StatelessWidget {
           children: [
             Icon(icon, color: color),
             const SizedBox(height: 8),
-            Text(title, style: TextStyle(color: color, fontWeight: FontWeight.bold)),
+            Text(
+              title,
+              style: TextStyle(color: color, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 4),
             Text(
               value,
@@ -215,15 +329,24 @@ class AdminDashboardScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.all(8),
-                child: Text('رقم المعاملة', style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text(
+                  'رقم المعاملة',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.all(8),
-                child: Text('نوع المعاملة', style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text(
+                  'نوع المعاملة',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.all(8),
-                child: Text('التاريخ', style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text(
+                  'التاريخ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),
@@ -244,7 +367,7 @@ class AdminDashboardScreen extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
