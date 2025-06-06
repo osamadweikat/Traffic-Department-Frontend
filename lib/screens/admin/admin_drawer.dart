@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_department/screens/admin/admin_employees_management_screen.dart';
 import 'package:traffic_department/screens/admin/admin_users_management_screen.dart';
 
 class AdminDrawer extends StatelessWidget {
@@ -32,7 +33,15 @@ class AdminDrawer extends StatelessWidget {
             );
           }),
 
-          _buildDrawerItem(Icons.badge, 'إدارة الموظفين', () {}),
+          _buildDrawerItem(Icons.badge, 'إدارة الموظفين', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AdminEmployeesManagementScreen(),
+              ),
+            );
+          }),
+
           _buildDrawerItem(Icons.assignment, 'إدارة المعاملات', () {}),
           _buildDrawerItem(Icons.report, 'إدارة الشكاوى والمقترحات', () {}),
           _buildDrawerItem(Icons.bar_chart, 'التقارير الشهرية', () {}),
