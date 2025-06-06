@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:traffic_department/screens/admin/admin_dashboard_screen.dart';
 import 'change_password_screen.dart';
-import '../dashboard/staff_dashboard_screen.dart';
+//import '../dashboard/staff_dashboard_screen.dart';
 
 class StaffPortalScreen extends StatefulWidget {
   const StaffPortalScreen({super.key});
@@ -103,7 +104,7 @@ class _StaffPortalScreenState extends State<StaffPortalScreen> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => const StaffDashboardScreen(),
+                                  builder: (_) => const AdminDashboardScreen(),
                                 ),
                               );
                             }
