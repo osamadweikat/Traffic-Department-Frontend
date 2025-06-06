@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_department/screens/admin/admin_complaints_suggestions_management_screen.dart';
 import 'package:traffic_department/screens/admin/admin_employees_management_screen.dart';
 import 'package:traffic_department/screens/admin/admin_transactions_management_screen.dart';
 import 'package:traffic_department/screens/admin/admin_users_management_screen.dart';
@@ -52,7 +53,16 @@ class AdminDrawer extends StatelessWidget {
             );
           }),
 
-          _buildDrawerItem(Icons.report, 'إدارة الشكاوى والمقترحات', () {}),
+          _buildDrawerItem(Icons.report, 'إدارة الشكاوى والمقترحات', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder:
+                    (context) =>
+                        const AdminComplaintsSuggestionsManagementScreen(),
+              ),
+            );
+          }),
           _buildDrawerItem(Icons.bar_chart, 'التقارير الشهرية', () {}),
           _buildDrawerItem(Icons.article, 'إدارة المحتوى', () {}),
           _buildDrawerItem(Icons.star_rate, 'تقييم الأداء', () {}),
