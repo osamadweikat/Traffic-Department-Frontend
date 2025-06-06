@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_department/screens/admin/admin_users_management_screen.dart';
 
 class AdminDrawer extends StatelessWidget {
   const AdminDrawer({super.key});
@@ -7,7 +8,7 @@ class AdminDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 260,
-      color: const Color(0xFF283593), 
+      color: const Color(0xFF283593),
       child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 32),
         children: [
@@ -22,7 +23,15 @@ class AdminDrawer extends StatelessWidget {
 
           const Divider(color: Colors.white24),
 
-          _buildDrawerItem(Icons.group, 'إدارة المستخدمين', () {}),
+          _buildDrawerItem(Icons.group, 'إدارة المستخدمين', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AdminUsersManagementScreen(),
+              ),
+            );
+          }),
+
           _buildDrawerItem(Icons.badge, 'إدارة الموظفين', () {}),
           _buildDrawerItem(Icons.assignment, 'إدارة المعاملات', () {}),
           _buildDrawerItem(Icons.report, 'إدارة الشكاوى والمقترحات', () {}),
