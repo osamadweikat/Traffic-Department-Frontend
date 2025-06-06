@@ -58,7 +58,7 @@ class _ReceivedTransactionsScreenState
       );
 
       Future.delayed(const Duration(seconds: 3), () {
-        Navigator.pop(context); 
+        Navigator.pop(context);
         setState(() {
           receivedTransactions.removeWhere(
             (tx) => selectedTransactions.contains(tx),
@@ -73,7 +73,7 @@ class _ReceivedTransactionsScreenState
         context: context,
         builder:
             (_) => AlertDialog(
-              backgroundColor: Colors.red.shade700, 
+              backgroundColor: Colors.red.shade700,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),
               ),
@@ -219,37 +219,37 @@ class _ReceivedTransactionsScreenState
                                 spacing: 16,
                                 runSpacing: 24,
                                 alignment: WrapAlignment.center,
-                                children:
-                                    attachments.map((att) {
-                                      return Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              10,
-                                            ),
-                                            child: Image.asset(
-                                              'assets/images/attachment_placeholder.png',
-                                              width: 110,
-                                              height: 110,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 8),
-                                          Text(
-                                            att,
-                                            style: const TextStyle(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.deepOrange,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
-                                      );
-                                    }).toList(),
+                                children: List.generate(attachments.length, (
+                                  index,
+                                ) {
+                                  final att = attachments[index];
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.asset(
+                                          'assets/images/P${(index % 5) + 1}.png',
+                                          width: 110,
+                                          height: 110,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        att,
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.deepOrange,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  );
+                                }),
                               ),
                             ),
                           ),

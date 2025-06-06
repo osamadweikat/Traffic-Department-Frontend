@@ -8,7 +8,8 @@ class TransactionDetailsScreen extends StatefulWidget {
   const TransactionDetailsScreen({super.key, required this.transaction});
 
   @override
-  State<TransactionDetailsScreen> createState() => _TransactionDetailsScreenState();
+  State<TransactionDetailsScreen> createState() =>
+      _TransactionDetailsScreenState();
 }
 
 class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
@@ -18,11 +19,14 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
   DateTime? startTime;
   late Timer timer;
   Map<String, dynamic> attachmentStatus = {};
+  String currentImageName = 'assets/images/P1.png';
 
   @override
   void initState() {
     super.initState();
-    final List<String> attachments = List<String>.from(widget.transaction['attachments'] ?? []);
+    final List<String> attachments = List<String>.from(
+      widget.transaction['attachments'] ?? [],
+    );
     for (var name in attachments) {
       attachmentStatus[name] = null;
     }
@@ -62,7 +66,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
     return '${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
   }
 
-  void showImageFullScreen() {
+  void showImageFullScreen(String imagePath) {
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
@@ -83,9 +87,7 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
                     child: SizedBox.expand(
                       child: FittedBox(
                         fit: BoxFit.contain,
-                        child: Image.asset(
-                          'assets/images/attachment_placeholder.png',
-                        ),
+                        child: Image.asset(imagePath),
                       ),
                     ),
                   ),
@@ -94,7 +96,11 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
                   top: 40,
                   right: 30,
                   child: IconButton(
-                    icon: const Icon(Icons.close, color: Colors.white, size: 32),
+                    icon: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: 32,
+                    ),
                     onPressed: () => Navigator.of(context).pop(),
                     tooltip: 'إغلاق',
                   ),
@@ -110,7 +116,9 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
   void handleAction(String action) {
     if (notesController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('الرجاء إدخال الملاحظات قبل تنفيذ الإجراء')),
+        const SnackBar(
+          content: Text('الرجاء إدخال الملاحظات قبل تنفيذ الإجراء'),
+        ),
       );
       return;
     }
@@ -118,38 +126,57 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
     if (action == 'تحويل لموظف آخر') {
       showDialog(
         context: context,
-        builder: (_) => AlertDialog(
-          backgroundColor: Colors.amber.shade50,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          title: const Text('تحويل لموظف آخر', style: TextStyle(fontWeight: FontWeight.bold)),
-          content: TextField(
-            controller: employeeIdController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: 'أدخل رقم الموظف الجديد',
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('إلغاء', style: TextStyle(color: Color(0xFF102542))),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                _showResultDialog('تم تحويل المعاملة للموظف رقم ${employeeIdController.text}', Colors.amber);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.amber,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        builder:
+            (_) => AlertDialog(
+              backgroundColor: Colors.amber.shade50,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
               ),
-              child: const Text('تحويل', style: TextStyle(color: Colors.white)),
+              title: const Text(
+                'تحويل لموظف آخر',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              content: TextField(
+                controller: employeeIdController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: 'أدخل رقم الموظف الجديد',
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text(
+                    'إلغاء',
+                    style: TextStyle(color: Color(0xFF102542)),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    _showResultDialog(
+                      'تم تحويل المعاملة للموظف رقم ${employeeIdController.text}',
+                      Colors.amber,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.amber,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text(
+                    'تحويل',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
       );
     } else {
       Color color = action == 'تم الإنجاز' ? Colors.green : Colors.red;
@@ -161,21 +188,28 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (_) => Dialog(
-        backgroundColor: color,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(Icons.check_circle, color: Colors.white, size: 48),
-              const SizedBox(height: 12),
-              Text(message, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 16)),
-            ],
+      builder:
+          (_) => Dialog(
+            backgroundColor: color,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.check_circle, color: Colors.white, size: 48),
+                  const SizedBox(height: 12),
+                  Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
     );
     Future.delayed(const Duration(seconds: 3), () => Navigator.pop(context));
   }
@@ -188,9 +222,11 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
   }
 
   Icon getAttachmentIcon(dynamic status) {
-    if (status == true) return const Icon(Icons.check_circle, color: Colors.green);
+    if (status == true)
+      return const Icon(Icons.check_circle, color: Colors.green);
     if (status == false) return const Icon(Icons.cancel, color: Colors.red);
-    if (status == null) return const Icon(Icons.report_problem, color: Colors.amber);
+    if (status == null)
+      return const Icon(Icons.report_problem, color: Colors.amber);
     return const Icon(Icons.help_outline, color: Colors.grey);
   }
 
@@ -203,7 +239,10 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
         backgroundColor: const Color(0xFF102542),
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text('تفاصيل المعاملة ${tx['id']}', style: const TextStyle(color: Colors.white)),
+        title: Text(
+          'تفاصيل المعاملة ${tx['id']}',
+          style: const TextStyle(color: Colors.white),
+        ),
       ),
       body: Directionality(
         textDirection: TextDirection.rtl,
@@ -218,7 +257,11 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
                   const SizedBox(width: 6),
                   Text(
                     'مدة المعالجة: ${formatDuration(elapsedSeconds)}',
-                    style: const TextStyle(fontSize: 16, color: Colors.red, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -226,41 +269,104 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
               ...[
                 _buildIconRow(Icons.person, 'الاسم الكامل', tx['citizenName']),
                 _buildIconRow(Icons.badge, 'الرقم الوطني', tx['nationalId']),
-                _buildIconRow(Icons.confirmation_number, 'رقم المعاملة', tx['id']),
+                _buildIconRow(
+                  Icons.confirmation_number,
+                  'رقم المعاملة',
+                  tx['id'],
+                ),
                 _buildIconRow(Icons.description, 'نوع المعاملة', tx['type']),
-                _buildIconRow(Icons.date_range, 'تاريخ الاستلام', tx['receivedDate']),
-                _buildIconRow(Icons.access_time, 'وقت الاستلام', tx['receivedTime']),
-                _buildIconRow(Icons.payment, 'طريقة الدفع', tx['paymentMethod']),
-                _buildIconRow(Icons.info_outline, 'الحالة الحالية', tx['status'] ?? 'قيد الإنجاز'),
+                _buildIconRow(
+                  Icons.date_range,
+                  'تاريخ الاستلام',
+                  tx['receivedDate'],
+                ),
+                _buildIconRow(
+                  Icons.access_time,
+                  'وقت الاستلام',
+                  tx['receivedTime'],
+                ),
+                _buildIconRow(
+                  Icons.payment,
+                  'طريقة الدفع',
+                  tx['paymentMethod'],
+                ),
+                _buildIconRow(
+                  Icons.info_outline,
+                  'الحالة الحالية',
+                  tx['status'] ?? 'قيد الإنجاز',
+                ),
               ],
               const SizedBox(height: 24),
-              const Text('الملفات المرفقة:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              const Text(
+                'الملفات المرفقة:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 12),
-              ...attachmentStatus.entries.map((entry) {
+              ...attachmentStatus.entries.toList().asMap().entries.map((
+                entryWithIndex,
+              ) {
+                final index = entryWithIndex.key;
+                final entry = entryWithIndex.value;
                 final status = entry.value;
+                final imagePath = 'assets/images/P${(index % 5) + 1}.png';
+
                 return GestureDetector(
-                  onTap: showImageFullScreen,
+                  onTap: () => showImageFullScreen(imagePath),
                   child: Card(
                     color: getAttachmentColor(status),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
                       child: Row(
                         children: [
+                          if (entry.key != 'صورة شخصية')
+                            IconButton(
+                              icon: const Icon(
+                                Icons.auto_awesome,
+                                color: Colors.blueAccent,
+                              ),
+                              onPressed: () => analyzeAttachment(entry.key),
+                              tooltip: 'تحليل بالذكاء الاصطناعي',
+                            ),
                           IconButton(
-                            icon: Icon(Icons.check_circle, color: status == true ? Colors.green : Colors.grey),
-                            onPressed: () => setState(() => attachmentStatus[entry.key] = true),
+                            icon: Icon(
+                              Icons.check_circle,
+                              color:
+                                  status == true ? Colors.green : Colors.grey,
+                            ),
+                            onPressed:
+                                () => setState(
+                                  () => attachmentStatus[entry.key] = true,
+                                ),
                             tooltip: 'صالح',
                           ),
                           IconButton(
-                            icon: Icon(Icons.report_problem, color: status == null ? Colors.amber : Colors.grey),
-                            onPressed: () => setState(() => attachmentStatus[entry.key] = null),
+                            icon: Icon(
+                              Icons.report_problem,
+                              color:
+                                  status == null ? Colors.amber : Colors.grey,
+                            ),
+                            onPressed:
+                                () => setState(
+                                  () => attachmentStatus[entry.key] = null,
+                                ),
                             tooltip: 'مشكوك فيه',
                           ),
                           IconButton(
-                            icon: Icon(Icons.cancel, color: status == false ? Colors.red : Colors.grey),
-                            onPressed: () => setState(() => attachmentStatus[entry.key] = false),
+                            icon: Icon(
+                              Icons.cancel,
+                              color: status == false ? Colors.red : Colors.grey,
+                            ),
+                            onPressed:
+                                () => setState(
+                                  () => attachmentStatus[entry.key] = false,
+                                ),
                             tooltip: 'غير صالح',
                           ),
                           const SizedBox(width: 12),
@@ -268,7 +374,10 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
                             child: Text(
                               entry.key,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                           getAttachmentIcon(status),
@@ -277,9 +386,13 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
                     ),
                   ),
                 );
-              }).toList(),
+              }),
+
               const SizedBox(height: 24),
-              const Text('ملاحظات الموظف:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              const Text(
+                'ملاحظات الموظف:',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 8),
               TextField(
                 controller: notesController,
@@ -288,7 +401,9 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
                   filled: true,
                   fillColor: Colors.white,
                   hintText: 'أدخل ملاحظاتك هنا...',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
@@ -297,17 +412,23 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () => handleAction('تم الإنجاز'),
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                    ),
                     child: const Text('تم الإنجاز'),
                   ),
                   ElevatedButton(
                     onPressed: () => handleAction('تحويل لموظف آخر'),
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.amber,
+                    ),
                     child: const Text('تحويل'),
                   ),
                   ElevatedButton(
                     onPressed: () => handleAction('رفض المعاملة'),
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                    ),
                     child: const Text('رفض'),
                   ),
                 ],
@@ -338,4 +459,8 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
       ),
     );
   }
+}
+
+void analyzeAttachment(String attachmentName) {
+  print('تحليل المرفق: $attachmentName');
 }
