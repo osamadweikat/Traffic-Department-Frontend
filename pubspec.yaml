@@ -82,6 +82,7 @@ dependencies:
   data_table_2: ^2.6.0
   percent_indicator: ^4.2.5
   bidi: ^2.0.13
+  collection: ^1.19.1
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:traffic_department/screens/staff/tasks/transactions/attachment_analysis.dart';
 
 class TransactionDetailsScreen extends StatefulWidget {
   final Map<String, dynamic> transaction;
@@ -331,9 +332,11 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
                                 Icons.auto_awesome,
                                 color: Colors.blueAccent,
                               ),
-                              onPressed: () => analyzeAttachment(entry.key),
+                              onPressed:
+                                  () => analyzeAttachment(context, entry.key),
                               tooltip: 'تحليل بالذكاء الاصطناعي',
                             ),
+
                           IconButton(
                             icon: Icon(
                               Icons.check_circle,
@@ -459,8 +462,4 @@ class _TransactionDetailsScreenState extends State<TransactionDetailsScreen> {
       ),
     );
   }
-}
-
-void analyzeAttachment(String attachmentName) {
-  print('تحليل المرفق: $attachmentName');
 }
