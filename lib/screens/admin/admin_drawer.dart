@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_department/screens/admin/admin_activity_log_screen.dart';
 import 'package:traffic_department/screens/admin/admin_complaints_suggestions_management_screen.dart';
 import 'package:traffic_department/screens/admin/admin_content_management_screen.dart';
 import 'package:traffic_department/screens/admin/admin_employee_evaluation_screen.dart';
@@ -91,7 +92,15 @@ class AdminDrawer extends StatelessWidget {
             );
           }),
 
-          _buildDrawerItem(Icons.history, 'سجل العمليات', () {}),
+          _buildDrawerItem(Icons.history, 'سجل العمليات', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AdminActivityLogScreen(),
+              ),
+            );
+          }),
+
           _buildDrawerItem(Icons.settings, 'إعدادات النظام', () {}),
 
           const Divider(color: Colors.white24),
