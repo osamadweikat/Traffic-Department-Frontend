@@ -5,6 +5,7 @@ import 'package:traffic_department/screens/admin/admin_content_management_screen
 import 'package:traffic_department/screens/admin/admin_employee_evaluation_screen.dart';
 import 'package:traffic_department/screens/admin/admin_employees_management_screen.dart';
 import 'package:traffic_department/screens/admin/admin_exam_results_screen.dart';
+import 'package:traffic_department/screens/admin/admin_inbox_screen.dart';
 import 'package:traffic_department/screens/admin/admin_monthly_report_screen.dart';
 import 'package:traffic_department/screens/admin/admin_system_settings_screen.dart';
 import 'package:traffic_department/screens/admin/admin_traffic_violations_screen.dart';
@@ -132,7 +133,12 @@ class AdminDrawer extends StatelessWidget {
               ),
             );
           }),
-          _buildDrawerItem(Icons.mail, 'صندوق الوارد', () {}),
+          _buildDrawerItem(Icons.mail_outline, 'صندوق الوارد', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AdminInboxScreen()),
+            );
+          }),
         ],
       ),
     );
