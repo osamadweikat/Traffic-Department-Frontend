@@ -4,6 +4,7 @@ import 'package:traffic_department/screens/admin/admin_complaints_suggestions_ma
 import 'package:traffic_department/screens/admin/admin_content_management_screen.dart';
 import 'package:traffic_department/screens/admin/admin_employee_evaluation_screen.dart';
 import 'package:traffic_department/screens/admin/admin_employees_management_screen.dart';
+import 'package:traffic_department/screens/admin/admin_exam_results_screen.dart';
 import 'package:traffic_department/screens/admin/admin_monthly_report_screen.dart';
 import 'package:traffic_department/screens/admin/admin_system_settings_screen.dart';
 import 'package:traffic_department/screens/admin/admin_transactions_management_screen.dart';
@@ -113,7 +114,15 @@ class AdminDrawer extends StatelessWidget {
 
           const Divider(color: Colors.white24),
 
-          _buildDrawerItem(Icons.school, 'نتائج الفحوصات', () {}),
+          _buildDrawerItem(Icons.school, 'نتائج الفحوصات', () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AdminExamResultsScreen(),
+              ),
+            );
+          }),
+
           _buildDrawerItem(Icons.local_police, 'المخالفات المرورية', () {}),
           _buildDrawerItem(Icons.mail, 'صندوق الوارد', () {}),
         ],
