@@ -5,6 +5,7 @@ import 'package:traffic_department/screens/staff/tasks/transactions/received_tra
 import 'package:traffic_department/screens/web_portal/citizen_dashboard_web.dart';
 import 'package:traffic_department/screens/web_portal/complaint_form_screen.dart';
 import 'package:traffic_department/screens/web_portal/contact_screen.dart';
+import 'package:traffic_department/screens/web_portal/inspection_results_entry_screen.dart';
 import 'package:traffic_department/screens/web_portal/login_screen_web.dart';
 import 'package:traffic_department/screens/web_portal/main_website_home.dart';
 import 'package:traffic_department/screens/web_portal/news_screen.dart';
@@ -56,8 +57,7 @@ class PanelApp extends StatelessWidget {
         '/citizen-dashboard': (context) => const CitizenDashboardWeb(),
         '/notifications': (context) => const NotificationsWeb(),
         '/inspection_portal': (context) => const InspectionPortalScreen(),
-
-
+        '/inspection_results':(context) => const InspectionResultsEntryScreen(),
       },
 
       onGenerateRoute: (settings) {

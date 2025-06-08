@@ -50,7 +50,7 @@ class _InspectionPortalScreenState extends State<InspectionPortalScreen> {
     String enteredPassword = passwordController.text.trim();
 
     if (enteredId == '123456' && enteredPassword == 'inspection123') {
-      Navigator.pushReplacementNamed(context, '/inspection_dashboard');
+      Navigator.pushReplacementNamed(context, '/inspection_results');
     } else {
       _showErrorDialog();
     }
