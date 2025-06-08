@@ -121,7 +121,7 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
           _buildNavButton(context, 'الرئيسية', '/'),
           _buildNavButton(context, 'بوابة الموظفين', '/staff-portal'),
           _buildNavButton(context, 'بوابة موظفي دائرة الفحص', '/inspection_portal'),
-          _buildNavButton(context, 'بوابة شرطة المرور', '/'),
+          _buildNavButton(context, 'بوابة شرطة المرور', '/traffic_police_portal'),
           _buildNavButton(context, 'بوابة المواطنين', '/login'),
           _buildNavButton(context, 'نتائج الفحص', '/test-results'),
           _buildNavButton(context, 'مخالفات مرورية', '/traffic-violations'),
