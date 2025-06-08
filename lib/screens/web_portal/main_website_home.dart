@@ -120,6 +120,8 @@ class _MainWebsiteHomeState extends State<MainWebsiteHome> {
         children: [
           _buildNavButton(context, 'الرئيسية', '/'),
           _buildNavButton(context, 'بوابة الموظفين', '/staff-portal'),
+          _buildNavButton(context, 'بوابة موظفي دائرة الفحص', '/'),
+          _buildNavButton(context, 'بوابة شرطة المرور', '/'),
           _buildNavButton(context, 'بوابة المواطنين', '/login'),
           _buildNavButton(context, 'نتائج الفحص', '/test-results'),
           _buildNavButton(context, 'مخالفات مرورية', '/traffic-violations'),
