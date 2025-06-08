@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:traffic_department/screens/admin/admin_drawer.dart';
 import 'package:traffic_department/screens/admin/admin_notifications_screen.dart';
+import 'package:traffic_department/screens/web_portal/main_website_home.dart';
 
 class AdminDashboardScreen extends StatelessWidget {
   const AdminDashboardScreen({super.key});
@@ -15,7 +16,6 @@ class AdminDashboardScreen extends StatelessWidget {
         body: Row(
           children: [
             const AdminDrawer(),
-
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -252,7 +252,14 @@ class AdminDashboardScreen extends StatelessWidget {
 
               IconButton(
                 icon: const Icon(Icons.logout, color: Colors.white),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MainWebsiteHome(),
+                    ),
+                  );
+                },
               ),
             ],
           ),

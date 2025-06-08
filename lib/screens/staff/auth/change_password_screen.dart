@@ -1,12 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_department/data/admin_login_data.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
-  const ChangePasswordScreen({super.key});
+  final String employeeId;
+
+  const ChangePasswordScreen({super.key, required this.employeeId});
 
   @override
   Widget build(BuildContext context) {
     final passwordController = TextEditingController();
     final confirmController = TextEditingController();
+
+    void _showMismatchDialog() {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          backgroundColor: Colors.red.shade50,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: Row(
+            children: [
+              Icon(Icons.error, color: Colors.red.shade700),
+              const SizedBox(width: 8),
+              const Text('خطأ', style: TextStyle(color: Colors.red)),
+            ],
+          ),
+          content: const Text(
+            'كلمة المرور غير متطابقة. يرجى التأكد من تطابق كلمة المرور والتأكيد.',
+            style: TextStyle(fontSize: 15),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('حسناً', style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        ),
+      );
+    }
 
     return Scaffold(
       backgroundColor: const Color(0xFFF4F6FA),
@@ -37,7 +67,6 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-
               const Text(
                 'مرحبًا بك في بوابة الموظفين',
                 style: TextStyle(
@@ -52,9 +81,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, color: Colors.black87),
               ),
-
               const SizedBox(height: 24),
-
               TextField(
                 controller: passwordController,
                 obscureText: true,
@@ -65,7 +92,6 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-
               TextField(
                 controller: confirmController,
                 obscureText: true,
@@ -76,12 +102,26 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context); 
+                    String newPassword = passwordController.text.trim();
+                    String confirmPassword = confirmController.text.trim();
+
+                    if (newPassword != confirmPassword || newPassword.isEmpty) {
+                      _showMismatchDialog();
+                      return;
+                    }
+
+                    final matchedEmployee = adminLoginData.firstWhere(
+                      (emp) => emp['employeeId'] == employeeId,
+                    );
+
+                    matchedEmployee['password'] = newPassword;
+                    matchedEmployee['isPasswordChanged'] = true;
+
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.teal,

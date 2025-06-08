@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:traffic_department/data/admin_login_data.dart';
 import 'package:traffic_department/screens/admin/admin_dashboard_screen.dart';
+import 'package:traffic_department/screens/staff/dashboard/staff_dashboard_screen.dart';
+import 'package:traffic_department/screens/staff/dashboard/staff_dashboard_simple_screen.dart';
 import 'change_password_screen.dart';
-//import '../dashboard/staff_dashboard_screen.dart';
 
 class StaffPortalScreen extends StatefulWidget {
   const StaffPortalScreen({super.key});
@@ -14,7 +16,88 @@ class StaffPortalScreen extends StatefulWidget {
 class _StaffPortalScreenState extends State<StaffPortalScreen> {
   final idController = TextEditingController();
   final passwordController = TextEditingController();
-  bool isFirstLogin = true;
+
+  void _showErrorDialog() {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: Colors.red.shade50,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            title: Row(
+              children: [
+                Icon(Icons.error, color: Colors.red.shade700),
+                const SizedBox(width: 8),
+                const Text(
+                  'خطأ في تسجيل الدخول',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ],
+            ),
+            content: const Text(
+              'رقم الموظف أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.',
+              style: TextStyle(fontSize: 15),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('حسناً', style: TextStyle(color: Colors.red)),
+              ),
+            ],
+          ),
+    );
+  }
+
+  void _handleLogin() async {
+    String enteredId = idController.text.trim();
+    String enteredPassword = passwordController.text.trim();
+
+    final matchedEmployee = adminLoginData.firstWhere(
+      (emp) =>
+          emp['employeeId'] == enteredId && emp['password'] == enteredPassword,
+      orElse: () => {},
+    );
+
+    if (matchedEmployee.isEmpty) {
+      _showErrorDialog();
+      return;
+    }
+
+    String role = matchedEmployee['role'];
+    bool isPasswordChanged = matchedEmployee['isPasswordChanged'] ?? false;
+
+    if (role == 'قديم') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const StaffDashboardScreen()),
+      );
+    } else if (role == 'جديد') {
+      if (!isPasswordChanged) {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ChangePasswordScreen(employeeId: enteredId),
+          ),
+        );
+        idController.clear();
+        passwordController.clear();
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const StaffDashboardSimpleScreen()),
+        );
+      }
+    } else if (role == 'أدمن') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const AdminDashboardScreen()),
+      );
+    } else {
+      _showErrorDialog();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +112,6 @@ class _StaffPortalScreenState extends State<StaffPortalScreen> {
               opacity: const AlwaysStoppedAnimation(0.05),
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
             child: Row(
@@ -64,7 +146,6 @@ class _StaffPortalScreenState extends State<StaffPortalScreen> {
                         ),
                       ),
                       const SizedBox(height: 24),
-
                       TextField(
                         controller: idController,
                         decoration: const InputDecoration(
@@ -74,7 +155,6 @@ class _StaffPortalScreenState extends State<StaffPortalScreen> {
                         ),
                       ),
                       const SizedBox(height: 16),
-
                       TextField(
                         controller: passwordController,
                         obscureText: true,
@@ -85,30 +165,10 @@ class _StaffPortalScreenState extends State<StaffPortalScreen> {
                         ),
                       ),
                       const SizedBox(height: 24),
-
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () async {
-                            if (isFirstLogin) {
-                              setState(() {
-                                isFirstLogin = false;
-                              });
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const ChangePasswordScreen(),
-                                ),
-                              );
-                            } else {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const AdminDashboardScreen(),
-                                ),
-                              );
-                            }
-                          },
+                          onPressed: _handleLogin,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1E3A5F),
                             padding: const EdgeInsets.symmetric(vertical: 14),
@@ -128,7 +188,6 @@ class _StaffPortalScreenState extends State<StaffPortalScreen> {
                     ],
                   ),
                 ),
-
                 Expanded(
                   flex: 3,
                   child: Center(
