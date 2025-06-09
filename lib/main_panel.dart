@@ -17,6 +17,7 @@ import 'package:traffic_department/screens/web_portal/portal_rating_screen.dart'
 import 'package:traffic_department/screens/web_portal/register_screen_web.dart';
 import 'package:traffic_department/screens/web_portal/suggestions_screen.dart';
 import 'package:traffic_department/screens/web_portal/test_results_screen_web.dart';
+import 'package:traffic_department/screens/web_portal/traffic_police_dashboard_screen.dart';
 import 'package:traffic_department/screens/web_portal/traffic_violations_screen_web.dart';
 import 'theme/staff_theme.dart';
 
@@ -60,6 +61,7 @@ class PanelApp extends StatelessWidget {
         '/inspection_portal': (context) => const InspectionPortalScreen(),
         '/inspection_results':(context) => const InspectionResultsEntryScreen(),
         '/traffic_police_portal': (context) => const TrafficPolicePortalScreen(),
+        '/traffic_police_dashboard': (context) => const TrafficPoliceDashboardScreen(),
       },
 
       onGenerateRoute: (settings) {

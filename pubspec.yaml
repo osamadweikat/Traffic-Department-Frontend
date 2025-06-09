@@ -84,6 +84,8 @@ dependencies:
   bidi: ^2.0.13
   collection: ^1.19.1
   sleek_circular_slider: ^2.1.0
+  dotted_border: ^3.0.1
+  flutter_dropzone: ^4.2.1
 
 dev_dependencies:
   flutter_test:
