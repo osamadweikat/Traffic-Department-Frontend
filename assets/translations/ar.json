@@ -152,7 +152,9 @@
   "my_transactions": "معاملاتي",
   "filter_transactions": "فلترة المعاملات",
   "no_transactions": "لا توجد معاملات",
-  "transaction_notes": "تفاصيل المعاملة ستُعرض هنا...",
+"transaction_notes": "تم رفض المعاملة بسبب عدم اكتمال الوثائق المطلوبة. يُرجى مراجعة دائرة السير وتقديم المستندات الناقصة لإعادة معالجة الطلب."
+
+,
   "filter_completed": "المكتملة",
   "filter_processing": "قيد المعالجة",
   "filter_rejected": "المرفوضة",

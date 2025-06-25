@@ -44,7 +44,7 @@ class _TrafficPoliceDashboardScreenState extends State<TrafficPoliceDashboardScr
     );
 
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pop(); 
+      Navigator.of(context).pop();
       setState(() {
         droppedFileName = '';
       });
@@ -79,20 +79,9 @@ class _TrafficPoliceDashboardScreenState extends State<TrafficPoliceDashboardScr
         ),
       ),
       body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(24),
-          margin: const EdgeInsets.symmetric(horizontal: 24),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                blurRadius: 12,
-                offset: const Offset(0, 6),
-              ),
-            ],
-          ),
+        child: SizedBox(
+          width: 500, // عرض واضح للوسط
+          height: 350, // ارتفاع واضح للوسط
           child: Stack(
             children: [
               DropzoneView(
@@ -120,17 +109,23 @@ class _TrafficPoliceDashboardScreenState extends State<TrafficPoliceDashboardScr
               GestureDetector(
                 onTap: _pickFileManually,
                 child: Container(
-                  height: 220,
-                  width: double.infinity,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: isHighlighted ? Colors.blue.withOpacity(0.1) : Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(16),
                     border: Border.all(
                       color: isHighlighted ? Colors.blue : Colors.grey,
                       width: 2,
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        blurRadius: 12,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
                   ),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

@@ -25,7 +25,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       "title_en": "Vehicle ownership transfer request rejected",
       "date": "2025-03-30",
       "isRead": true,
-      "details": "تفاصيل رفض نقل الملكية"
+      "details": "تم رفض المعاملة بسبب وجود مخالفات مرورية غير مسددة بقيمة 450 شيكل على المركبة.\n\nيُرجى تسديد جميع المخالفات قبل إعادة تقديم الطلب.\n\nالملاحظات: يرجى مراجعة دائرة السير مع إيصالات الدفع اللازمة."
     },
     {
       "title_ar": "تم إصدار مخالفة جديدة على المركبة",

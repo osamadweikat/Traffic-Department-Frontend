@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:traffic_department/screens/citizen/contact/contact_us_screen.dart';
+//import 'package:traffic_department/screens/citizen/contact/contact_us_screen.dart';
 import 'package:traffic_department/screens/citizen/profile/profile_screen.dart';
 import 'package:traffic_department/screens/citizen/transactions/transactions_screen.dart';
 import 'package:traffic_department/screens/citizen/vehicles/vehicles_screen.dart';
@@ -72,9 +72,7 @@ class CustomDrawer extends StatelessWidget {
             _buildListTile(Icons.question_answer, "drawer_faq".tr(), iconColor: Colors.blueGrey, onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (_) => const FAQScreen()));
             }),
-            _buildListTile(Icons.phone_in_talk, "drawer_contact".tr(), iconColor: Colors.teal, onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const ContactUsScreen()));
-            }),
+            
 
             const Divider(),
 
